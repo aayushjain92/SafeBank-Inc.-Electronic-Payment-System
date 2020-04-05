@@ -13,27 +13,28 @@ let BeneficiarySchema = new Schema({
     },
     lastName: {
         type: String,
-        required: "Name is missing"
+        required: "LastName is missing"
     },
     accountNumber: {
         type: Number,
         required: "Number is missing"
     },
-    modifiedDate: {
-        type: Date,
-        default: Date.now
-    }
+    nickName: {
+        type: String,
+        required: "nickname is missing"
+    },
+
 },
     {
         versionKey: false
     });
 // Duplicate the id field as mongoose returns _id field instead of id.
-TodoSchema.virtual('id').get(function () {
+BeneficiarySchema.virtual('id').get(function () {
     return this._id.toHexString();
 });
 
 // Ensure virtual fields are serialised.
-TodoSchema.set('toJSON', {
+BeneficiarySchema.set('toJSON', {
     virtuals: true
 });
 
