@@ -1,0 +1,15 @@
+.grid{
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-auto-rows: minmax(75px, auto);
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; 
+    text-align: center;
+    margin:auto;
+    align-content: center;
+    justify-items: center;
+}
+
+.box{
+    width: 70%;
+    margin-bottom: 10px;
+}
