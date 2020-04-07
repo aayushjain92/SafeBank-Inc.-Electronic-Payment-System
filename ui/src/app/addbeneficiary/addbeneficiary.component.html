@@ -1,0 +1,83 @@
+
+
+
+
+<div class="mainContent form">
+
+    <div class="formelement">
+        <label for="fname">First Name:</label>
+        <input class="textb" type="text" name="fname" id="fname" #title="ngModel" [(ngModel)]="firstName"
+            required="required">
+        <!-- <span class="error" *ngIf="!title.valid && title.touched">
+            Please enter title!
+        </span> -->
+    </div>
+    <div class="formelement">
+        <label for="lname">Last Name:</label>
+        <input class="textb" type="text" name="lname" id="lname" #title="ngModel" [(ngModel)]="lastName"
+            required="required">
+        <!-- <span class="error" *ngIf="!description.valid && description.touched">
+            Please enter description!
+        </span> -->
+    </div>
+    <div class="formelement">
+        <label for="accountNumber">Account Number:</label>
+        <input class="textb" type="text" name="accountNumber" id="accountNumber" #title="ngModel"
+            [(ngModel)]="accountNumber" required="required">
+        <!-- <span class="error" *ngIf="!dueDate.valid && dueDate.touched">
+            Please enter Due date!
+        </span> -->
+    </div>
+
+
+
+    <div class="formelement">
+        <label for="nickName">Nick Name:</label>
+        <input class="textb" type="text" name="nickName" id="nickName" #title="ngModel" [(ngModel)]="nickName"
+            required="required">
+        <!-- <span class="error" *ngIf="!dueDate.valid && dueDate.touched">
+            Please enter Due date!
+        </span> -->
+    </div>
+
+    <div class="formelement">
+        <label for="routingNumber">Routing Number:</label>
+        <input class="textb" type="text" name="routingNumber" id="routingNumber" #title="ngModel"
+            [(ngModel)]="routingNumber" required="required">
+        <button class="submitBtn" name="check" value="check" (click)="check()">Check</button>
+        <!-- <span class="error" *ngIf="!routingNumber.valid && routingNumber.touched">
+            Please enter Due date!
+        </span> -->
+        <div *ngIf="enterVal">
+            <span class="error">{{error}}</span>
+        </div>
+        <div *ngIf="routingNumberCheck">
+            <mat-icon>check_circle</mat-icon>
+        </div>
+    </div>
+
+
+    <button class="submitBtn" name="Submit" value="Submit" (click)="savebeneficiary()">Submit</button>
+    <div *ngIf="beneficiaryCheck">
+        <span class="beneficiaryerror">{{error}}</span>
+    </div>
+    <!-- error for form fields -->
+
+</div>
+
+<!-- The Modal -->
+<div id="myModal" class="modal" [ngStyle]="{'display': modalValue ? 'block' : 'none' }">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+        <div class="modal-header">
+
+            <h4 class="modal-title" id="myModalLabel">Exterminator</h4>
+        </div>
+        <p>{{modalValue}}</p>
+        <div class="crumb">
+            <a class="anav anavl" [routerLink]="['/beneficiary']" routerLinkActive="router-link-active">OK</a>
+        </div>
+    </div>
+
+</div>

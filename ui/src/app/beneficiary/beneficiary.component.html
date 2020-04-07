@@ -1,0 +1,95 @@
+<div id="main" class="main">
+
+    <!-- main accordion section -->
+    <div class="container">
+
+        <div id="mainContent" class="mainContent">
+
+            <div class="left-section">
+                <div class="crumb">
+                    <a class="anav anavl" [routerLink]="['/addbeneficiary']" routerLinkActive="router-link-active">
+                        <mat-icon class="icon">person_add</mat-icon>Add
+                    </a>
+                </div>
+
+                <div id="todoLists">
+                    <h3 class="heading">{{title}}</h3>
+
+                    <div *ngFor="let beneficiary of beneficiaries">
+                        <mat-accordion>
+
+                            <mat-expansion-panel>
+
+                                <mat-expansion-panel-header>
+
+                                    <mat-panel-title>
+
+
+                                        <label for="fName ">Name:</label>
+                                        <input class="textb " type="text" name=fName id="fName"
+                                            [(ngModel)]="beneficiary.firstName">
+
+                                    </mat-panel-title>
+                                    <mat-panel-description>
+
+                                    </mat-panel-description>
+                                </mat-expansion-panel-header>
+                                <label for="lastName">Last Name:</label>
+                                <input class="textb " type="text" name=lastName id="lastName"
+                                    [(ngModel)]="beneficiary.lastName">
+                                <br>
+                                <br>
+                                <label for="accountNumber">Account Number:</label>
+                                <input class="textb" type="text" id="accountNumber" name=accountNumber
+                                    value="{{ beneficiary.accountNumber}}" readonly>
+                                <br>
+                                <br>
+                                <label for="nickName">Nick Name:</label>
+                                <input class="textb" type="text" id="nickName" name=nickName
+                                    value="{{ beneficiary.nickName}}" readonly>
+
+                                <br>
+                                <br>
+                                <label for="routingNumber">Routing Number:</label>
+                                <input class="textb" type="text" id="routingNumber" name=routingNumber
+                                    value="{{ beneficiary.routingNumber}}" readonly>
+                                <mat-action-row>
+                                    <button class="deleteBtn" (click)="deleteBeneficiary(beneficiary)">Delete</button>
+                                </mat-action-row>
+                            </mat-expansion-panel>
+                            <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                            </mat-expansion-panel>
+                        </mat-accordion>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<!-- The Modal -->
+<div id="myModal" class="modal" [ngStyle]="{'display': modalValue ? 'block' : 'none' }">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+        <!-- <div class="modal-header">
+
+            <h4 class="modal-title" id="myModalLabel">Exterminator</h4>
+        </div> -->
+        <div class="header">
+            <img height="40px" width="40px" src="https://www.tanie-konto.pl/wp-content/uploads/idea-bank-logo.jpg">
+        </div>
+        <div class="modal-container">
+            <p>{{modalValue}}</p>
+            <div class="crumbl">
+                <a class="deletmod deletmodl" [routerLink]="[]" (click)="toggleModal()">OK</a>
+            </div>
+        </div>
+
+    </div>
+
+</div>
