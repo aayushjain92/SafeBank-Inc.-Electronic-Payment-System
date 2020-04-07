@@ -23,6 +23,10 @@ let BeneficiarySchema = new Schema({
         type: String,
         required: "nickname is missing"
     },
+    routingNumber: {
+        type: Number,
+
+    }
 
 },
     {

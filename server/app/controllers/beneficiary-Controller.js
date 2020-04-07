@@ -36,6 +36,7 @@ exports.save = (request, response) => {
             message: "nickName cannot be empty"
         });
     }
+
     const beneficiary = Object.assign({}, request.body);
     const result = (saveditem) => {
         response.status(201);
@@ -112,15 +113,24 @@ let renderErrorResponse = (response) => {
 };
 
 
-// // badrequest error if id not found
-// let badrequestErrorResponse = (response) => {
-//     const errorCallback = (error) => {
-//         if (error) {
-//             response.status(404);
-//             response.json({
-//                 message: "id not found"
-//             });
-//         }
-//     };
-//     return errorCallback;
-// };
+
+// get method for the finding items by passing id it will return 1 item
+exports.get = (request, response) => {
+    const accountId = request.params.accountNumber;
+    console.log(accountId)
+    const total = beneficaryService.search(accountId)
+
+        .then(item => {
+            if (!item) {
+                return response.status(404).json({
+                    message: "account not found"
+                });
+            }
+            response.status(200).json(item);
+        })
+        .catch(err => {
+            response.status(500).json({
+                message: "not proper id formAT"
+            });
+        });
+};

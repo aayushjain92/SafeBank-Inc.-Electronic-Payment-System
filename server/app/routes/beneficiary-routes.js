@@ -10,6 +10,6 @@ module.exports = (app) => {
         .post(beneficaryController.save);
 
     app.route('/beneficiary/:accountNumber')
-
+        .get(beneficaryController.get)
         .delete(beneficaryController.delete);
 };  

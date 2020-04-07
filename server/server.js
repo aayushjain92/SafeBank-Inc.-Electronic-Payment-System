@@ -28,11 +28,15 @@ app.use((req, res, next) => {
     );
     req.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET');
     if (req.method === 'OPTIONS') {
+
         req.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET');
         return res.status(200).json({});
     }
     next();
 });
+
+
+
 const initApp = require('./app/app');
 initApp(app);
 

@@ -9,6 +9,12 @@ exports.Search = (params) => {
     return promise;
 };
 
+
+// seach for all the Beneficiary by accntnumber
+exports.search = (accountId) => {
+    const promise = Beneficiary.findOne({ accountNumber: accountId }).exec();
+    return promise;
+};
 /**
  * Saves the new Beneficiary object.
  *
@@ -30,4 +36,11 @@ exports.delete = (accountId) => {
     const promise = Beneficiary.findOneAndDelete({ accountNumber: accountId }).exec();
 
     return promise;
+};
+
+// find beneficiary by id
+exports.get = (accountId) => {
+    const itemPromise = Beneficiary.findOne({ accountNumber: accountId }).exec();
+    console.log(itemPromise);
+    return itemPromise;
 };
