@@ -16,6 +16,12 @@ import { BeneficiaryComponent } from './beneficiary/beneficiary.component';
 import { AddbeneficiaryComponent } from './addbeneficiary/addbeneficiary.component';
 import { RegisterNavBarComponent} from './signup/register-nav-bar/register-nav-bar.component';
 import { PersonalDetailsComponent} from './signup/personal-details/personal-details.component';
+import { LandingPageComponent } from './landing/landing-page/landing-page.component';
+import { RegisterComponent } from './signup/register/register.component';
+import { AddressDetailsComponent } from './signup/address-details/address-details.component';
+import { AccountDetailsComponent } from './signup/account-details/account-details.component';
+import { CredentialDetailsComponent } from './signup/credential-details/credential-details.component';
+
 
 @NgModule({
   declarations: [
@@ -23,7 +29,12 @@ import { PersonalDetailsComponent} from './signup/personal-details/personal-deta
     BeneficiaryComponent,
     AddbeneficiaryComponent,
     RegisterNavBarComponent,
-    PersonalDetailsComponent
+    PersonalDetailsComponent,
+    LandingPageComponent,
+    RegisterComponent,
+    AddressDetailsComponent,
+    AccountDetailsComponent,
+    CredentialDetailsComponent
   ],
 
   imports: [
