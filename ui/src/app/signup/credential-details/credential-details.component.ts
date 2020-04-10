@@ -28,7 +28,12 @@ export class CredentialDetailsComponent implements OnInit {
       });
   }
 
+  generateAccountNumber(): number{
+    return Math.floor((Math.random() * 9 + 1) * Math.pow(10,11));
+  }
+
   addUser(user: User): void{
+    user.accountNumber = this.generateAccountNumber();
     this.service.registerUser(user);
     window.alert("Account added successfully");
     this.router.navigateByUrl("/");
