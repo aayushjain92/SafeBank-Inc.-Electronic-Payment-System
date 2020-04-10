@@ -12,6 +12,10 @@ let TransactSchema = new Schema({
         required: [true, 'Account Number is required']
     },
 
+    beneficiaryAccountNumber:{
+        type: String
+    },
+
     //will mark it as debit/credit/transfer
     type: {
         type: String,
@@ -22,6 +26,7 @@ let TransactSchema = new Schema({
         type: Number,
         required: [true, 'Amount is required']
     },
+    
     transactionDate: { 
         type : Date, 
         default: Date.now
@@ -41,4 +46,4 @@ TransactSchema.set('toJSON', {
     virtuals: true
 });
 
-module.exports = mongoose.model('transact', TransactSchema);
+module.exports = mongoose.model('transactions', TransactSchema);

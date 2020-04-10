@@ -6,6 +6,5 @@ const transactController = require('../controllers/transact-Controller');
 
 module.exports = (app) => {
     app.route('/transactions')
-        .get(transactController.list)
-        .post(transactController.save);
+        .post(transactController.post);
 };  
