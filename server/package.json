@@ -4,6 +4,8 @@
   "description": "Backend for Final Project - Banking App",
   "main": "index.js",
   "scripts": {
+    "start": "nodemon server.js",
+    "debug": "node --nolazy --inspect-brk=9229 server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "vivdalal",

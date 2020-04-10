@@ -7,12 +7,12 @@ const Schema = mongoose.Schema;
  */
 let AccBalSchema = new Schema({
 
-    AccountNum: {
+    AccountNumber: {
         type: String,
         required: [true, 'Account Number is required']
     },
     
-    CurrBalance: { 
+    CurrentBalance: { 
         type : Number
     }
 },
@@ -30,4 +30,4 @@ AccBalSchema.set('toJSON', {
     virtuals: true
 });
 
-module.exports = mongoose.model('account_balance', AccBalSchema);
+module.exports = mongoose.model('balances', AccBalSchema);

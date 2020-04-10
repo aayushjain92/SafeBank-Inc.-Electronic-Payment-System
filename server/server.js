@@ -34,4 +34,4 @@ const initApp = require('./app/app');
 initApp(app);
 
 app.listen(port);
-console.log('Transact API started on: ' + port);
+console.log('API started on: ' + port);
