@@ -9,6 +9,7 @@ import { AccountDetailsComponent } from './signup/account-details/account-detail
 import { CredentialDetailsComponent } from './signup/credential-details/credential-details.component';
 import { LandingPageComponent } from './landing/landing-page/landing-page.component';
 import { RegisterComponent } from './signup/register/register.component';
+import { LoginComponent } from './login/login-component/login.component';
 
 
 const routes: Routes = [
@@ -24,7 +25,8 @@ const routes: Routes = [
       ]
   },
   { path: 'beneficiary', component: BeneficiaryComponent },
-  { path: 'addbeneficiary', component: AddbeneficiaryComponent }
+  { path: 'addbeneficiary', component: AddbeneficiaryComponent },
+  { path: 'login', component: LoginComponent }
 ];
 
 @NgModule({
