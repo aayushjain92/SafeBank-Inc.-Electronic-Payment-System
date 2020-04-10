@@ -29,6 +29,10 @@ let UserSchema = new Schema({
     phoneNumber:{
         type: Number
     },
+    routingNumber :{
+        type: String,
+        default: "EX112223"
+    },
     accountType:{
         type: String,
         default : "Checking"
@@ -67,6 +71,9 @@ let UserSchema = new Schema({
     password: {
         type : String,
         required : "Password is missing"
+    },
+    accountNumber: {
+        type: Number
     }
 
 },
@@ -82,14 +89,6 @@ UserSchema.virtual('id').get(function () {
 // Ensure virtual fields are serialised.
 UserSchema.set('toJSON', {
     virtuals: true
-});
-
-UserSchema.virtual('accountNumber').get(function(){
-    return 123456789012;
-});
-
-UserSchema.virtual('accountNumber').get(function(){
-    return 210987654321;
 });
 
 module.exports = mongoose.model('user', UserSchema);
