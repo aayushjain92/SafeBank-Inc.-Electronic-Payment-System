@@ -7,13 +7,24 @@ const Schema = mongoose.Schema;
  */
 let TransactSchema = new Schema({
 
-    accountNum: {
+    ownerAccountNum: {
         type: String,
         required: [true, 'Account Number is required']
     },
+
+    //will mark it as debit/credit/transfer
+    type: {
+        type: String,
+        required: [true, 'Transaction type is required']
+    },
+
     amount: {
         type: Number,
         required: [true, 'Amount is required']
+    },
+    transactionDate: { 
+        type : Date, 
+        default: Date.now
     }
 },
     {
