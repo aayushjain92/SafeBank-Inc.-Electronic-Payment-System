@@ -7,4 +7,4 @@ export const login = createAction(
   );
   
   
-  export type LoginPageActionsUnion = ReturnType<typeof login>;
+  export type LoginPageActions = ReturnType<typeof login>;

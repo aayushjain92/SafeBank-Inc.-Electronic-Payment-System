@@ -15,6 +15,6 @@ export const loginSuccess = createAction(
   
   // This is an alternative to union() type export. Work great when you need
   // to export only a single Action type.
-  export type AuthActionsUnion = ReturnType<
+  export type AuthActions = ReturnType<
     typeof loginSuccess | typeof loginFailure | typeof loginRedirect
   >;

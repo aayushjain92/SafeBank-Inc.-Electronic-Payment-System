@@ -7,4 +7,5 @@ export const logoutConfirmationDismiss = createAction(
 );
 
 const all = union({ logout, logoutConfirmation, logoutConfirmationDismiss });
-export type LogoutActionsUnion = typeof all;
+
+export type LogoutActions = typeof all;

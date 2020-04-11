@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import * as fromAuth from './../../store/reducers';
+import * as fromAuth from './../../store/reducers/login.reducer';
 import { Store, select } from '@ngrx/store';
-import { AuthActions } from './../../store/actions';
 import { User } from './../../model/user';
 import { LoginService } from 'src/app/services/login.service';
 
@@ -14,17 +13,17 @@ export class LoginComponent implements OnInit {
 
   user = new User();
 
-  // pending$ = this.store.pipe(select(fromAuth.getLoginPagePending));
-  // error$ = this.store.pipe(select(fromAuth.getLoginPageError));
+  pending$ = this.store.pipe(select(fromAuth.getPending));
+  error$ = this.store.pipe(select(fromAuth.getError));
 
-  constructor(private store: Store<fromAuth.State>, private loginApi: LoginService) {}
+  constructor(private loginApi: LoginService, private store: Store<fromAuth.State>) {}
 
   ngOnInit() {
-    this.loginApi.loadStore();
+    this.loginApi.loadUsers();
   }
 
   onSubmit(user : User) {
-    this.store.dispatch(AuthActions.loginSuccess({user}));
+    this.loginApi.logIn(user);
   }
 
 }

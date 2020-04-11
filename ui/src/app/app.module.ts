@@ -10,8 +10,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { ReactiveFormsModule } from '@angular/forms';
 
+import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
-import { loginReducer } from './store/reducers/login.reducer';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -26,6 +26,9 @@ import { AccountDetailsComponent } from './signup/account-details/account-detail
 import { CredentialDetailsComponent } from './signup/credential-details/credential-details.component';
 import { LoginComponent } from './login/login-component/login.component';
 import { LoginFormComponent } from './login/login-form/login-form/login-form.component';
+import * as fromAuth from './store/reducers';
+import { LogoutConfirmationDialogComponent } from './login/logout-confirmation-dialog/logout-confirmation-dialog.component';
+import { AuthEffects } from './store/effects/auth.effects';
 
 
 @NgModule({
@@ -41,7 +44,8 @@ import { LoginFormComponent } from './login/login-form/login-form/login-form.com
     AccountDetailsComponent,
     CredentialDetailsComponent,
     LoginComponent,
-    LoginFormComponent
+    LoginFormComponent,
+    LogoutConfirmationDialogComponent
   ],
 
   imports: [
@@ -52,9 +56,10 @@ import { LoginFormComponent } from './login/login-form/login-form/login-form.com
     BrowserAnimationsModule,
     FormsModule,
     MatIconModule, MatFormFieldModule, MatInputModule, MatCardModule,
-    StoreModule.forRoot({
-      'auth' : loginReducer
-    }),
+    StoreModule.forRoot({}),
+    StoreModule.forFeature(fromAuth.authFeatureKey, fromAuth.reducers),
+    EffectsModule.forRoot([]),
+    EffectsModule.forFeature([AuthEffects]),
     ReactiveFormsModule,
   ],
 

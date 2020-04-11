@@ -21,7 +21,13 @@ export class PersonalDetailsComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  today = new Date();
+  
   setBtnStatus(): string{
+    const dob = new Date(this.user.dob);
+    if(this.user.age == null){
+    this.user.age = this.today.getFullYear() - dob.getFullYear();
+    }
     this.button = "personal_save";
     return this.button;
   }
