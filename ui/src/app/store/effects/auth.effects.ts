@@ -27,71 +27,71 @@ export class AuthEffects {
   //   )
   // );
 
-  login$ = createEffect(() =>
-  this.actions$.pipe(
-    ofType(LoginPageActions.login)
-    // map(action => action.users)
-    // exhaustMap((auth: Credentials) =>
-    //   this.authService.login(auth).pipe(
-    //     map(user => AuthApiActions.loginSuccess({ user })),
-    //     catchError(error => of(AuthApiActions.loginFailure({ error })))
-    //   )
-    // )
-  )
-);
+//   login$ = createEffect(() =>
+//   this.actions$.pipe(
+//     ofType(LoginPageActions.login)
+//     // map(action => action.users)
+//     // exhaustMap((auth: Credentials) =>
+//     //   this.authService.login(auth).pipe(
+//     //     map(user => AuthApiActions.loginSuccess({ user })),
+//     //     catchError(error => of(AuthApiActions.loginFailure({ error })))
+//     //   )
+//     // )
+//   )
+// );
 
-  loginSuccess$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(AuthActions.loginSuccess),
-        tap(() => this.router.navigate(['/']))
-      ),
-    { dispatch: false }
-  );
+//   loginSuccess$ = createEffect(
+//     () =>
+//       this.actions$.pipe(
+//         ofType(AuthActions.loginSuccess),
+//         tap(() => this.router.navigate(['/']))
+//       ),
+//     { dispatch: false }
+//   );
 
-  loginRedirect$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(AuthActions.loginRedirect, LogoutActions.logout),
-        tap(authed => {
-          this.router.navigate(['/login']);
-        })
-      ),
-    { dispatch: false }
-  );
+//   loginRedirect$ = createEffect(
+//     () =>
+//       this.actions$.pipe(
+//         ofType(AuthActions.loginRedirect, LogoutActions.logout),
+//         tap(authed => {
+//           this.router.navigate(['/login']);
+//         })
+//       ),
+//     { dispatch: false }
+//   );
 
-  logoutConfirmation$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(LogoutActions.logoutConfirmation),
-      exhaustMap(() => {
-        const dialogRef = this.dialog.open<
-          LogoutConfirmationDialogComponent,
-          undefined,
-          boolean
-        >(LogoutConfirmationDialogComponent);
-
-        return dialogRef.afterClosed();
-      }),
-      map(
-        result =>
-          result
-            ? LogoutActions.logout()
-            : LogoutActions.logoutConfirmationDismiss()
-      )
-    )
-  );
-
-//   logoutIdleUser$ = createEffect(() =>
+//   logoutConfirmation$ = createEffect(() =>
 //     this.actions$.pipe(
-//       ofType(UserActions.idleTimeout),
-//       map(() => AuthActions.logout())
+//       ofType(LogoutActions.logoutConfirmation),
+//       exhaustMap(() => {
+//         const dialogRef = this.dialog.open<
+//           LogoutConfirmationDialogComponent,
+//           undefined,
+//           boolean
+//         >(LogoutConfirmationDialogComponent);
+
+//         return dialogRef.afterClosed();
+//       }),
+//       map(
+//         result =>
+//           result
+//             ? LogoutActions.logout()
+//             : LogoutActions.logoutConfirmationDismiss()
+//       )
 //     )
 //   );
 
-  constructor(
-    private actions$: Actions,
-    private loginService: LoginService,
-    private router: Router,
-    private dialog: MatDialog
-  ) {}
+// //   logoutIdleUser$ = createEffect(() =>
+// //     this.actions$.pipe(
+// //       ofType(UserActions.idleTimeout),
+// //       map(() => AuthActions.logout())
+// //     )
+// //   );
+
+//   constructor(
+//     private actions$: Actions,
+//     private loginService: LoginService,
+//     private router: Router,
+//     //private dialog: MatDialog
+//   ) {}
 }

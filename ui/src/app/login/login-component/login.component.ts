@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(user : User) {
-    this.loginApi.logIn(user);
+    this.loginApi.login(user);
   }
 
 }
