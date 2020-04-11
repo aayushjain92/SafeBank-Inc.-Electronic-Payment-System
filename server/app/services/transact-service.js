@@ -10,32 +10,59 @@ Transaction = mongoose.model('transactions');
  *
  * @param {Object} params {Search parameters}
  */
-exports.search = function (params) {
-    const promise = Balance.findOne(params).exec();
-    return promise;
+exports.search = async function (params) {
+    try{
+        const acc = await Balance.findOne(params);   
+        return acc;
+    }catch(error){
+        throw error;
+    }     
 };
-
 
 /**
  * Returns the balance object matching the id.
  */
 exports.update = function (balance, amount) {
-    balance.CurrentBalance = amount;
-    // console.log(balance);
-    // console.log(amount);
-    const promise = Balance.findOneAndUpdate({_id: balance._id}, balance).exec();
-    return promise;
+    
+    return new Promise(async(resolve, reject)=>{
+        try{      
+            balance.CurrentBalance = amount;
+            await Balance.findOneAndUpdate({_id: balance._id}, balance);
+            resolve(true);
+        }catch(error){
+            reject(error);
+        }
+    }
+    )  
+  
 };
+
+exports.transfer = function (transaction, ownerAccount, beneficiaryAccount) {
+    
+    return new Promise(async(resolve, reject)=>{
+        try{      
+            ownerAccount.CurrentBalance = ownerAccount.CurrentBalance - transaction.amount;
+            beneficiaryAccount.CurrentBalance = beneficiaryAccount.CurrentBalance + transaction.amount;
+            await Balance.findOneAndUpdate({_id: ownerAccount._id}, ownerAccount);
+            await Balance.findOneAndUpdate({_id: beneficiaryAccount._id}, beneficiaryAccount);
+            resolve(true);
+        }catch(error){
+            reject(error);
+        }
+    }
+    )  
+  
+};
+
 
 /**
  * Saves and returns the new transaction object.
  *
  * @param {Object} transaction {transaction object}
  */
-exports.save = function (transaction) {
-    
-    const newTransaction = new Transaction(transaction);
-    const promise = newTransaction.save();
-    return promise;
+exports.save = async function (transaction) {
+    const transactionData = new Transaction(transaction);
+    const tx =  await transactionData.save(transactionData);
+    return tx;   
 };
 

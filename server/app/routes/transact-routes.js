@@ -7,12 +7,12 @@ const transactController = require('../controllers/transact-Controller');
 module.exports = (app) => {
     // to credit the amount to a particular account
     app.route('/credit')
-        .put(transactController.new);
+        .put(transactController.credit);
 
     app.route('/debit')
-        .put(transactController.put);
+        .put(transactController.debit);
 
     app.route('/transfer')
-        .put(transactController.put);
+        .put(transactController.transfer);
 
 };  

@@ -16,12 +16,6 @@ let TransactSchema = new Schema({
         type: String
     },
 
-    //will mark it as debit/credit/transfer
-    type: {
-        type: String,
-        required: [true, 'Transaction type is required']
-    },
-
     amount: {
         type: Number,
         required: [true, 'Amount is required']
