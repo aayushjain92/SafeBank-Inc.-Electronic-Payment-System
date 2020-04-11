@@ -21,7 +21,10 @@ exports.search = (accountId) => {
  * @param Beneficiary
 */
 exports.save = (beneficiary) => {
+
+
     const newBeneficiary = new Beneficiary(beneficiary);
+
     return newBeneficiary.save();
 };
 

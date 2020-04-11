@@ -36,7 +36,7 @@ exports.save = (request, response) => {
             message: "nickName cannot be empty"
         });
     }
-
+    //push v alidation in services
     const beneficiary = Object.assign({}, request.body);
     const result = (saveditem) => {
         response.status(201);

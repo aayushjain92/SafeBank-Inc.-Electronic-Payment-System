@@ -50,7 +50,7 @@ export class BeneficiaryComponent implements OnInit {
       this.modalValue = benefeciary.firstName + " has been deleted successfully";
       console.log(benefeciary.accountNumber);
       this.getbeneficiary();
-
+      // document.getElementById("myModal").style.display = "block";
     }, (err) => {
       console.log(err);
     });
@@ -60,6 +60,7 @@ export class BeneficiaryComponent implements OnInit {
   toggleModal() {
 
     document.getElementById("myModal").style.display = "none";
+    this.modalValue = undefined;
     return false;
   }
 
