@@ -6,7 +6,8 @@ let express = require('express'),
     userModel = require('./app/models/user'),
     beneficiaryModel = require('./app/models/beneficiary'),
     beneficiaryRoutes = require('./app/routes/beneficiary-routes'),
-    registerRoutes = require('./app/routes/register-routes');
+    registerRoutes = require('./app/routes/register-routes'),
+    loginRoutes = require('./app/routes/login-routes');
 
 
 // mongoose instance connection url connection
@@ -39,6 +40,7 @@ app.use((req, res, next) => {
 // initApp(app);
 beneficiaryRoutes(app);
 registerRoutes(app);
+loginRoutes(app);
 
 app.listen(port);
 console.log('Exterminator app API server started on: ' + port);

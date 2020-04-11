@@ -20,7 +20,7 @@ let UserSchema = new Schema({
         required: "Date of birth is missing"
     },
     age:{
-        type : Date
+        type : Number
     },
     email:{
         type: String,

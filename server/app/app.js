@@ -6,6 +6,8 @@ module.exports = (app) => {
     const routes = require('./routes/beneficiary-routes');
     const userModel = require('./models/user');
     const registerRoutes = require('./routes/register-routes');
+    const loginRoutes = require('./routes/login-routes');
     routes(app);
     registerRoutes(app);
+    loginRoutes(app);
 };

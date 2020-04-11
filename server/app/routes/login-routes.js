@@ -3,5 +3,6 @@
 const loginController = require('../controllers/login-Controller');
 
 module.exports = (app) => {
-    app.route('/login').post(loginController.save);
+    app.route('/login').get(loginController.list);
 };
+ 
