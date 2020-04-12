@@ -97,15 +97,16 @@ export class AddbeneficiaryComponent implements OnInit {
       .subscribe(data => {
         this.routing = data;
         // checking if the beneficary already exists
-        if (this.routing["accountNumber"] == this.accountNumber) {
-
+        console.log("this", data);
+        if (data) {
+          console.log("this", data);
           this.beneficiaryCheck = true;
           this.error = "Beneficiary already exists";
           let timeoutId = setTimeout(() => {
             this.beneficiaryCheck = false;
           }, 5000);
         } else {
-
+          this.beneficiaryCheck = false;
           this.benef = new Beneficiary(this.firstName, this.lastName, this.accountNumber, this.nickName, this.routingNumber);
 
           this.rest.savebeneficiary(this.benef)

@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { map, catchError, tap, endWith } from 'rxjs/operators';
 import { escapeIdentifier } from '@angular/compiler/src/output/abstract_emitter';
 import { Beneficiary } from '../model/beneficiary'
-
+import { environment } from 'src/environments/environment';
 // const httpOptions = {
 //   headers: new HttpHeaders({
 //     'Content-Type': 'application/json',
@@ -13,8 +13,9 @@ import { Beneficiary } from '../model/beneficiary'
 //     'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Z-Key'
 //   })
 // };
+// in env fodler
+const endpoint = environment.apiUrl;
 
-const endpoint = 'http://localhost:3000/';
 @Injectable({
   providedIn: 'root'
 })

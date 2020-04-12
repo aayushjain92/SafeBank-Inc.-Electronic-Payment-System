@@ -36,7 +36,7 @@ exports.save = (request, response) => {
             message: "nickName cannot be empty"
         });
     }
-
+    //push v alidation in services
     const beneficiary = Object.assign({}, request.body);
     const result = (saveditem) => {
         response.status(201);
@@ -117,15 +117,10 @@ let renderErrorResponse = (response) => {
 // get method for the finding items by passing id it will return 1 item
 exports.get = (request, response) => {
     const accountId = request.params.accountNumber;
-    console.log(accountId)
-    const total = beneficaryService.search(accountId)
 
+    const total = beneficaryService.search(accountId)
         .then(item => {
-            if (!item) {
-                return response.status(404).json({
-                    message: "account not found"
-                });
-            }
+
             response.status(200).json(item);
         })
         .catch(err => {
