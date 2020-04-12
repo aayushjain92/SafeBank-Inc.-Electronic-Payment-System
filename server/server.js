@@ -2,6 +2,7 @@ let express = require('express'),
     app = express(),
     port = process.env.PORT || 3000,
     mongoose = require('mongoose'), //created model loading here
+
     bodyParser = require('body-parser'),
     userModel = require('./app/models/user'),
     beneficiaryModel = require('./app/models/beneficiary'),
@@ -18,6 +19,7 @@ mongoose.connect('mongodb+srv://root:root@exterminators-hvc8c.mongodb.net/test?r
     useNewUrlParser: true,
     useFindAndModify: false
 });
+
 mongoose.Promise = global.Promise;
 
 
@@ -29,20 +31,8 @@ app.use(bodyParser.json());
 
 
 //Enabling CORS
-// app.use((req, res, next) => {
-//     res.header('Access-Control-Allow-Origin', '*');
-//     res.header(
-//         'Access-Control-Allow-Headers',
-//         'Origin, X-Requested-With, Content-Type, Accept, Authorization'
-//     );
-//     req.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET');
-//     if (req.method === 'OPTIONS') {
 
-//         req.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET');
-//         return res.status(200).json({});
-//     }
-//     next();
-// });
+
 
 //Enabling CORS
 app.use(function (req, res, next) {
@@ -58,4 +48,5 @@ const initApp = require('./app/app');
 initApp(app);
 
 app.listen(port);
+
 console.log('Exterminator app API server started on: ' + port);
