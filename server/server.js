@@ -2,13 +2,16 @@ let express = require('express'),
     app = express(),
     port = process.env.PORT || 3000,
     mongoose = require('mongoose'), //created model loading here
-
     bodyParser = require('body-parser'),
-    userModel = require('./app/models/user'),
-    beneficiaryModel = require('./app/models/beneficiary'),
-    beneficiaryRoutes = require('./app/routes/beneficiary-routes'),
-    registerRoutes = require('./app/routes/register-routes'),
-    loginRoutes = require('./app/routes/login-routes');
+    
+    
+// commenting unnecessary code
+    
+//     userModel = require('./app/models/user'),
+//     beneficiaryModel = require('./app/models/beneficiary'),
+//     beneficiaryRoutes = require('./app/routes/beneficiary-routes'),
+//     registerRoutes = require('./app/routes/register-routes'),
+//     loginRoutes = require('./app/routes/login-routes');
 
 
 // mongoose instance connection url connection
@@ -28,10 +31,6 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 app.use(bodyParser.json());
-
-
-//Enabling CORS
-
 
 
 //Enabling CORS
