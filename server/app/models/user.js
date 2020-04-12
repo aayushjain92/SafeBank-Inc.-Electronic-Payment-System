@@ -74,12 +74,17 @@ let UserSchema = new Schema({
     },
     accountNumber: {
         type: Number
-    }
+    },
+    status: {
+        type: String,
+        enum : ['active','inactive', 'deleted'],
+        default: 'active'
+    },
 
 },
-    {
-        versionKey: false
-    });
+{
+    versionKey: false
+});
 
 // Duplicate the id field as mongoose returns _id field instead of id.
 UserSchema.virtual('id').get(function () {

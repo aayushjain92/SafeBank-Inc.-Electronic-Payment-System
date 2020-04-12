@@ -14,7 +14,13 @@ let AccBalSchema = new Schema({
     
     CurrentBalance: { 
         type : Number
-    }
+    },
+
+    status: {
+        type: String,
+        enum : ['active','inactive', 'deleted'],
+        default: 'active'
+    },
 },
     {
         versionKey: false
