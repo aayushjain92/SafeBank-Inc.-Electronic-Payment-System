@@ -30,4 +30,4 @@ AccBalSchema.set('toJSON', {
     virtuals: true
 });
 
-module.exports = mongoose.model('balances', AccBalSchema);
+module.exports = mongoose.model('accounts', AccBalSchema);

@@ -1,6 +1,6 @@
 'use strict';
 const mongoose = require('mongoose'),
-Balance = mongoose.model('balances'),
+Balance = mongoose.model('account'),
 Transaction = mongoose.model('transactions');
 
 
