@@ -1,5 +1,6 @@
 'use strict';
 const mongoose = require('mongoose');
+const shortid = require('shortid');
 const Schema = mongoose.Schema;
 
 /**
@@ -7,13 +8,22 @@ const Schema = mongoose.Schema;
  */
 let AccBalSchema = new Schema({
 
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User"
+      },
+
     AccountNumber: {
         type: String,
-        required: [true, 'Account Number is required']
+        default: function getShortId(){
+           let accNum = shortid.generate();
+           return accNum.toUpperCase();
+        }
     },
     
     CurrentBalance: { 
-        type : Number
+        type : Number,
+        default: 0,
     },
 
     status: {

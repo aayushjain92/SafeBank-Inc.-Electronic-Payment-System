@@ -10,8 +10,10 @@ module.exports = (app) => {
     const userModel = require('./models/user');
     const registerRoutes = require('./routes/register-routes');
     const loginRoutes = require('./routes/login-routes');
+    const accountRoutes = require('./routes/account-routes');
     transactRoutes(app);
     beneficiaryRoutes(app);
     registerRoutes(app);
     loginRoutes(app);
+    accountRoutes(app);
 };
