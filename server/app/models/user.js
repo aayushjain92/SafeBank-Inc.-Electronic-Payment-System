@@ -72,9 +72,10 @@ let UserSchema = new Schema({
         type : String,
         required : "Password is missing"
     },
-    accountNumber: {
-        type: Number
-    },
+    
+    // accountNumber: {
+    //     type: Number
+    // },
     status: {
         type: String,
         enum : ['active','inactive', 'deleted'],
@@ -96,4 +97,6 @@ UserSchema.set('toJSON', {
     virtuals: true
 });
 
-module.exports = mongoose.model('user', UserSchema);
+const User = mongoose.model("user", UserSchema);
+
+module.exports = {User, UserSchema};

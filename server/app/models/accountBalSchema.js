@@ -2,16 +2,13 @@
 const mongoose = require('mongoose');
 const shortid = require('shortid');
 const Schema = mongoose.Schema;
-
+const userSchema = require("./user").UserSchema;
 /**
  * Mongoose schema for todolist object.
  */
 let AccBalSchema = new Schema({
 
-    user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User"
-      },
+    user: userSchema,
 
     AccountNumber: {
         type: String,
