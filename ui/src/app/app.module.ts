@@ -29,6 +29,7 @@ import { LoginFormComponent } from './login/login-form/login-form/login-form.com
 import * as fromAuth from './store/reducers';
 import { LogoutConfirmationDialogComponent } from './login/logout-confirmation-dialog/logout-confirmation-dialog.component';
 import { AuthEffects } from './store/effects/auth.effects';
+import { TransactiontableComponent } from './transactiontable/transactiontable.component';
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import { AuthEffects } from './store/effects/auth.effects';
     CredentialDetailsComponent,
     LoginComponent,
     LoginFormComponent,
-    LogoutConfirmationDialogComponent
+    LogoutConfirmationDialogComponent,
+    TransactiontableComponent
   ],
 
   imports: [
