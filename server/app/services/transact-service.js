@@ -1,7 +1,7 @@
 'use strict';
 const mongoose = require('mongoose'),
-Balance = mongoose.model('balances'),
-Transaction = mongoose.model('transactions');
+    Balance = mongoose.model('balances'),
+    Transaction = mongoose.model('transactions');
 
 
 
@@ -11,47 +11,47 @@ Transaction = mongoose.model('transactions');
  * @param {Object} params {Search parameters}
  */
 exports.search = async function (params) {
-    try{
-        const acc = await Balance.findOne(params);   
+    try {
+        const acc = await Balance.findOne(params);
         return acc;
-    }catch(error){
+    } catch (error) {
         throw error;
-    }     
+    }
 };
 
 /**
  * Returns the balance object matching the id.
  */
 exports.update = function (balance, amount) {
-    
-    return new Promise(async(resolve, reject)=>{
-        try{      
+
+    return new Promise(async (resolve, reject) => {
+        try {
             balance.CurrentBalance = amount;
-            await Balance.findOneAndUpdate({_id: balance._id}, balance);
+            await Balance.findOneAndUpdate({ _id: balance._id }, balance);
             resolve(true);
-        }catch(error){
+        } catch (error) {
             reject(error);
         }
     }
-    )  
-  
+    )
+
 };
 
 exports.transfer = function (transaction, ownerAccount, beneficiaryAccount) {
-    
-    return new Promise(async(resolve, reject)=>{
-        try{      
+
+    return new Promise(async (resolve, reject) => {
+        try {
             ownerAccount.CurrentBalance = ownerAccount.CurrentBalance - transaction.amount;
             beneficiaryAccount.CurrentBalance = beneficiaryAccount.CurrentBalance + transaction.amount;
-            await Balance.findOneAndUpdate({_id: ownerAccount._id}, ownerAccount);
-            await Balance.findOneAndUpdate({_id: beneficiaryAccount._id}, beneficiaryAccount);
+            await Balance.findOneAndUpdate({ _id: ownerAccount._id }, ownerAccount);
+            await Balance.findOneAndUpdate({ _id: beneficiaryAccount._id }, beneficiaryAccount);
             resolve(true);
-        }catch(error){
+        } catch (error) {
             reject(error);
         }
     }
-    )  
-  
+    )
+
 };
 
 
@@ -62,7 +62,7 @@ exports.transfer = function (transaction, ownerAccount, beneficiaryAccount) {
  */
 exports.save = async function (transaction) {
     const transactionData = new Transaction(transaction);
-    const tx =  await transactionData.save(transactionData);
-    return tx;   
+    const tx = await transactionData.save(transactionData);
+    return tx;
 };
 
