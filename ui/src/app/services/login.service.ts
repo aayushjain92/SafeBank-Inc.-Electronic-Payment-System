@@ -33,6 +33,10 @@ export class LoginService {
     })
   }
 
+  getUserByEmail(email : string): Observable<User> {
+    return this.http.get<User>(API_URL + 'login/' + email);
+  }
+
   loadUsers(): void {
     this.setUsersToArray();
     this.loadStickiesIntoStore(this.users);
@@ -53,14 +57,23 @@ export class LoginService {
     const isauthentcated = this.authenticate(user);
     const error = "Email/paswword is incorrect. Please try again.";
     if (isauthentcated) {
-      this.store.dispatch(AuthActions.loginSuccess({ user }));
-      //how to use state in dashboard and other screens
-      this.router.navigate(['/dashboard']);
-      console.log('User added>>>');
-      console.log(this.store);
+      //Fetching entire user object
+      this.getUserByEmail(user.email).subscribe((userDetails:User) => {
+        console.log('Inside subscription');
+        console.log(userDetails);
+        user = userDetails;
+        console.log('After enrichment>>');
+        console.log(user);
+        this.store.dispatch(AuthActions.loginSuccess({ user }));
+        //how to use state in dashboard and other screens
+        this.router.navigate(['/dashboard']);
+        console.log('User added>>>');
+        console.log(this.store);
+      })
     } else {
       this.store.dispatch(AuthActions.loginFailure({ error }));
       //Handle error scenario
+      this.router.navigate(['/login']);
     }
   }
 

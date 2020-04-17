@@ -19,6 +19,12 @@ export class DashboardComponent implements OnInit {
     console.log(this.store);
     this.store.subscribe(val => auth = val);
     this.user = auth.auth.status.user;
+    
+    //route to login
+    
+    //Call get User...
+
+    //Call beneficiary details for user
   }
 
 }
