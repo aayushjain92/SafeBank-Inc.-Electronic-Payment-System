@@ -19,9 +19,6 @@ let UserSchema = new Schema({
         type: Date,
         required: "Date of birth is missing"
     },
-    age:{
-        type : Number
-    },
     email:{
         type: String,
         required : "Email is missing"
@@ -60,22 +57,11 @@ let UserSchema = new Schema({
         type : Number,
         required : "Zip Code is missing"
     },
-    country: {
-        type: String,
-        required : "Country is missing"
-    },
-    username: {
-        type : String,
-        required : "Username is missing"
-    },
+
     password: {
         type : String,
         required : "Password is missing"
     },
-    
-    // accountNumber: {
-    //     type: Number
-    // },
     status: {
         type: String,
         enum : ['active','inactive', 'deleted'],
