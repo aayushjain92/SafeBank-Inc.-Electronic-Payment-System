@@ -1,0 +1,45 @@
+<div class="label">
+    <label>Street:</label>
+</div>
+<div class="input">
+    <input type="text" [(ngModel)]="user.addressLine1" />
+</div>
+
+<div class="label">
+    <label>Apartment:</label>
+</div>
+<div class="input">
+    <input type="text" [(ngModel)]="user.addressLine2" />
+</div>
+
+<div class="label">
+    <label>City:</label>
+</div>
+<div class="input">
+    <input type="text" maxlength="10" [(ngModel)]="user.city" />
+</div>
+
+<div class="label">
+    <label>State:</label>
+</div>
+<div class="input">
+    <input type="text" [(ngModel)]="user.state" />
+</div>
+
+<div class="label">
+    <label>Country</label>
+</div>
+<div class="input">
+    <input type="text" [(ngModel)]="user.country" />
+</div>
+
+<div class="label">
+    <label>Zip:</label>
+</div>
+<div class="input">
+    <input type="number" [(ngModel)]="user.zip" />
+</div>
+
+<div>
+    <button>Save</button>
+</div>

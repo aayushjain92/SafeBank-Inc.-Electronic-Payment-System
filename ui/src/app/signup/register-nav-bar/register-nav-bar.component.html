@@ -1,0 +1,39 @@
+<div class="grid">
+    <div class="box">
+        <div class="navBarBtn">
+            <button id="personal" routerLink="/register/personalDetails" 
+            routerLinkActive="active" (click)="getPersonalButton()" >Personal</button>
+        </div>
+
+        <div class="navBarBtn">
+            <button id="demographic" routerLink="/register/demographicDetails" 
+            routerLinkActive="active" (click)="getAddressButton()"
+            ngDisabled="!button == personal_save"> Demographic</button>
+        </div>
+
+        <div class="navBarBtn">
+            <button id="account" routerLink="/register/accountDetails" 
+            routerLinkActive="active" (click)="getAccountButton()">Account Details</button>
+        </div>
+
+        <div class="navBarBtn">
+            <button id="credentials" routerLink="/register/credentials" 
+            routerLinkActive="active" (click)="getCredsButton()">Credentials</button>
+        </div>
+    </div>
+
+    <div class="box">
+        <div *ngIf="button=='personal'" class="components">
+            <app-personal-details [user]="user"></app-personal-details>
+        </div>
+        <div *ngIf="button=='address'" class="components">
+            <app-address-details [user]="user"></app-address-details>
+        </div>
+        <div *ngIf="button=='account'" class="components">
+            <app-account-details [user]="user"></app-account-details>
+        </div>
+        <div *ngIf="button=='creds'" class="components">
+            <app-credential-details [user]="user"></app-credential-details>
+        </div>
+    </div>
+</div>
