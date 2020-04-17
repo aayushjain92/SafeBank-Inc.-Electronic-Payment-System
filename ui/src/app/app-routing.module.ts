@@ -28,7 +28,7 @@ const routes: Routes = [
   { path: 'beneficiary', component: BeneficiaryComponent },
   { path: 'addbeneficiary', component: AddbeneficiaryComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'transactions', component: TransactiontableComponent }
+  { path: 'transactions', component: TransactiontableComponent },
   { path: 'dashboard', component: DashboardComponent }
 ];
 

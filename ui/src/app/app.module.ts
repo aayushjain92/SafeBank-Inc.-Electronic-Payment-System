@@ -17,8 +17,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BeneficiaryComponent } from './beneficiary/beneficiary.component';
 import { AddbeneficiaryComponent } from './addbeneficiary/addbeneficiary.component';
-import { RegisterNavBarComponent} from './signup/register-nav-bar/register-nav-bar.component';
-import { PersonalDetailsComponent} from './signup/personal-details/personal-details.component';
+import { RegisterNavBarComponent } from './signup/register-nav-bar/register-nav-bar.component';
+import { PersonalDetailsComponent } from './signup/personal-details/personal-details.component';
 import { LandingPageComponent } from './landing/landing-page/landing-page.component';
 import { RegisterComponent } from './signup/register/register.component';
 import { AddressDetailsComponent } from './signup/address-details/address-details.component';
@@ -35,11 +35,11 @@ import { NavComponent } from './nav/nav.component';
 
 //Angular material design
 import { MatSliderModule } from '@angular/material/slider';
-import {MatStepperModule} from '@angular/material/stepper';
-import {MatNativeDateModule} from '@angular/material/core';
-import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatButtonModule} from '@angular/material/button';
-import {MatSelectModule} from '@angular/material/select';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSelectModule } from '@angular/material/select';
 @NgModule({
   declarations: [
     AppComponent,
@@ -55,7 +55,7 @@ import {MatSelectModule} from '@angular/material/select';
     LoginComponent,
     LoginFormComponent,
     LogoutConfirmationDialogComponent,
-    TransactiontableComponent
+    TransactiontableComponent,
     DashboardComponent,
     NavComponent
   ],
