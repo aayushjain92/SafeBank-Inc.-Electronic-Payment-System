@@ -1,6 +1,5 @@
 'use strict';
 const mongoose = require('mongoose'),
-    Balance = mongoose.model('balances'),
     Transaction = mongoose.model('transactions');
 
 
