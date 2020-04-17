@@ -9,7 +9,7 @@ exports.transfer = async function (request, response) {
     
         // owner account existence and balance verification
         const ownerAccount = await Service.search({AccountNumber:transaction.ownerAccountNum});
-        if(!ownerAccount || ownerAccount.CurrentBalance < transaction.amount){
+        if(!ownerAccount || ownerAccount.CurrentAccount < transaction.amount){
             return response.json({
                 status: 401,
                 message: "Account doesnt exist or Insufficient Funds"
@@ -54,7 +54,7 @@ exports.credit = async function (request, response) {
     
         // verify owner's account existence 
         const ownerAccount = await Service.search({AccountNumber:transaction.ownerAccountNum});
-        if(!ownerAccount || ownerAccount.CurrentBalance < transaction.amount){
+        if(!ownerAccount || ownerAccount.CurrentAccount < transaction.amount){
             return response.json({
                 status: 401,
                 message: "Account doesnt exist"
@@ -62,7 +62,7 @@ exports.credit = async function (request, response) {
         }
 
         // credit the amount to the owner's account 
-        await Service.update(ownerAccount, ownerAccount.CurrentBalance + transaction.amount);
+        await Service.update(ownerAccount, ownerAccount.CurrentAccount + transaction.amount);
         
         // logging transaction        
         const tx = await Service.save(transaction);
@@ -90,7 +90,7 @@ exports.debit = async function (request, response) {
     
         // verify owner's account existence 
         const ownerAccount = await Service.search({AccountNumber:transaction.ownerAccountNum});
-        if(!ownerAccount || ownerAccount.CurrentBalance < transaction.amount){
+        if(!ownerAccount || ownerAccount.CurrentAccount < transaction.amount){
             return response.json({
                 status: 401,
                 message: "Account doesnt exist or Insufficient Funds"
@@ -98,7 +98,7 @@ exports.debit = async function (request, response) {
         }
 
         // debit the amount from the owner's account 
-        await Service.update(ownerAccount, ownerAccount.CurrentBalance - transaction.amount);
+        await Service.update(ownerAccount, ownerAccount.CurrentAccount - transaction.amount);
         
         // logging transaction        
         const tx = await Service.save(transaction);

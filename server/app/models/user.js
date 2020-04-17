@@ -19,9 +19,6 @@ let UserSchema = new Schema({
         type: Date,
         required: "Date of birth is missing"
     },
-    age:{
-        type : Number
-    },
     email:{
         type: String,
         required : "Email is missing"
@@ -60,26 +57,21 @@ let UserSchema = new Schema({
         type : Number,
         required : "Zip Code is missing"
     },
-    country: {
-        type: String,
-        required : "Country is missing"
-    },
-    username: {
-        type : String,
-        required : "Username is missing"
-    },
+
     password: {
         type : String,
         required : "Password is missing"
     },
-    accountNumber: {
-        type: Number
-    }
+    status: {
+        type: String,
+        enum : ['active','inactive', 'deleted'],
+        default: 'active'
+    },
 
 },
-    {
-        versionKey: false
-    });
+{
+    versionKey: false
+});
 
 // Duplicate the id field as mongoose returns _id field instead of id.
 UserSchema.virtual('id').get(function () {
@@ -91,4 +83,6 @@ UserSchema.set('toJSON', {
     virtuals: true
 });
 
-module.exports = mongoose.model('user', UserSchema);
+const User = mongoose.model("user", UserSchema);
+
+module.exports = {User, UserSchema};

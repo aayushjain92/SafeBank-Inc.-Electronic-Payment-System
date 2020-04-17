@@ -1,20 +1,33 @@
 'use strict';
 const mongoose = require('mongoose');
+const shortid = require('shortid');
 const Schema = mongoose.Schema;
-
+const userSchema = require("./user").UserSchema;
 /**
  * Mongoose schema for todolist object.
  */
 let AccBalSchema = new Schema({
 
+    user: userSchema,
+
     AccountNumber: {
         type: String,
-        required: [true, 'Account Number is required']
+        default: function getShortId(){
+           let accNum = shortid.generate();
+           return accNum.toUpperCase();
+        }
     },
     
     CurrentBalance: { 
-        type : Number
-    }
+        type : Number,
+        default: 0,
+    },
+
+    status: {
+        type: String,
+        enum : ['active','inactive', 'deleted'],
+        default: 'active'
+    },
 },
     {
         versionKey: false
@@ -30,4 +43,4 @@ AccBalSchema.set('toJSON', {
     virtuals: true
 });
 
-module.exports = mongoose.model('balances', AccBalSchema);
+module.exports = mongoose.model('accounts', AccBalSchema);
