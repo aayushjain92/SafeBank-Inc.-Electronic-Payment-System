@@ -1,22 +1,33 @@
-<div>
+<div class="center-content">
   <form [formGroup]="form" (ngSubmit)="submit()">
-
     <div>
-      <label>Username:</label>
-      <input type="text" matInput placeholder="Username" formControlName="username">
+      <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input matInput placeholder="Email ID" formControlName="email" required>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field>
+        <input matInput placeholder="Password" [type]="hide ? 'password' : 'text'" formControlName="password" required>
+        <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        <mat-hint *ngIf="!passwordInput.value">Enter your password</mat-hint>
+      </mat-form-field>
     </div>
 
-    <div>
+    <!-- <div>
       <label>Password:</label>
       <input type="password" matInput placeholder="Password" formControlName="password">
     </div>
+    <p>lalaalalal</p> -->
 
     <p *ngIf="errorMessage" class="loginError">
       {{ errorMessage }}
     </p>
 
     <p class="loginButtons">
-      <button type="submit">Login</button>
+      <button mat-raised-button color="primary" type="submit">Login</button>
+      <button mat-raised-button color="primary" routerLink="/register/" 
+        routerLinkActive="active">Register</button>
     </p>
 
   </form>

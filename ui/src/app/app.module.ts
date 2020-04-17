@@ -30,8 +30,16 @@ import * as fromAuth from './store/reducers';
 import { LogoutConfirmationDialogComponent } from './login/logout-confirmation-dialog/logout-confirmation-dialog.component';
 import { AuthEffects } from './store/effects/auth.effects';
 import { TransactiontableComponent } from './transactiontable/transactiontable.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { NavComponent } from './nav/nav.component';
 
-
+//Angular material design
+import { MatSliderModule } from '@angular/material/slider';
+import {MatStepperModule} from '@angular/material/stepper';
+import {MatNativeDateModule} from '@angular/material/core';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatButtonModule} from '@angular/material/button';
+import {MatSelectModule} from '@angular/material/select';
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,6 +56,8 @@ import { TransactiontableComponent } from './transactiontable/transactiontable.c
     LoginFormComponent,
     LogoutConfirmationDialogComponent,
     TransactiontableComponent
+    DashboardComponent,
+    NavComponent
   ],
 
   imports: [
@@ -63,6 +73,12 @@ import { TransactiontableComponent } from './transactiontable/transactiontable.c
     EffectsModule.forRoot([]),
     EffectsModule.forFeature([AuthEffects]),
     ReactiveFormsModule,
+    MatSliderModule,
+    MatStepperModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
+    MatSelectModule,
+    MatButtonModule,
   ],
 
   providers: [],

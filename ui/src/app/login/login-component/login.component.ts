@@ -4,6 +4,7 @@ import { Store, select } from '@ngrx/store';
 import { User } from './../../model/user';
 import { LoginService } from 'src/app/services/login.service';
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -22,7 +23,9 @@ export class LoginComponent implements OnInit {
     this.loginApi.loadUsers();
   }
 
-  onSubmit(user: User) {
+
+  onSubmit(user : User) {
+    console.log('in login comp parent >>' + user);
     this.loginApi.login(user);
   }
 

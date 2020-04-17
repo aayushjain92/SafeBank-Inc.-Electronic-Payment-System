@@ -7,10 +7,9 @@ const TxnHistoryService = require('../services/transactionHistory-service')
 exports.transfer = async function (request, response) {
     try {
         const transaction = Object.assign({}, request.body);
-
         // owner account existence and balance verification
-        const ownerAccount = await Service.search({ AccountNumber: transaction.ownerAccountNum });
-        if (!ownerAccount || ownerAccount.CurrentBalance < transaction.amount) {
+        const ownerAccount = await Service.search({AccountNumber:transaction.ownerAccountNum});
+        if(!ownerAccount || ownerAccount.CurrentAccount < transaction.amount){
             return response.json({
                 status: 401,
                 message: "Account doesnt exist or Insufficient Funds"
@@ -54,17 +53,16 @@ exports.credit = async function (request, response) {
         const transaction = Object.assign({}, request.body);
 
         // verify owner's account existence 
-        const ownerAccount = await Service.search({ AccountNumber: transaction.ownerAccountNum });
-        if (!ownerAccount || ownerAccount.CurrentBalance < transaction.amount) {
-            return response.json({
+        const ownerAccount = await Service.search({AccountNumber:transaction.ownerAccountNum});
+        if(!ownerAccount || ownerAccount.CurrentAccount < transaction.amount){
+           return response.json({
                 status: 401,
                 message: "Account doesnt exist"
             });
         }
 
         // credit the amount to the owner's account 
-        await Service.update(ownerAccount, ownerAccount.CurrentBalance + transaction.amount);
-
+        await Service.update(ownerAccount, ownerAccount.CurrentAccount + transaction.amount);
         // logging transaction        
         const tx = await Service.save(transaction);
         return response.json({
@@ -90,8 +88,8 @@ exports.debit = async function (request, response) {
         const transaction = Object.assign({}, request.body);
 
         // verify owner's account existence 
-        const ownerAccount = await Service.search({ AccountNumber: transaction.ownerAccountNum });
-        if (!ownerAccount || ownerAccount.CurrentBalance < transaction.amount) {
+        const ownerAccount = await Service.search({AccountNumber:transaction.ownerAccountNum});
+        if(!ownerAccount || ownerAccount.CurrentAccount < transaction.amount){
             return response.json({
                 status: 401,
                 message: "Account doesnt exist or Insufficient Funds"
@@ -99,8 +97,7 @@ exports.debit = async function (request, response) {
         }
 
         // debit the amount from the owner's account 
-        await Service.update(ownerAccount, ownerAccount.CurrentBalance - transaction.amount);
-
+        await Service.update(ownerAccount, ownerAccount.CurrentAccount - transaction.amount);
         // logging transaction        
         const tx = await Service.save(transaction);
         return response.json({
@@ -108,7 +105,6 @@ exports.debit = async function (request, response) {
             message: "transaction successful",
             data: tx
         });
-
 
     } catch (error) {
         return response.json({
