@@ -1,10 +1,8 @@
 'use strict';
 const mongoose = require('mongoose'),
+
 Account = mongoose.model('accounts'),
 Transaction = mongoose.model('transactions');
-
-
-
 /**
  * Returns an array of account number object matching the search parameters.
  *
@@ -14,9 +12,9 @@ exports.search = async function (params) {
     try{
         const acc = await Account.findOne(params);   
         return acc;
-    }catch(error){
+    } catch (error) {
         throw error;
-    }     
+    }
 };
 
 /**
@@ -29,16 +27,16 @@ exports.update = function (account, amount) {
             account.CurrentAccount = amount;
             await Account.findOneAndUpdate({_id: account._id}, account);
             resolve(true);
-        }catch(error){
+        } catch (error) {
             reject(error);
         }
     }
-    )  
-  
+    )
+
 };
 
 exports.transfer = function (transaction, ownerAccount, beneficiaryAccount) {
-    
+ 
     return new Promise(async(resolve, reject)=>{
         try{      
             ownerAccount.CurrentAccount = ownerAccount.CurrentAccount - transaction.amount;
@@ -46,12 +44,12 @@ exports.transfer = function (transaction, ownerAccount, beneficiaryAccount) {
             await Account.findOneAndUpdate({_id: ownerAccount._id}, ownerAccount);
             await Account.findOneAndUpdate({_id: beneficiaryAccount._id}, beneficiaryAccount);
             resolve(true);
-        }catch(error){
+        } catch (error) {
             reject(error);
         }
     }
-    )  
-  
+    )
+
 };
 
 
@@ -62,7 +60,7 @@ exports.transfer = function (transaction, ownerAccount, beneficiaryAccount) {
  */
 exports.save = async function (transaction) {
     const transactionData = new Transaction(transaction);
-    const tx =  await transactionData.save(transactionData);
-    return tx;   
+    const tx = await transactionData.save(transactionData);
+    return tx;
 };
 

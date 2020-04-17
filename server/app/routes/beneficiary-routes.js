@@ -3,13 +3,13 @@
 const beneficaryController = require('../controllers/beneficiary-Controller');
 
 // defining all the end points for beneficary
-// end point plural
+
 module.exports = (app) => {
-    app.route('/beneficiary')
+    app.route('/beneficiaries')
         .get(beneficaryController.list)
         .post(beneficaryController.save);
 
-    app.route('/beneficiary/:accountNumber')
+    app.route('/beneficiaries/:accountNumber')
         .get(beneficaryController.get)
         .delete(beneficaryController.delete);
 };  

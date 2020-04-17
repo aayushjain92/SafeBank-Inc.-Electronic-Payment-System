@@ -27,23 +27,23 @@ export class BeneficiaryService {
   // end point to get all items
   getbeneficiary(): Observable<any> {
 
-    return this.http.get(endpoint + 'beneficiary');
+    return this.http.get(endpoint + 'beneficiaries');
   }
 
 
   // end point to save all beneficiary
   savebeneficiary(beneficiary: Beneficiary): Observable<Beneficiary> {
 
-    return this.http.post<Beneficiary>(endpoint + 'beneficiary', beneficiary);
+    return this.http.post<Beneficiary>(endpoint + 'beneficiaries', beneficiary);
   }
 
   // end point to delete beneficiary
   deleteBeneficiary(accountNumber): Observable<Beneficiary> {
 
-    return this.http.delete<Beneficiary>(`${endpoint + 'beneficiary'}/${accountNumber}`);
+    return this.http.delete<Beneficiary>(`${endpoint + 'beneficiaries'}/${accountNumber}`);
   }
 
   getBeneficiarybyaccountNumber(accountNumber): Observable<Beneficiary> {
-    return this.http.get<Beneficiary>(`${endpoint + 'beneficiary'}/${accountNumber}`);
+    return this.http.get<Beneficiary>(`${endpoint + 'beneficiaries'}/${accountNumber}`);
   }
 }

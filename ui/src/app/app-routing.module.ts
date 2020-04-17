@@ -10,8 +10,8 @@ import { CredentialDetailsComponent } from './signup/credential-details/credenti
 import { LandingPageComponent } from './landing/landing-page/landing-page.component';
 import { RegisterComponent } from './signup/register/register.component';
 import { LoginComponent } from './login/login-component/login.component';
+import { TransactiontableComponent } from './transactiontable/transactiontable.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-
 
 const routes: Routes = [
   { path: '', component: LandingPageComponent },
@@ -28,6 +28,7 @@ const routes: Routes = [
   { path: 'beneficiary', component: BeneficiaryComponent },
   { path: 'addbeneficiary', component: AddbeneficiaryComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'transactions', component: TransactiontableComponent }
   { path: 'dashboard', component: DashboardComponent }
 ];
 

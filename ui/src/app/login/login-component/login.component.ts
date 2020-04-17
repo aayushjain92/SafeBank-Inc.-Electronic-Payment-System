@@ -17,11 +17,12 @@ export class LoginComponent implements OnInit {
   pending$ = this.store.pipe(select(fromAuth.getPending));
   error$ = this.store.pipe(select(fromAuth.getError));
 
-  constructor(private loginApi: LoginService, private store: Store<fromAuth.State>) {}
+  constructor(private loginApi: LoginService, private store: Store<fromAuth.State>) { }
 
   ngOnInit() {
     this.loginApi.loadUsers();
   }
+
 
   onSubmit(user : User) {
     console.log('in login comp parent >>' + user);

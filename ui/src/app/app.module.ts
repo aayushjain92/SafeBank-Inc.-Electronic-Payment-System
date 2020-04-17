@@ -29,6 +29,7 @@ import { LoginFormComponent } from './login/login-form/login-form/login-form.com
 import * as fromAuth from './store/reducers';
 import { LogoutConfirmationDialogComponent } from './login/logout-confirmation-dialog/logout-confirmation-dialog.component';
 import { AuthEffects } from './store/effects/auth.effects';
+import { TransactiontableComponent } from './transactiontable/transactiontable.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { NavComponent } from './nav/nav.component';
 
@@ -39,8 +40,6 @@ import {MatNativeDateModule} from '@angular/material/core';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatButtonModule} from '@angular/material/button';
 import {MatSelectModule} from '@angular/material/select';
-
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -56,6 +55,7 @@ import {MatSelectModule} from '@angular/material/select';
     LoginComponent,
     LoginFormComponent,
     LogoutConfirmationDialogComponent,
+    TransactiontableComponent
     DashboardComponent,
     NavComponent
   ],
