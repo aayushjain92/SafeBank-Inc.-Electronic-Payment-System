@@ -33,3 +33,24 @@ let renderErrorResponse = (response) => {
     };
     return errorCallback;
 };
+
+/**
+ * get method for the finding items by passing id it will return 1 item
+ *
+ * @param request
+ * @param response
+*/
+exports.get = (request, response) => {
+    const email = request.params.email;
+
+    const total = loginService.searchUserByEmail(email)
+        .then(item => {
+
+            response.status(200).json(item);
+        })
+        .catch(err => {
+            response.status(500).json({
+                message: "not proper id format"
+            });
+        });
+};

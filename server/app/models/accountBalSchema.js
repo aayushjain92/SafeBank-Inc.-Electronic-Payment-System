@@ -23,6 +23,11 @@ let AccBalSchema = new Schema({
         default: 0,
     },
 
+    routingNumber :{
+        type: String,
+        default: "EX112223"
+    },
+
     status: {
         type: String,
         enum : ['active','inactive', 'deleted'],

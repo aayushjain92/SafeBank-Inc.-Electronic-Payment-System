@@ -25,10 +25,6 @@ let UserSchema = new Schema({
     },
     phoneNumber:{
         type: Number
-    },//remove default value
-    routingNumber :{
-        type: String,
-        default: "EX112223"
     },
     accountType:{
         type: String,
