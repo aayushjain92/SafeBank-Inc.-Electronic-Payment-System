@@ -1,11 +1,14 @@
 'use strict';
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const accBalSchema = require("./accountBalSchema").AccBalSchema;
 
 /**
  * Mongoose schema for todolist object.
  */
 let UserSchema = new Schema({
+
+    account : accBalSchema,
 
     firstName: {
         type: String,

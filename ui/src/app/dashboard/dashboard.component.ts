@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { Store, select } from '@ngrx/store';
 import * as fromAuth from './../store/reducers/login.reducer';
 import { User } from 'src/app/model/user';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,17 +13,24 @@ import { User } from 'src/app/model/user';
 export class DashboardComponent implements OnInit {
   user: User;
   
-  constructor( private store: Store<fromAuth.State>) { }
+  constructor( private store: Store<fromAuth.State>, private router : Router) { }
 
   ngOnInit(): void {
     let auth;
     console.log(this.store);
     this.store.subscribe(val => auth = val);
-    this.user = auth.auth.status.user;
-    
+    if(auth.auth.status.user == null){
+      this.router.navigate(['/login']);
+    } else {
+      this.user = auth.auth.status.user;
+      console.log('User found in dashboard');
+      console.log(this.user);
+      console.log('User found' + this.user.firstName);
+      console.log('Account number: ' + this.user.account.AccountNumber);
+    }
+ 
     //route to login
     
-    //Call get User...
 
     //Call beneficiary details for user
   }
