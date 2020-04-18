@@ -16,7 +16,7 @@ let express = require('express'),
 
 // mongoose instance connection url connection
 // mongoose.set('useNewUrlParser', true);
-mongoose.connect('mongodb+srv://root:root@exterminators-hvc8c.mongodb.net/test?retryWrites=true&w=majority',
+mongoose.connect('mongodb+srv://root:root@exterminators-hvc8c.mongodb.net/bankdb?retryWrites=true&w=majority',
     {
         useUnifiedTopology: true,
         useNewUrlParser: true,
