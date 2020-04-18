@@ -11,7 +11,7 @@ const API_URL = environment.apiUrl;
 })
 export class RegisterService {
 
-  users: User[] = [];
+  users: User[];
 
   constructor(private http: HttpClient) { }
 
@@ -19,6 +19,13 @@ export class RegisterService {
   getUsers(): Observable<User[]> {
     return this.http.get<User[]>(API_URL + 'register');
   }
+
+  // getUserArray(): User[] {
+  //   this.getUsers().subscribe((users:User[]) => {
+  //     this.users = users;
+  //   })
+  //   return this.users;
+  // }
 
   registerUser(user: User): void {
     this.http.post(API_URL + 'register', user)

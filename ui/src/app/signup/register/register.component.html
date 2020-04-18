@@ -162,8 +162,13 @@
       <mat-card  class="center-content">
         <mat-card-content>
       <ng-template matStepLabel>Done</ng-template>
+
+      <div *ngIf="userExists">
+        <div>Email Id Already Exists</div>
+      </div>
+      
       <p>You are now done.</p>
-      <div>
+      <div>  
         <button mat-raised-button color="primary" matStepperPrevious>Back</button>
         <button mat-raised-button color="primary" (click)="stepper.reset()">Reset</button>
         <button mat-raised-button color="primary" (click)="saveUser()">Submit</button>
