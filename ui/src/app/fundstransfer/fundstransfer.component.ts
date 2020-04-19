@@ -15,15 +15,17 @@ import { Transaction } from '../model/transaction.model';
 })
 export class FundstransferComponent implements OnInit {
   title = 'Funds Transfer';
-
-constructor(public rest: FundstransferService, private route: ActivatedRoute, private router: Router, private store: Store<fromAuth.State>) { }
+  transaction: Transaction;
+  constructor(public rest: FundstransferService, private route: ActivatedRoute, private router: Router, private store: Store<fromAuth.State>) {
+    this.transaction = new Transaction();
+  }
   user: User;
   auth: any;
   displayText: string = undefined;
-  transaction: Transaction;
   panelOpenState = false;
 
   ngOnInit(): void {
+
     this.initializeTable();
     //this.getbeneficiary();
   }
@@ -33,11 +35,12 @@ constructor(public rest: FundstransferService, private route: ActivatedRoute, pr
     //console.log(this.store);
     this.store.subscribe(val => self.auth = val);
     this.user = this.auth.auth.status.user;
-    this.transaction.ownerAccountNumber =  this.user.account.AccountNumber;
+    console.log("funds" + this.user.account.AccountNumber);
   }
 
 
   credit(transaction : Transaction): void{
+    this.transaction.ownerAccountNumber =  this.user.account.AccountNumber;
     //transaction.ownerAccountNumber = this.user.account.AccountNumber;
     //this.rest.creditAmount(transaction);
     // this.router.navigate(['/login', {}]);
