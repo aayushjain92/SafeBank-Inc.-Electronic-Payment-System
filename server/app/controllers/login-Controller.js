@@ -45,7 +45,6 @@ exports.get = (request, response) => {
 
     const total = loginService.searchUserByEmail(email)
         .then(item => {
-
             response.status(200).json(item);
         })
         .catch(err => {
@@ -54,3 +53,37 @@ exports.get = (request, response) => {
             });
         });
 };
+
+exports.updateLastLogin = (request, response) => {
+    console.log('In update method');
+    const email = request.params.email;
+    let user;
+    //Find by Email
+    loginService.searchUserByEmail(email)
+        .then(item => {
+            user = item;
+            user.modifiedDate = new Date().toISOString();
+            user.lastLoginDate = new Date().toISOString();
+            // console.log('setting last login as : ' + user.lastLoginDate);
+            //Update the user
+            loginService.update(user)
+                .then(updatedItem =>{
+                    // console.log('object updated successfully');
+                    // console.log(updatedItem);
+                    response.status(200).json({
+                        message : 'Last login time updated for user with email id : ' + updatedItem.email
+                    });
+                    console.log('Done');
+                })
+                .catch(err => {
+                    response.status(500).json({
+                        message: "Unable to update the user"
+                    });
+                })
+        })
+        .catch(err => {
+            response.status(500).json({
+                message: "Something went wrong"
+            });
+        });
+}

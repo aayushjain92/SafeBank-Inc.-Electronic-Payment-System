@@ -27,26 +27,23 @@ exports.save = (request, response) => {
     let newAccount;
     const user = Object.assign({}, request.body);
     const result = (saveditem) => {
-        // response.status(201);
         newAccount = saveditem;
-        //Create account
-        // const account = {
-        //     user : newUser
-        // };
         user.account = newAccount;
+        
         const userResult = (savedUserItem) => {
-            // response.status(201);
             newUser = savedUserItem;
+            // console.log('user creation');
+            // console.log(newUser);
+            response.status(201);
+            response.json(newUser);
         };
         const userPromise = registerService.save(user);
         userPromise
             .then(userResult)
             .catch(renderErrorResponse(response));
+        // console.log('account creation')
+        // console.log(newAccount);
 
-        console.log(newUser);
-        console.log(newAccount);
-        
-        response.json(newUser);
     };
     const promise = accountService.save({});
     promise
