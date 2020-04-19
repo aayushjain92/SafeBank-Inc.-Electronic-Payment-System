@@ -22,4 +22,5 @@ describe('FundstransferComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  
 });
