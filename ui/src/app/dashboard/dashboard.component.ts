@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { Store, select } from '@ngrx/store';
 import * as fromAuth from './../store/reducers/login.reducer';
 import { User } from 'src/app/model/user';
 import { Router } from '@angular/router';
+// import { MainNavComponent }  from '../main-nav/main-nav.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,6 +13,8 @@ import { Router } from '@angular/router';
 })
 export class DashboardComponent implements OnInit {
   user: User;
+
+  // @ViewChild(MainNavComponent) mainNavModal;
   
   constructor( private store: Store<fromAuth.State>, private router : Router) { }
 
@@ -27,6 +30,7 @@ export class DashboardComponent implements OnInit {
       console.log(this.user);
       console.log('User found' + this.user.firstName);
       console.log('Account number: ' + this.user.account.AccountNumber);
+      // this.mainNavModal.openModal();
     }
  
     //route to login

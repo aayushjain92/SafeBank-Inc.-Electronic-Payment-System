@@ -66,6 +66,18 @@ let UserSchema = new Schema({
         enum : ['active','inactive', 'deleted'],
         default: 'active'
     },
+    createdDate: { 
+        type : Date, 
+        default: Date.now
+    },
+    modifiedDate: { 
+        type : Date, 
+        default: Date.now
+    },
+    lastLoginDate: { 
+        type : Date, 
+        default: Date.now
+    },
 
 },
 {
