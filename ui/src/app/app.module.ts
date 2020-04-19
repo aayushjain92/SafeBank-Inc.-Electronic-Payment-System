@@ -43,6 +43,7 @@ import { ContactUsComponent } from './contact-us/contact-us.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { CustomercareComponent } from './customercare/customercare.component';
 import { CcDashComponent } from './cc-dash/cc-dash.component';
+import { CcMainNavComponent } from './cc-main-nav/cc-main-nav.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { CcDashComponent } from './cc-dash/cc-dash.component';
     DonateCovidComponent,
     ContactUsComponent,
     CustomercareComponent,
-    CcDashComponent
+    CcDashComponent,
+    CcMainNavComponent
   ],
 
   imports: [

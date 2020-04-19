@@ -26,12 +26,12 @@ export class ContactUsComponent implements OnInit {
     private router: Router, private service : ContactUsService, private _snackBar: MatSnackBar) { }
 
   categories : Category[] = [
-    {value: 'account', viewValue: 'Account'},
-    {value: 'login', viewValue: 'Login'},
-    {value: 'beneficiary', viewValue: 'Beneficiary'},
-    {value: 'balance', viewValue: 'Balance'},
-    {value: 'dispute', viewValue: 'Dispute'},
-    {value: 'other', viewValue: 'Other'},
+    {value: 'Account', viewValue: 'Account'},
+    {value: 'Login', viewValue: 'Login'},
+    {value: 'Beneficiary', viewValue: 'Beneficiary'},
+    {value: 'Balance', viewValue: 'Balance'},
+    {value: 'Dispute', viewValue: 'Dispute'},
+    {value: 'Other', viewValue: 'Other'},
   ]
 
   ngOnInit(): void {

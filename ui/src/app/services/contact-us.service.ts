@@ -14,8 +14,11 @@ export class ContactUsService {
   constructor(private http: HttpClient) { }
 
   saveComplaint(contactus : Contactus): Observable<any> {
-    //Save the complaint raised by user
-    console.log(endpoint);
+    //Save the complaint raised by user 
     return this.http.post<Contactus>(endpoint + 'complaints', contactus);
+  }
+
+  getAllComplaints(): Observable<Contactus[]> {
+    return this.http.get<Contactus[]>(endpoint + 'complaints');
   }
 }

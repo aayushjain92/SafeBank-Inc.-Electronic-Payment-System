@@ -14,7 +14,8 @@ export class User {
     state: string;
     zip: number;
     password: string;
-    account: Account
+    account: Account;
+    role: string;
 
     // Constructor
     constructor(values: Object = {}) {
