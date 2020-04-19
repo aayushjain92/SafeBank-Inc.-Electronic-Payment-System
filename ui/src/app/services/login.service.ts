@@ -33,8 +33,17 @@ export class LoginService {
     })
   }
 
+
+
   getUserByEmail(email : string): Observable<User> {
     return this.http.get<User>(API_URL + 'login/' + email);
+  }
+
+  updateLastLogin(email : string){
+    this.http.put(API_URL + 'login/' + email + '/lastlogin', {})
+  .subscribe((response: any) => {
+      console.log('Last Login time updated in DB');
+    });
   }
 
   loadUsers(): void {
