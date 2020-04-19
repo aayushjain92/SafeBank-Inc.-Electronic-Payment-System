@@ -15,4 +15,10 @@ module.exports = (app) => {
     app.route('/transfer')
         .put(transactController.transfer);
 
+    app.route('/transactions/:accountNumber')
+        .get(transactController.list)
+
+
+    app.route('/transactionspdf/:accountNumber')
+        .get(transactController.pdf);
 };  

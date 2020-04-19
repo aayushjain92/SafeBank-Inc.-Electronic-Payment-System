@@ -1,3 +1,4 @@
+import { Account } from 'src/app/model/account.model';
 //Class for bank customer
 export class User {
     firstName: string;
@@ -18,6 +19,7 @@ export class User {
     country: string;
     username: string;
     password: string;
+    account: Account
 
     // Constructor
     constructor(values: Object = {}) {

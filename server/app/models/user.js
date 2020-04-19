@@ -1,11 +1,14 @@
 'use strict';
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const accBalSchema = require("./accountBalSchema").AccBalSchema;
 
 /**
  * Mongoose schema for todolist object.
  */
 let UserSchema = new Schema({
+
+    account : accBalSchema,
 
     firstName: {
         type: String,
@@ -19,19 +22,12 @@ let UserSchema = new Schema({
         type: Date,
         required: "Date of birth is missing"
     },
-    age:{
-        type : Number
-    },
     email:{
         type: String,
         required : "Email is missing"
     },
     phoneNumber:{
         type: Number
-    },//remove default value
-    routingNumber :{
-        type: String,
-        default: "EX112223"
     },
     accountType:{
         type: String,
@@ -60,26 +56,33 @@ let UserSchema = new Schema({
         type : Number,
         required : "Zip Code is missing"
     },
-    country: {
-        type: String,
-        required : "Country is missing"
-    },
-    username: {
-        type : String,
-        required : "Username is missing"
-    },
+
     password: {
         type : String,
         required : "Password is missing"
     },
-    accountNumber: {
-        type: Number
-    }
+    status: {
+        type: String,
+        enum : ['active','inactive', 'deleted'],
+        default: 'active'
+    },
+    createdDate: { 
+        type : Date, 
+        default: Date.now
+    },
+    modifiedDate: { 
+        type : Date, 
+        default: Date.now
+    },
+    lastLoginDate: { 
+        type : Date, 
+        default: Date.now
+    },
 
 },
-    {
-        versionKey: false
-    });
+{
+    versionKey: false
+});
 
 // Duplicate the id field as mongoose returns _id field instead of id.
 UserSchema.virtual('id').get(function () {
@@ -91,4 +94,6 @@ UserSchema.set('toJSON', {
     virtuals: true
 });
 
-module.exports = mongoose.model('user', UserSchema);
+const User = mongoose.model("user", UserSchema);
+
+module.exports = {User, UserSchema};

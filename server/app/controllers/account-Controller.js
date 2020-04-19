@@ -1,8 +1,8 @@
 'use strict';
 
-const beneficaryService = require('../services/beneficiary-service');
+const accountService = require('../services/account-service');
 const mongoose = require('mongoose'),
-    Beneficiary = mongoose.model('beneficiary');
+    Account = mongoose.model('accounts');
 
 
 /**
@@ -12,41 +12,45 @@ const mongoose = require('mongoose'),
  * @param response
 */
 exports.save = (request, response) => {
-    if (!request.body.firstName) {
+    // if (!request.body.firstName) {
 
-        return response.status(400).send({
-            message: "firstName cannot be empty"
-        });
-    }
-    if (!request.body.lastName) {
-
-        return response.status(400).send({
-            message: "lastName cannot be empty"
-        });
-    }
-    if (!request.body.accountNumber) {
-
-        return response.status(400).send({
-            message: "accountNumber cannot be empty"
-        });
-    }
-    if (!request.body.nickName) {
-
-        return response.status(400).send({
-            message: "nickName cannot be empty"
-        });
-    }
-
-    //push v alidation in services
-    const beneficiary = Object.assign({}, request.body);
+    //     return response.status(400).send({
+    //         message: "firstName cannot be empty"
+    //     });
+    // }
+    //push validation in services
+    const account = Object.assign({}, request.body);
     const result = (saveditem) => {
         response.status(201);
         response.json(saveditem);
     };
-    const promise = beneficaryService.save(beneficiary);
+    const promise = accountService.save(account);
     promise
         .then(result)
         .catch(renderErrorResponse(response));
+};
+
+
+/**
+ * get method for the finding items by passing id it will return 1 item
+ *
+ * @param request
+ * @param response
+*/
+exports.get = (request, response) => {
+    console.log('In get');
+    const accountId = request.params.accountId;
+
+    const total = accountService.searchAllByAccountId(accountId)
+        .then(item => {
+
+            response.status(200).json(item);
+        })
+        .catch(err => {
+            response.status(500).json({
+                message: "not proper id format"
+            });
+        });
 };
 /**
  * Sets response for item search and return all.
@@ -58,7 +62,7 @@ exports.list = (request, response) => {
 
     const params = {};
 
-    const promise = beneficaryService.Search(params);
+    const promise = accountService.searchAll(params);
     const result = (items) => {
         response.status(200);
         response.json(items);
@@ -70,16 +74,20 @@ exports.list = (request, response) => {
 
 
 
-// delete the beneficiary based on the accountnumber
-
+/**
+ * Delete the Account based on the accountnumber
+ *
+ * @param request
+ * @param response
+*/
 exports.delete = (request, response) => {
-    const accountId = request.params.accountNumber;
+    const accountId = request.params.accountId;
 
 
-    const promise = beneficaryService.delete(accountId);
+    const promise = accountService.delete(accountId);
     promise
-        .then(beneficiary => {
-            if (beneficiary) {
+        .then(account => {
+            if (account) {
                 return response.status(200).json({
                     message: "Account deleted"
                 });
@@ -111,22 +119,4 @@ let renderErrorResponse = (response) => {
         }
     };
     return errorCallback;
-};
-
-
-
-// get method for the finding items by passing id it will return 1 item
-exports.get = (request, response) => {
-    const accountId = request.params.accountNumber;
-
-    const total = beneficaryService.search(accountId)
-        .then(item => {
-
-            response.status(200).json(item);
-        })
-        .catch(err => {
-            response.status(500).json({
-                message: "not proper id formAT"
-            });
-        });
 };

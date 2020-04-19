@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { User } from 'src/app/model/user';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login-form',
@@ -24,20 +24,24 @@ export class LoginFormComponent implements OnInit {
   @Input() errorMessage: string | null;
 
   @Output() submitted = new EventEmitter<User>();
-
+  
   form: FormGroup = new FormGroup({
-  username : new FormControl(''),
-  password : new FormControl('')
-});  
+      email : new FormControl('', Validators.required),
+      password : new FormControl('', Validators.required)
+});
 
+  hide = true;
+  get passwordInput() { return this.form.get('password'); } 
+  
   constructor() { }
-
+  
   ngOnInit() { }
-
+  
   submit() {
     if (this.form.valid) {
       this.submitted.emit(this.form.value);
     }
   }
+
 
 }

@@ -1,6 +1,7 @@
 'use strict';
 
 const registerService = require('../services/register-service');
+const accountService = require('../services/account-service');
 const mongoose = require('mongoose'),
     User = mongoose.model('user');
 
@@ -11,6 +12,7 @@ const mongoose = require('mongoose'),
  * @param response
 */
 exports.save = (request, response) => {
+    
     if (!request.body.firstName) {
         return response.status(400).send({
             message: "firstName cannot be empty"
@@ -21,16 +23,34 @@ exports.save = (request, response) => {
             message: "lastName cannot be empty"
         });
     }
-
+    let newUser;
+    let newAccount;
     const user = Object.assign({}, request.body);
     const result = (saveditem) => {
-        response.status(201);
-        response.json(saveditem);
+        newAccount = saveditem;
+        user.account = newAccount;
+        
+        const userResult = (savedUserItem) => {
+            newUser = savedUserItem;
+            // console.log('user creation');
+            // console.log(newUser);
+            response.status(201);
+            response.json(newUser);
+        };
+        const userPromise = registerService.save(user);
+        userPromise
+            .then(userResult)
+            .catch(renderErrorResponse(response));
+        // console.log('account creation')
+        // console.log(newAccount);
+
     };
-    const promise = registerService.save(user);
+    const promise = accountService.save({});
     promise
         .then(result)
         .catch(renderErrorResponse(response));
+
+
 };
 
 // /**

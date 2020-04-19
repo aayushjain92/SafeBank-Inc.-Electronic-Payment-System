@@ -16,7 +16,7 @@ let BeneficiarySchema = new Schema({
         required: "LastName is missing"
     },
     accountNumber: {
-        type: Number,
+        type: String,
         required: "Number is missing"
     },
     nickName: {
