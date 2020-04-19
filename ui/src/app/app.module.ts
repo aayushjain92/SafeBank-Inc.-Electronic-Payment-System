@@ -31,7 +31,6 @@ import { LogoutConfirmationDialogComponent } from './login/logout-confirmation-d
 import { AuthEffects } from './store/effects/auth.effects';
 import { TransactiontableComponent } from './transactiontable/transactiontable.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { NavComponent } from './nav/nav.component';
 
 //Angular material design
 import { MatSliderModule } from '@angular/material/slider';
@@ -45,6 +44,7 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -62,7 +62,6 @@ import { MatListModule } from '@angular/material/list';
     LogoutConfirmationDialogComponent,
     TransactiontableComponent,
     DashboardComponent,
-    NavComponent,
     MainNavComponent
   ],
 
