@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
 import * as fromAuth from './../store/reducers/login.reducer';
 import { User } from 'src/app/model/user';
@@ -15,14 +15,15 @@ export class DashboardComponent implements OnInit {
   user: User;
 
   // @ViewChild(MainNavComponent) mainNavModal;
-  
-  constructor( private store: Store<fromAuth.State>, private router : Router) { }
+
+  constructor(private store: Store<fromAuth.State>, private router: Router) { }
+
 
   ngOnInit(): void {
     let auth;
     console.log(this.store);
     this.store.subscribe(val => auth = val);
-    if(auth.auth.status.user == null){
+    if (auth.auth.status.user == null) {
       this.router.navigate(['/login']);
     } else {
       this.user = auth.auth.status.user;
@@ -32,9 +33,10 @@ export class DashboardComponent implements OnInit {
       console.log('Account number: ' + this.user.account.AccountNumber);
       // this.mainNavModal.openModal();
     }
- 
+    console.log("heere", this.user)
+
     //route to login
-    
+
 
     //Call beneficiary details for user
   }
