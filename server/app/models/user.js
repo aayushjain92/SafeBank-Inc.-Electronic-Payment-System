@@ -29,10 +29,6 @@ let UserSchema = new Schema({
     phoneNumber:{
         type: Number
     },
-    accountType:{
-        type: String,
-        default : "Checking"
-    },
     ssn:{
         type: Number,
         required : "Social Security Number is missing"
@@ -77,6 +73,11 @@ let UserSchema = new Schema({
     lastLoginDate: { 
         type : Date, 
         default: Date.now
+    },
+    role: { 
+        type : String,
+        enum : ['user','admin', 'customercare'], 
+        default: 'user'
     },
 
 },
