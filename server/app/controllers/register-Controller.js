@@ -2,8 +2,21 @@
 
 const registerService = require('../services/register-service');
 const accountService = require('../services/account-service');
+const emailService = require('../services/email-service');
 const mongoose = require('mongoose'),
     User = mongoose.model('user');
+
+exports.list = (request, response) => {
+    const params = {};
+    const promise = registerService.Search(params);
+    const result = (items) => {
+        response.status(200);
+        response.json(items);
+    };
+    promise
+        .then(result)
+        .catch(renderErrorResponse(response));
+};
 
 /**
  * Creates a new list and sets the response.
@@ -12,7 +25,7 @@ const mongoose = require('mongoose'),
  * @param response
 */
 exports.save = (request, response) => {
-    
+
     if (!request.body.firstName) {
         return response.status(400).send({
             message: "firstName cannot be empty"
@@ -43,7 +56,14 @@ exports.save = (request, response) => {
             .catch(renderErrorResponse(response));
         // console.log('account creation')
         // console.log(newAccount);
+        console.log(newUser);
+        console.log(newAccount);
+        console.log("prior email service");
+        //call to email service
+        emailService.sendEmail(newUser);
 
+        response.json(saveditem);
+        response.json(newUser);
     };
     const promise = accountService.save({});
     promise

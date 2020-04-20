@@ -75,11 +75,12 @@ export class RegisterComponent implements OnInit {
     {value: 'WY', viewValue: 'Wyoming'},
   ];
 
-  user: User = new User();
-  
-
   constructor(private _formBuilder: FormBuilder, private route: ActivatedRoute,
-    private router: Router, private service : RegisterService) { }
+  private router: Router, private service : RegisterService) { }
+
+  user: User = new User();
+  users : User[] = [];
+  userExists : boolean = false;
 
   ngOnInit(): void {
     this.personalFormGroup = this._formBuilder.group({
@@ -138,10 +139,31 @@ export class RegisterComponent implements OnInit {
     console.log(this.user.password);
     //SSN Field
     this.user.ssn = this.ssnFormGroup.get('ssn').value;
-    
-    
-    this.service.registerUser(this.user);
-    this.router.navigate(['/login', {}]);
+
+    //check for existing email
+    this.service.getUsers().subscribe((users:User[]) => {
+          this.users = users;
+        })
+    this.userExists = this.checkIfUserExists(this.user.email);
+
+    if(this.userExists){
+      this.router.navigate(['/register', {}]);
+    }else{
+      this.service.registerUser(this.user);
+      this.router.navigate(['/login', {}]);
+    }
+  }
+
+  checkIfUserExists(email:String) : boolean{
+    var userExists : boolean;
+    this.users.forEach((user) => {
+      if(user.email == email){
+        userExists = true;
+      }else{
+        userExists = false;
+      }
+    });
+    return userExists;
   }
 
 }
