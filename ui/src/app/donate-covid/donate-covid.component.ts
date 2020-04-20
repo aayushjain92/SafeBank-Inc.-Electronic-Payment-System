@@ -4,7 +4,9 @@ import * as fromAuth from './../store/reducers/login.reducer';
 import { Router } from '@angular/router';
 import { User } from 'src/app/model/user';
 import {FormBuilder, FormGroup, Validators, FormControl} from '@angular/forms';
-
+import { Transaction } from '../model/transaction.model';
+import { FundstransferService } from '../services/fundstransfer.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
 @Component({
   selector: 'app-donate-covid',
   templateUrl: './donate-covid.component.html',
@@ -13,8 +15,12 @@ import {FormBuilder, FormGroup, Validators, FormControl} from '@angular/forms';
 export class DonateCovidComponent implements OnInit {
   donateFormGroup : FormGroup
   user: User;
-
-  constructor(private store: Store<fromAuth.State>, private router: Router, private _formBuilder: FormBuilder) { }
+  transaction: Transaction;
+  constructor(private store: Store<fromAuth.State>, 
+    private router: Router, private _formBuilder: FormBuilder, 
+    public rest: FundstransferService, private _snackBar: MatSnackBar ) { 
+      this.transaction = new Transaction();
+    }
 
   ngOnInit(): void {
     let auth;
@@ -25,9 +31,6 @@ export class DonateCovidComponent implements OnInit {
     } else {
       this.user = auth.auth.status.user;
       console.log('User found in donatecovid');
-      console.log(this.user);
-      console.log('User found' + this.user.firstName);
-      console.log('Account number: ' + this.user.account.AccountNumber);
       // this.mainNavModal.openModal();
     }
     this.donateFormGroup = this._formBuilder.group({
@@ -35,8 +38,25 @@ export class DonateCovidComponent implements OnInit {
     });
   }
 
-  saveTransaction(): void {
-    //Save transaction code goes here
+  // pass the transaction model to FundstransferService for debiting the amount
+  debit(transaction : Transaction): void{
+    this.transaction.ownerAccountNum =  this.user.account.AccountNumber;
+    this.transaction.category = 'Donation';
+    console.log(transaction);
+    this.rest.debitAmount(transaction).subscribe((data) => {
+      this.openSnackBar(transaction.ownerAccountNum + ` 
+      has been debited successfully by USD ${transaction.amount}`
+      , 'Dismiss');
+      this.router.navigate(['/dashboard']);
+    }, (err) => {
+      console.log(err);
+    });
+  }
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 4000,
+    });
   }
 }
 

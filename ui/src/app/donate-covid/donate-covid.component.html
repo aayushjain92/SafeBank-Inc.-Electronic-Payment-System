@@ -14,12 +14,12 @@
                 <div class="element">
                   <mat-form-field>
                     <mat-label>Amount</mat-label>
-                    <input matInput placeholder="Donation Amount" [(ngModel)]="user.firstName" 
+                    <input matInput placeholder="Donation Amount" [(ngModel)]="transaction.amount"
                       formControlName="amountCtrl" required>
                   </mat-form-field>
                 </div>
                 <div>
-                    <button mat-raised-button color="primary" (click)="saveTransaction()">Submit</button>
+                    <button mat-raised-button color="primary" (click)="debit(transaction)">Donate</button>
                 </div>
               </form>
         </mat-card-content>
