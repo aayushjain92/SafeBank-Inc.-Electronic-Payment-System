@@ -49,6 +49,7 @@ import { CustomercareComponent } from './customercare/customercare.component';
 import { CcDashComponent } from './cc-dash/cc-dash.component';
 import { CcMainNavComponent } from './cc-main-nav/cc-main-nav.component';
 import {MatTableModule} from '@angular/material/table';
+import {MatSortModule} from '@angular/material/sort';
 import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
@@ -99,6 +100,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatListModule,
     MatSnackBarModule,
     MatTableModule,
+    MatSortModule,
     MatDialogModule
   ],
 

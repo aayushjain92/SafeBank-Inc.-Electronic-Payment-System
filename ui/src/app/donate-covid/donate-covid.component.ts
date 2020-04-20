@@ -3,7 +3,7 @@ import { Store, select } from '@ngrx/store';
 import * as fromAuth from './../store/reducers/login.reducer';
 import { Router } from '@angular/router';
 import { User } from 'src/app/model/user';
-import {FormBuilder, FormGroup, Validators, FormControl} from '@angular/forms';
+import { FormGroup, Validators, FormControl} from '@angular/forms';
 import { Transaction } from '../model/transaction.model';
 import { FundstransferService } from '../services/fundstransfer.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
@@ -17,8 +17,8 @@ export class DonateCovidComponent implements OnInit {
   user: User;
   transaction: Transaction;
   constructor(private store: Store<fromAuth.State>, 
-    private router: Router, private _formBuilder: FormBuilder, 
-    public rest: FundstransferService, private _snackBar: MatSnackBar ) { 
+    private router: Router, public rest: FundstransferService
+    , private _snackBar: MatSnackBar ) { 
       this.transaction = new Transaction();
     }
 
@@ -31,10 +31,13 @@ export class DonateCovidComponent implements OnInit {
     } else {
       this.user = auth.auth.status.user;
       console.log('User found in donatecovid');
-      // this.mainNavModal.openModal();
     }
-    this.donateFormGroup = this._formBuilder.group({
-      amountCtrl : ['', Validators.required],
+    this.donateFormGroup = new FormGroup({
+      amountCtrl : new FormControl('', [
+        Validators.required,
+        Validators.min(0.1),
+        Validators.pattern('^[0-9]\\d*(?:\\.\\d{1,2})?$'),
+      ]),
     });
   }
 
