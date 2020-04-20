@@ -1,145 +1,149 @@
-<mat-accordion #profile>
-    <mat-expansion-panel class="justify-content-center">
-        <mat-expansion-panel-header>
-            <mat-panel-title>
-            Personal data
-            </mat-panel-title>
-        </mat-expansion-panel-header>
-        <form [formGroup] = "personalFormGroup">
-        <mat-form-field>
-            <mat-label>First name</mat-label>
-            <input matInput readonly formControlName="firstNameCtrl">
-        </mat-form-field>
-    
-        <br> 
+<app-main-nav>
 
-        <mat-form-field>
-            <mat-label>Last name</mat-label>
-            <input matInput readonly formControlName="lastNameCtrl">
-        </mat-form-field>
-
-        <br> 
-
-        <mat-form-field>
-            <mat-label>Phone Number</mat-label>
-            <input matInput formControlName="phoneNumCtrl" required>
-        </mat-form-field>
-
-        <br> 
-
-        <mat-form-field>
-            <mat-label>Email</mat-label>
-            <input matInput readonly formControlName="emailIDCtrl">
-        </mat-form-field>
-
-        <br> 
-
-        <mat-form-field>
-            <mat-label>Date of Birth</mat-label>
-            <input matInput readonly formControlName="dobCtrl">
-        </mat-form-field>
-    </form>
-    </mat-expansion-panel>
-
-    <mat-expansion-panel class="justify-content-center">
-        <mat-expansion-panel-header>
-            <mat-panel-title>
-            Address Details
-            </mat-panel-title>
-        </mat-expansion-panel-header>
-      
-        <br> 
-        <form [formGroup] = "addressFormGroup">
-        <mat-form-field>
-            <mat-label>Address Line 1</mat-label>
-            <input matInput formControlName="addressLine1Ctrl" required>
-        </mat-form-field>
-
-        <br> 
-
-        <mat-form-field>
-            <mat-label>Address Line 2</mat-label>
-            <input matInput formControlName="addressLine2Ctrl" required>
-        </mat-form-field>
-
-        <br> 
-
-        <mat-form-field>
-            <mat-label>City</mat-label>
-            <input matInput formControlName="cityCtrl" required>
-        </mat-form-field> 
-
-        <br> 
-
-        <mat-form-field>
-            <mat-label>State</mat-label>
-            <input matInput formControlName="stateCtrl" required>
-        </mat-form-field>
-
-        <br> 
-
-        <mat-form-field>
-            <mat-label>ZipCode</mat-label>
-            <input matInput formControlName="zipCtrl" required>
-        </mat-form-field>
-        </form>
-    </mat-expansion-panel>
-
-    <mat-expansion-panel class="justify-content-center">
-        <mat-expansion-panel-header>
-            <mat-panel-title>
-            Credential Details
-            </mat-panel-title>
-        </mat-expansion-panel-header>
-
-        <form [formGroup] = "credentialsFormGroup">
-        <mat-form-field>
-            <mat-label>Password</mat-label>
-            <input matInput formControlName="password" required>
-        </mat-form-field>
-        </form>
-    </mat-expansion-panel>
-
-    <mat-expansion-panel class="justify-content-center">
-        <mat-expansion-panel-header>
-            <mat-panel-title>
-                Account Details
-            </mat-panel-title>
-        </mat-expansion-panel-header>
-
-        <br> 
-        <form [formGroup] = "ssnFormGroup">
-        <mat-form-field>
-            <mat-label>Account Number</mat-label>
-            <input matInput formControlName= "accNumCtrl" readonly>
-        </mat-form-field>
-
-        <!-- <br> 
-
-        <mat-form-field>
-            <mat-label>Account Type</mat-label>
-            <input matInput readonly>
-        </mat-form-field> -->
-
-        <br> 
-
-        <mat-form-field>
-            <mat-label>Routing Number</mat-label>
-            <input matInput formControlName= "routingNumCtrl" readonly>
-        </mat-form-field>
-
-        <br> 
+</app-main-nav>
+<div class="center-content">
+    <mat-accordion #profile>
+        <mat-expansion-panel class="expansion-panel">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                Personal data
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <form [formGroup] = "personalFormGroup">
+            <mat-form-field>
+                <mat-label>First name</mat-label>
+                <input matInput readonly formControlName="firstNameCtrl">
+            </mat-form-field>
         
-        <mat-form-field>
-            <mat-label>Social Security Number</mat-label>
-            <input matInput formControlName= "ssn" readonly>
-        </mat-form-field>
-    </form>
-    </mat-expansion-panel>
+            <br> 
     
-    <div>  
-        <!-- <button mat-raised-button color="primary" >Back</button> -->
-        <button mat-raised-button color="primary" (click)="profile.reset()">Reset</button>
-        <button mat-raised-button color="primary" (click)="updateUser()">Submit</button>
-    </div> 
-  </mat-accordion>
+            <mat-form-field>
+                <mat-label>Last name</mat-label>
+                <input matInput readonly formControlName="lastNameCtrl">
+            </mat-form-field>
+    
+            <br> 
+    
+            <mat-form-field>
+                <mat-label>Phone Number</mat-label>
+                <input matInput formControlName="phoneNumCtrl" required>
+            </mat-form-field>
+    
+            <br> 
+    
+            <mat-form-field>
+                <mat-label>Email</mat-label>
+                <input matInput readonly formControlName="emailIDCtrl">
+            </mat-form-field>
+    
+            <br> 
+    
+            <mat-form-field>
+                <mat-label>Date of Birth</mat-label>
+                <input matInput readonly formControlName="dobCtrl">
+            </mat-form-field>
+        </form>
+        </mat-expansion-panel>
+    
+        <mat-expansion-panel class="expansion-panel">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                Address Details
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+          
+            <br> 
+            <form [formGroup] = "addressFormGroup">
+            <mat-form-field>
+                <mat-label>Address Line 1</mat-label>
+                <input matInput formControlName="addressLine1Ctrl" required>
+            </mat-form-field>
+    
+            <br> 
+    
+            <mat-form-field>
+                <mat-label>Address Line 2</mat-label>
+                <input matInput formControlName="addressLine2Ctrl" required>
+            </mat-form-field>
+    
+            <br> 
+    
+            <mat-form-field>
+                <mat-label>City</mat-label>
+                <input matInput formControlName="cityCtrl" required>
+            </mat-form-field> 
+    
+            <br> 
+    
+            <mat-form-field>
+                <mat-label>State</mat-label>
+                <input matInput formControlName="stateCtrl" required>
+            </mat-form-field>
+    
+            <br> 
+    
+            <mat-form-field>
+                <mat-label>ZipCode</mat-label>
+                <input matInput formControlName="zipCtrl" required>
+            </mat-form-field>
+            </form>
+        </mat-expansion-panel>
+    
+        <mat-expansion-panel class="expansion-panel">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                Credential Details
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+    
+            <form [formGroup] = "credentialsFormGroup">
+            <mat-form-field>
+                <mat-label>Password</mat-label>
+                <input matInput formControlName="password" required>
+            </mat-form-field>
+            </form>
+        </mat-expansion-panel>
+    
+        <mat-expansion-panel class="expansion-panel">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Account Details
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+    
+            <br> 
+            <form [formGroup] = "ssnFormGroup">
+            <mat-form-field>
+                <mat-label>Account Number</mat-label>
+                <input matInput formControlName= "accNumCtrl" readonly>
+            </mat-form-field>
+    
+            <!-- <br> 
+    
+            <mat-form-field>
+                <mat-label>Account Type</mat-label>
+                <input matInput readonly>
+            </mat-form-field> -->
+    
+            <br> 
+    
+            <mat-form-field>
+                <mat-label>Routing Number</mat-label>
+                <input matInput formControlName= "routingNumCtrl" readonly>
+            </mat-form-field>
+    
+            <br> 
+            
+            <mat-form-field>
+                <mat-label>Social Security Number</mat-label>
+                <input matInput formControlName= "ssn" readonly>
+            </mat-form-field>
+        </form>
+        </mat-expansion-panel>
+        
+        <div>  
+            <!-- <button mat-raised-button color="primary" >Back</button> -->
+            <button mat-raised-button color="primary" (click)="updateUser()">Submit</button>
+        </div> 
+      </mat-accordion>
+</div>
