@@ -27,9 +27,12 @@ $gray: #f7f7f7;
 .mat-icon {
     font-size: 25px;
   }
-// .icon{
-//     transform: scale(2);
-// }
+
+.matbtn{
+    font-size: 12px;
+}
+
+
 .main{
 
     width: 100%;
@@ -61,11 +64,11 @@ label{
         font-weight: $f400;
        background-color: rgba(238, 229, 236, 0.767);
     }
-    .textb{
-        background-color:rgba(238, 229, 236, 0.767);
-        border-style: none
+    // .textb{
+    //     background-color:rgba(238, 229, 236, 0.767);
+    //     border-style: none
         
-    }
+    // }
 
     .left-section {
         
@@ -88,18 +91,18 @@ label{
     }
 
 
-    .deleteBtn {
+    // .deleteBtn {
     
-        @extend .btn;
-        background-color: rgb(190, 30, 30);
-        &:hover {
-            background-color: black;
-            color: white;
-        }
-        &:focus {
-            outline: 0;
-        }
-    }
+    //     @extend .btn;
+    //     background-color: rgb(190, 30, 30);
+    //     &:hover {
+    //         background-color: black;
+    //         color: white;
+    //     }
+    //     &:focus {
+    //         outline: 0;
+    //     }
+    // }
    
    
 
@@ -251,6 +254,10 @@ label{
   align-items: center;
 }
 
-.example-headers-align .mat-form-field + .mat-form-field {
-  margin-left: 8px;
-}
+// .example-headers-align .mat-form-field + .mat-form-field {
+//   margin-left: 8px;
+// }
+
+.example-headers-align .mat-form-field{
+    margin-left: 8px;
+  }

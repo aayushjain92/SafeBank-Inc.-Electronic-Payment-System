@@ -37,7 +37,7 @@
                                 </mat-form-field>
 
                                 <mat-form-field appearance="fill" class="funds-full-width">
-                                    <mat-label><mat-icon>attach_money</mat-icon>Amount</mat-label>                                
+                                    <mat-label><mat-icon class="matbtn">attach_money</mat-icon>Amount</mat-label>                                
                                     <input matInput type="number" name=amount id="amount"
                                     [(ngModel)]="transaction.amount" required="required">
                                 </mat-form-field>
@@ -73,7 +73,7 @@
                                 </mat-form-field>
 
                             <mat-form-field appearance="fill" class="funds-full-width">
-                                <mat-label><mat-icon>attach_money</mat-icon>Amount</mat-label>                                
+                                <mat-label><mat-icon class="matbtn">attach_money</mat-icon>Amount</mat-label>                                
                                 <input matInput type="number" name=amount id="amount"
                                 [(ngModel)]="transaction.amount" required="required">
                             </mat-form-field>
@@ -126,7 +126,7 @@
                                     </mat-form-field>
     
                                 <mat-form-field appearance="fill" class="funds-full-width">
-                                    <mat-label><mat-icon>attach_money</mat-icon>Amount</mat-label>                                
+                                    <mat-label><mat-icon class="matbtn">attach_money</mat-icon>Amount</mat-label>                                
                                     <input matInput type="number" name=amount id="amount"
                                     [(ngModel)]="transaction.amount" required="required">
                                 </mat-form-field>
@@ -134,7 +134,8 @@
                                 </form>
 
                             <mat-action-row>
-                                <button class="deleteBtn" (click)="transfer(transaction)">Transfer</button>
+                                <button mat-raised-button color="primary" (click)="transfer(transaction)">Transfer</button>
+                                <!-- <button class="deleteBtn" (click)="transfer(transaction)">Transfer</button> -->
                             </mat-action-row>
                         </mat-expansion-panel>
 
