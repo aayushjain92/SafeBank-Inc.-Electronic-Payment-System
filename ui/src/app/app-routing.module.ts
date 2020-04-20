@@ -16,7 +16,7 @@ const routes: Routes = [
   { path: '', component: LandingPageComponent },
   { path: 'beneficiaries', component: BeneficiaryComponent },
   { path: 'register', component: RegisterComponent,},
-  { path: 'addbeneficiary', component: AddbeneficiaryComponent },
+  { path: 'beneficiaries/add', component: AddbeneficiaryComponent },
   { path: 'login', component: LoginComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'ccdashboard', component: CcDashComponent },

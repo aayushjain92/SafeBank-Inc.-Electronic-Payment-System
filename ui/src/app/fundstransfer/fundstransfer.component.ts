@@ -16,7 +16,8 @@ import { Transaction } from '../model/transaction.model';
 export class FundstransferComponent implements OnInit {
   title = 'Funds Transfer';
   transaction: Transaction;
-  constructor(public rest: FundstransferService, private route: ActivatedRoute, private router: Router, private store: Store<fromAuth.State>) {
+  constructor(public rest: FundstransferService, private route: ActivatedRoute, 
+    private router: Router, private store: Store<fromAuth.State>) {
     this.transaction = new Transaction();
   }
   user: User;
@@ -29,9 +30,15 @@ export class FundstransferComponent implements OnInit {
   }
 
   initializeTable() {
-    let self = this;
-    this.store.subscribe(val => self.auth = val);
-    this.user = this.auth.auth.status.user;
+    let auth;
+    console.log(this.store);
+    this.store.subscribe(val => auth = val);
+    if (auth.auth.status.user == null) {
+      this.router.navigate(['/login']);
+    } else {
+      this.user = auth.auth.status.user;
+      console.log('User found on Fund Transfer');
+    }
   }
 
   // pass the transaction model to FundstransferService for crediting the amount
