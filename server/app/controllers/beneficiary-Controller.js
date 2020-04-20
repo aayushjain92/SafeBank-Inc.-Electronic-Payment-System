@@ -36,6 +36,7 @@ exports.save = (request, response) => {
             message: "nickName cannot be empty"
         });
     }
+
     //push v alidation in services
     const beneficiary = Object.assign({}, request.body);
     const result = (saveditem) => {
@@ -54,20 +55,19 @@ exports.save = (request, response) => {
  * @param response
 */
 exports.list = (request, response) => {
+    const accountId = request.params.accountNumber;
 
-    const params = {};
+    const total = beneficaryService.searchbeneficiaryList(accountId)
+        .then(item => {
 
-    const promise = beneficaryService.Search(params);
-    const result = (items) => {
-        response.status(200);
-        response.json(items);
-    };
-    promise
-        .then(result)
-        .catch(renderErrorResponse(response));
+            response.status(200).json(item);
+        })
+        .catch(err => {
+            response.status(500).json({
+                message: "not proper id formAT"
+            });
+        });
 };
-
-
 
 // delete the beneficiary based on the accountnumber
 

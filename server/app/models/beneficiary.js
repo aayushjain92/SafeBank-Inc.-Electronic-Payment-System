@@ -16,7 +16,7 @@ let BeneficiarySchema = new Schema({
         required: "LastName is missing"
     },
     accountNumber: {
-        type: Number,
+        type: String,
         required: "Number is missing"
     },
     nickName: {
@@ -25,7 +25,10 @@ let BeneficiarySchema = new Schema({
     },
     routingNumber: {
         type: Number,
-
+    },
+    parentAccountNumber: {
+        type: String,
+        required: "Number is missing"
     }
 
 },

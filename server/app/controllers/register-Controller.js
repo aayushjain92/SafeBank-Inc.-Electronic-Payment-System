@@ -40,24 +40,24 @@ exports.save = (request, response) => {
     let newAccount;
     const user = Object.assign({}, request.body);
     const result = (saveditem) => {
-        // response.status(201);
-        newUser = saveditem;
-        //Create account
-        const account = {
-            user: newUser
+        newAccount = saveditem;
+        user.account = newAccount;
+        
+        const userResult = (savedUserItem) => {
+            newUser = savedUserItem;
+            // console.log('user creation');
+            // console.log(newUser);
+            response.status(201);
+            response.json(newUser);
         };
-        const accResult = (savedAccitem) => {
-            // response.status(201);
-            newAccount = savedAccitem;
-        };
-        const accPromise = accountService.save(account);
-        accPromise
-            .then(accResult)
+        const userPromise = registerService.save(user);
+        userPromise
+            .then(userResult)
             .catch(renderErrorResponse(response));
-
+        // console.log('account creation')
+        // console.log(newAccount);
         console.log(newUser);
         console.log(newAccount);
-
         console.log("prior email service");
         //call to email service
         emailService.sendEmail(newUser);
@@ -65,7 +65,7 @@ exports.save = (request, response) => {
         response.json(saveditem);
         response.json(newUser);
     };
-    const promise = registerService.save(user);
+    const promise = accountService.save({});
     promise
         .then(result)
         .catch(renderErrorResponse(response));

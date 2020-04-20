@@ -1,29 +1,30 @@
-<p>transactiontable works!</p>
-
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-
-
 <!-- table for 5 txns details -->
-<table class="table table-hover">
-    <thead>
-        <tr>
-            <th scope="col">Transaction Date</th>
-            <th scope="col">Account Number</th>
-            <th scope="col">Type</th>
-            <th scope="col">Amount</th>
-        </tr>
-    </thead>
+<div class="wrapper">
+    <div class="tablestyle">
+        <table class="table table-hover">
+            <thead class="text-warning">
+                <tr>
+                    <th scope="col">Transaction Date</th>
+                    <th scope="col">Account Number</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Amount</th>
+                </tr>
+            </thead>
 
-    <tbody>
-        <ng-container *ngFor="let txns of transactions">
-            <tr>
-                <td>{{txns.transactionDate}}</td>
-                <td>{{txns.ownerAccountNum}}</td>
-                <td>{{txns.type}}</td>
-                <td>{{txns.amount}}</td>
-            </tr>
-        </ng-container>
-        <a (click)='getpdf()'>GeneratePdf</a>
-    </tbody>
+            <tbody>
+                <ng-container *ngFor="let txns of transactions">
+                    <tr class>
+                        <td>{{txns.transactionDate}}</td>
+                        <td>{{txns.ownerAccountNum}}</td>
+                        <td>{{txns.type}}</td>
+                        <td>{{txns.amount}}</td>
+                    </tr>
+                </ng-container>
+                <a class="generatatepdf" href="javascript:void(0);" (click)='getpdf()'>GeneratePdf</a>
+            </tbody>
 
-</table>
+        </table>
+    </div>
+
+
+</div>

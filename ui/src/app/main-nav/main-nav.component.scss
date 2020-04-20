@@ -1,0 +1,38 @@
+.sidenav-container {
+  height: 100%;
+}
+
+.sidenav {
+  width: 220px;
+  background: inherit;
+}
+
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.example-sidenav-content {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.toolbar {
+  background-color: blue;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.nav-item {
+  padding-left: 5px;
+}
+
+
+
+
+
