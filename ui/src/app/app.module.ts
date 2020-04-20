@@ -40,6 +40,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -57,7 +58,8 @@ import { MatSelectModule } from '@angular/material/select';
     LogoutConfirmationDialogComponent,
     TransactiontableComponent,
     DashboardComponent,
-    NavComponent
+    NavComponent,
+    UserProfileComponent
   ],
 
   imports: [
