@@ -5,7 +5,10 @@ import { Store } from '@ngrx/store';
 import * as fromAuth from './../store/reducers/login.reducer';
 import { User } from 'src/app/model/user';
 import {FundstransferService} from '../services/fundstransfer.service';
+import { BeneficiaryService } from '../services/beneficiary.service';
 import { Transaction } from '../model/transaction.model';
+import { Beneficiary } from '../model/beneficiary';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 
 @Component({
@@ -16,7 +19,10 @@ import { Transaction } from '../model/transaction.model';
 export class FundstransferComponent implements OnInit {
   title = 'Funds Transfer';
   transaction: Transaction;
-  constructor(public rest: FundstransferService, private route: ActivatedRoute, 
+  beneficiaries: any;
+  selectedBeneficiary: string;
+
+  constructor(public restBeneficiary: BeneficiaryService, public rest: FundstransferService, private route: ActivatedRoute, 
     private router: Router, private store: Store<fromAuth.State>) {
     this.transaction = new Transaction();
   }
@@ -27,7 +33,38 @@ export class FundstransferComponent implements OnInit {
 
   ngOnInit(): void {
     this.initializeTable();    
+    this.getbeneficiary();
   }
+
+  creditValidateForm = new FormGroup({
+    amountFormControl : new FormControl('', [
+      Validators.required,
+      Validators.min(0.1),
+      Validators.pattern('^[0-9]+(\.[0-9]{1,2})?$'),
+    ]),
+  });
+
+  debitValidateForm = new FormGroup({
+    amountFormControl : new FormControl('', [
+      Validators.required,
+      Validators.min(0.1),
+      Validators.pattern('^[0-9]+(\.[0-9]{1,2})?$'),
+    ]),
+    categoryFormControl: new FormControl('', [
+      Validators.required,
+    ]),
+  });
+
+  beneficiaryValidateForm = new FormGroup({
+    amountFormControl : new FormControl('', [
+      Validators.required,
+      Validators.min(0.1),
+      Validators.pattern('^[0-9]+(\.[0-9]{1,2})?$'),
+    ]),
+    beneficiaryFormControl: new FormControl('', [
+      Validators.required,
+    ]),
+  });
 
   initializeTable() {
     let auth;
@@ -37,15 +74,18 @@ export class FundstransferComponent implements OnInit {
       this.router.navigate(['/login']);
     } else {
       this.user = auth.auth.status.user;
+      this.transaction.ownerAccountNum =  this.user.account.AccountNumber;
       console.log('User found on Fund Transfer');
     }
   }
 
+
   // pass the transaction model to FundstransferService for crediting the amount
   credit(transaction : Transaction): void{
-    this.transaction.ownerAccountNum =  this.user.account.AccountNumber;
     this.transaction.amount = Number(this.transaction.amount);
-    console.log(transaction);
+    this.transaction.category = "N.A.";
+    this.transaction.type = "Credit";
+    
     this.rest.creditAmount(transaction).subscribe((data) => {
       this.displayText = transaction.ownerAccountNum + ` has been credited successfully by USD ${transaction.amount}`;
     }, (err) => {
@@ -55,15 +95,37 @@ export class FundstransferComponent implements OnInit {
 
   // pass the transaction model to FundstransferService for debiting the amount
   debit(transaction : Transaction): void{
-    this.transaction.ownerAccountNum =  this.user.account.AccountNumber;
-    
-    console.log(transaction);
+    this.transaction.amount = Number(this.transaction.amount);
+    this.transaction.type = "Debit";
+
     this.rest.debitAmount(transaction).subscribe((data) => {
       this.displayText = transaction.ownerAccountNum + ` has been debited successfully by USD ${transaction.amount}`;
     }, (err) => {
       console.log(err);
     });
   }
+
+
+  // get beneficiaries 
+  getbeneficiary() {
+    this.restBeneficiary.getbeneficiary(this.user.account.AccountNumber)
+      .subscribe(data => {
+        this.beneficiaries = data;
+
+      });
+  }
+
+    // pass the transaction model to FundstransferService for transferring the amount to another account
+    transfer(transaction : Transaction): void{
+      this.transaction.category = "N.A.";
+      this.transaction.type = "Transfer";
+
+      this.rest.transferAmount(transaction).subscribe((data) => {
+        this.displayText = `Amount transferred successfully!`;
+      }, (err) => {
+        console.log(err);
+      });
+    }
 
   // the confirmation modal
   toggleModal() {

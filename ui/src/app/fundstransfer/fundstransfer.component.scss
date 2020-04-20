@@ -25,11 +25,14 @@ $gray: #f7f7f7;
 
 }
 .mat-icon {
-    font-size: 20px;
+    font-size: 25px;
   }
-// .icon{
-//     transform: scale(2);
-// }
+
+.matbtn{
+    font-size: 12px;
+}
+
+
 .main{
 
     width: 100%;
@@ -61,11 +64,7 @@ label{
         font-weight: $f400;
        background-color: rgba(238, 229, 236, 0.767);
     }
-    .textb{
-        background-color:rgba(238, 229, 236, 0.767);
-        border-style: none
-        
-    }
+
 
     .left-section {
         
@@ -86,21 +85,6 @@ label{
             }
         }
     }
-
-
-    .deleteBtn {
-    
-        @extend .btn;
-        background-color: rgb(190, 30, 30);
-        &:hover {
-            background-color: black;
-            color: white;
-        }
-        &:focus {
-            outline: 0;
-        }
-    }
-   
    
 
     .updateBtn {
@@ -116,11 +100,8 @@ label{
         }
     }
    
-    
-// button class
-    .btn{
 
-    
+    .btn{    
     border: none;
     color: white;
     padding: 8px 14px;
@@ -227,4 +208,34 @@ label{
 
   .modal-container{
     padding: 20px;
+  }
+
+
+  .funds-form {
+    min-width: 100px;
+    max-width: 200px;
+    width: 100%;
+  }
+  
+  .funds-full-width {
+    width: 100%;
+  }
+  
+
+.example-headers-align .mat-expansion-panel-header-title,
+.example-headers-align .mat-expansion-panel-header-description {
+  flex-basis: 0;
+}
+
+.example-headers-align .mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
+}
+
+// .example-headers-align .mat-form-field + .mat-form-field {
+//   margin-left: 8px;
+// }
+
+.example-headers-align .mat-form-field{
+    margin-left: 8px;
   }
