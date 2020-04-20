@@ -30,10 +30,17 @@ export class UserProfileComponent implements OnInit {
       this.router.navigate(['/login']);
     } else {
       this.user = authState.auth.status.user;
+      console.log(JSON.stringify(this.user));
     }
+    
     this.personalFormGroup = this._formBuilder.group({
-      phoneNumberCtrl : ['', Validators.required]
+      firstNameCtrl : ['', Validators.required],
+      lastNameCtrl : ['', Validators.required],
+      phoneNumCtrl : ['', Validators.required ],
+      emailIDCtrl : ['', Validators.required],
+      dobCtrl : []
     });
+
     this.addressFormGroup = this._formBuilder.group({
       addressLine1Ctrl: ['', Validators.required],
       addressLine2Ctrl: ['', Validators.required],
@@ -41,12 +48,42 @@ export class UserProfileComponent implements OnInit {
       stateCtrl: ['', Validators.required],
       zipCtrl: ['', Validators.required]
     });
+
     this.credentialsFormGroup = this._formBuilder.group({
-      password: new FormControl('', [Validators.required, Validators.minLength(9)])
+      password: new FormControl('', [Validators.required, Validators.minLength(9), Validators.pattern("")])
     });
+
     this.ssnFormGroup = this._formBuilder.group({
-      ssn: new FormControl('', [Validators.required] )
+      ssn: new FormControl('', [Validators.required] ),
+      accNumCtrl: new FormControl(),
+      routingNumCtrl : new FormControl()
     })
+    
+    this.personalFormGroup.patchValue({
+      firstNameCtrl : this.user.firstName,
+      lastNameCtrl : this.user.lastName,
+      emailIDCtrl : this.user.email,
+      phoneNumCtrl : this.user.phoneNum,
+      dobCtrl: this.user.dob
+    });
+
+    this.addressFormGroup.patchValue({
+      addressLine1Ctrl: this.user.addressLine1,
+      addressLine2Ctrl: this.user.addressLine2,
+      cityCtrl: this.user.city,
+      stateCtrl: this.user.state,
+      zipCtrl: this.user.zip
+    });
+
+    this.credentialsFormGroup.patchValue({
+      password: this.user.password
+    });
+
+    this.ssnFormGroup.patchValue({
+      ssn: this.user.ssn,
+      accNumCtrl: this.user.account.AccountNumber,
+      routingNumCtrl : this.user.account.routingNumber
+    });
   }
 
   hide = true;
@@ -55,10 +92,15 @@ export class UserProfileComponent implements OnInit {
   get ssnInput() { return this.ssnFormGroup.get('ssn'); } 
 
   updateUser(){
+    this.user = new User();
     //Personal info
-    this.user.phoneNum = this.personalFormGroup.get('phoneNumberCtrl').value;
+    //this.user.phoneNum = this.personalFormGroup.get('phoneNumCtrl').value;
+    this.user.firstName = this.personalFormGroup.getRawValue().firstNameCtrl;
+    this.user.lastName = this.personalFormGroup.getRawValue().lastNameCtrl;
+    this.user.email = this.personalFormGroup.getRawValue().emailIDCtrl;
+    this.user.dob = this.personalFormGroup.getRawValue().dobCtrl;
 
-    // Address fields
+    //Address fields 
     this.user.addressLine1 = this.addressFormGroup.get('addressLine1Ctrl').value;
     this.user.addressLine2 = this.addressFormGroup.get('addressLine2Ctrl').value;
     this.user.city = this.addressFormGroup.get('cityCtrl').value;
@@ -67,9 +109,13 @@ export class UserProfileComponent implements OnInit {
 
     // base64 encoded password
     this.user.password = btoa(this.credentialsFormGroup.get('password').value);
-    
+
     //update user service call
-    this.service.updateUser(this.user);
+    this.service.updateUser(this.user).subscribe(
+      (user: User) => {
+        this.router.navigate(['/dashboard']);
+      }
+    );
     
   }
 
