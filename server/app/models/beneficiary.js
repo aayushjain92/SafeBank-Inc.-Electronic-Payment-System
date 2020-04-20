@@ -25,6 +25,10 @@ let BeneficiarySchema = new Schema({
     },
     routingNumber: {
         type: Number,
+    },
+    parentAccountNumber: {
+        type: String,
+        required: "Number is missing"
     }
 
 },

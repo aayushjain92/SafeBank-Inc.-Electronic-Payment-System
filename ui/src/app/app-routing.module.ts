@@ -14,8 +14,8 @@ import {FundstransferComponent} from './fundstransfer/fundstransfer.component'
 
 const routes: Routes = [
   { path: '', component: LandingPageComponent },
+  { path: 'beneficiaries', component: BeneficiaryComponent },
   { path: 'register', component: RegisterComponent,},
-  { path: 'beneficiary', component: BeneficiaryComponent },
   { path: 'addbeneficiary', component: AddbeneficiaryComponent },
   { path: 'login', component: LoginComponent },
   { path: 'dashboard', component: DashboardComponent },

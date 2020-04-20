@@ -9,6 +9,10 @@ exports.Search = (params) => {
     return promise;
 };
 
+exports.searchbeneficiaryList = (accountId) => {
+    const promise = Beneficiary.find({ parentAccountNumber: accountId }).exec();
+    return promise;
+};
 
 // seach for all the Beneficiary by accntnumber
 exports.search = (accountId) => {

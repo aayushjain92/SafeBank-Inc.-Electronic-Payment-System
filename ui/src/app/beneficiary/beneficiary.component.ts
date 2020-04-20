@@ -4,6 +4,9 @@ import { NgForm, FormGroup, FormBuilder } from '@angular/forms';
 import { Beneficiary } from '../model/beneficiary'
 import { ActivatedRoute, Router } from '@angular/router';
 import { BeneficiaryService } from '../services/beneficiary.service';
+import { Store, select } from '@ngrx/store';
+import * as fromAuth from './../store/reducers/login.reducer';
+import { User } from 'src/app/model/user';
 @Component({
   selector: 'app-beneficiary',
   templateUrl: './beneficiary.component.html',
@@ -12,7 +15,7 @@ import { BeneficiaryService } from '../services/beneficiary.service';
 export class BeneficiaryComponent implements OnInit {
   firstName: string;
   lastName: string;
-  accountNumber: number;
+  accountNumber: string;
   nickName: string;
 
   beneficiaries: any;
@@ -21,24 +24,34 @@ export class BeneficiaryComponent implements OnInit {
   modalValue: string = undefined;
   benefeciary: Beneficiary;
   routingNumber: number;
-  constructor(public rest: BeneficiaryService, private route: ActivatedRoute, private router: Router
-  ) { }
 
+  constructor(public rest: BeneficiaryService, private route: ActivatedRoute, private router: Router, private store: Store<fromAuth.State>
+  ) { }
+  user: User;
+  auth: any;
   ngOnInit(): void {
+    this.initializeData();
     this.getbeneficiary();
+
+  }
+
+  // intitialized data for a loggedin User
+  initializeData() {
+    let self = this;
+    console.log(this.store);
+    this.store.subscribe(val => self.auth = val);
+    this.user = this.auth.auth.status.user;
+    console.log("beneficary" + this.user.account.AccountNumber);
   }
 
   // get beneficiaries
   getbeneficiary() {
-    this.rest.getbeneficiary()
+    this.rest.getbeneficiary(this.user.account.AccountNumber)
       .subscribe(data => {
         this.beneficiaries = data;
 
       });
-
-
   }
-
 
   // function to delete beneficiaries
   deleteBeneficiary(benefeciary: Beneficiary) {

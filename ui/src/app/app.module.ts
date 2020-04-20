@@ -40,6 +40,7 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
+import { ChartComponent } from './chart/chart.component';
 import { DonateCovidComponent } from './donate-covid/donate-covid.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
@@ -61,6 +62,7 @@ import {MatTableModule} from '@angular/material/table';
     TransactiontableComponent,
     DashboardComponent,
     MainNavComponent,
+    ChartComponent,
     DonateCovidComponent,
     ContactUsComponent,
     CustomercareComponent,

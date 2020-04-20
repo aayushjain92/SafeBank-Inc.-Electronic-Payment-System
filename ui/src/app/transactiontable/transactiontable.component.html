@@ -1,26 +1,30 @@
 <!-- table for 5 txns details -->
-<div>
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th scope="col">Transaction Date</th>
-                <th scope="col">Account Number</th>
-                <th scope="col">Type</th>
-                <th scope="col">Amount</th>
-            </tr>
-        </thead>
-
-        <tbody>
-            <ng-container *ngFor="let txns of transactions">
+<div class="wrapper">
+    <div class="tablestyle">
+        <table class="table table-hover">
+            <thead class="text-warning">
                 <tr>
-                    <td>{{txns.transactionDate}}</td>
-                    <td>{{txns.ownerAccountNum}}</td>
-                    <td>{{txns.type}}</td>
-                    <td>{{txns.amount}}</td>
+                    <th scope="col">Transaction Date</th>
+                    <th scope="col">Account Number</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Amount</th>
                 </tr>
-            </ng-container>
-            <a (click)='getpdf()'>GeneratePdf</a>
-        </tbody>
+            </thead>
 
-    </table>
+            <tbody>
+                <ng-container *ngFor="let txns of transactions">
+                    <tr class>
+                        <td>{{txns.transactionDate}}</td>
+                        <td>{{txns.ownerAccountNum}}</td>
+                        <td>{{txns.type}}</td>
+                        <td>{{txns.amount}}</td>
+                    </tr>
+                </ng-container>
+                <a class="generatatepdf" href="javascript:void(0);" (click)='getpdf()'>GeneratePdf</a>
+            </tbody>
+
+        </table>
+    </div>
+
+
 </div>

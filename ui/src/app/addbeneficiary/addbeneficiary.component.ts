@@ -6,7 +6,9 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { Observable } from 'rxjs';
 import { map, catchError, tap, endWith } from 'rxjs/operators';
 import { escapeIdentifier } from '@angular/compiler/src/output/abstract_emitter';
-
+import * as fromAuth from './../store/reducers/login.reducer';
+import { User } from 'src/app/model/user';
+import { Store, select } from '@ngrx/store';
 @Component({
   selector: 'app-addbeneficiary',
   templateUrl: './addbeneficiary.component.html',
@@ -16,7 +18,7 @@ export class AddbeneficiaryComponent implements OnInit {
   // variables declared for using through out 
   firstName: string;
   lastName: string;
-  accountNumber: number;
+  accountNumber: string;
   nickName: string;
   routingNumber: number;
   routing: any;
@@ -30,15 +32,26 @@ export class AddbeneficiaryComponent implements OnInit {
   accountNumberCheck: boolean = false;
   error: string;
   modalValue: string = undefined;
-  constructor(public rest: BeneficiaryService, private route: ActivatedRoute, private router: Router, private http: HttpClient
+  user: User;
+  auth: any;
+  constructor(public rest: BeneficiaryService, private route: ActivatedRoute, private router: Router, private http: HttpClient, private store: Store<fromAuth.State>
   ) { }
 
 
   ngOnInit(): void {
+    this.initializeData();
   }
   private extractData(res: Response) {
     let body = res;
     return body || {};
+  }
+
+  initializeData() {
+    let self = this;
+    console.log(this.store);
+    this.store.subscribe(val => self.auth = val);
+    this.user = this.auth.auth.status.user;
+    console.log("table" + this.user.account.AccountNumber);
   }
 
   // function to check the routing number
@@ -81,7 +94,7 @@ export class AddbeneficiaryComponent implements OnInit {
 
   // get beneficiaries from backend
   getbeneficiary() {
-    this.rest.getbeneficiary()
+    this.rest.getbeneficiary(this.user.account.AccountNumber)
       .subscribe(data => {
         this.beneficiaries = data;
 
@@ -107,7 +120,7 @@ export class AddbeneficiaryComponent implements OnInit {
           }, 5000);
         } else {
           this.beneficiaryCheck = false;
-          this.benef = new Beneficiary(this.firstName, this.lastName, this.accountNumber, this.nickName, this.routingNumber);
+          this.benef = new Beneficiary(this.firstName, this.lastName, this.accountNumber, this.nickName, this.routingNumber, this.user.account.AccountNumber);
 
           this.rest.savebeneficiary(this.benef)
             .subscribe(data => {
