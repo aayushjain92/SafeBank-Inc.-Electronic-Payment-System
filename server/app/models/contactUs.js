@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 /**
  * Mongoose schema for todolist object.
  */
-let BeneficiarySchema = new Schema({
+let ContactUsSchema = new Schema({
 
     firstName: {
         type: String,
@@ -15,20 +15,21 @@ let BeneficiarySchema = new Schema({
         type: String,
         required: "LastName is missing"
     },
+    email : {
+        type: String,
+        required: 'Email is missing'
+    },
     accountNumber: {
         type: String,
         required: "Number is missing"
     },
-    nickName: {
+    description : {
         type: String,
-        required: "nickname is missing"
+        required: "Description is missing"
     },
-    routingNumber: {
-        type: Number,
-    },
-    parentAccountNumber: {
+    category: {
         type: String,
-        required: "Number is missing"
+        required: "Category is missing"
     }
 
 },
@@ -36,13 +37,13 @@ let BeneficiarySchema = new Schema({
         versionKey: false
     });
 // Duplicate the id field as mongoose returns _id field instead of id.
-BeneficiarySchema.virtual('id').get(function () {
+ContactUsSchema.virtual('id').get(function () {
     return this._id.toHexString();
 });
 
 // Ensure virtual fields are serialised.
-BeneficiarySchema.set('toJSON', {
+ContactUsSchema.set('toJSON', {
     virtuals: true
 });
 
-module.exports = mongoose.model('beneficiary', BeneficiarySchema);
+module.exports = mongoose.model('contactus', ContactUsSchema);

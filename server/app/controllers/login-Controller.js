@@ -4,7 +4,12 @@ const loginService = require('../services/login-service');
 const mongoose = require('mongoose'),
     User = mongoose.model('user');
 
-
+/**
+ * get method to list all users
+ *
+ * @param request
+ * @param response
+*/
 exports.list = (request, response) => {
     const totalQuery = request.query.total;
     const params = {};

@@ -16,6 +16,17 @@ let TransactSchema = new Schema({
         type: String
     },
 
+    //mark it as debit/credit/transfer to reflect it in the report
+    //transaction type
+    type: {
+        type: String
+    },
+
+    //money spent on category: food, travel, shopping
+    category: {
+        type: String
+    },
+
     amount: {
         type: Number,
         required: [true, 'Amount is required']

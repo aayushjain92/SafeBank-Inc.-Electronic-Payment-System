@@ -4,18 +4,6 @@ let express = require('express'),
     mongoose = require('mongoose'), //created model loading here
     bodyParser = require('body-parser');
 
-
-// commenting unnecessary code
-
-// userModel = require('./app/models/user'),
-// beneficiaryModel = require('./app/models/beneficiary'),
-// beneficiaryRoutes = require('./app/routes/beneficiary-routes'),
-// registerRoutes = require('./app/routes/register-routes'),
-// loginRoutes = require('./app/routes/login-routes');
-
-
-// mongoose instance connection url connection
-// mongoose.set('useNewUrlParser', true);
 mongoose.connect('mongodb+srv://root:root@exterminators-hvc8c.mongodb.net/bankdb?retryWrites=true&w=majority',
     {
         useUnifiedTopology: true,
