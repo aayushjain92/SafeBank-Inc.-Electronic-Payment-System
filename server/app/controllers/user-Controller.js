@@ -22,25 +22,40 @@ exports.list = (request, response) => {
 };
 
 exports.updateUser = (request, response) => {
-    user = request.params.user;
-    console.log("user in server service:"+ JSON.stringify(user));
-
-    //Should user be checked whether it exists in db??
-
-    //Update the user
-    userService.update(user).then(updatedItem =>{
-        console.log("user in server service update method:"+ JSON.stringify(user));
-            response.status(200).json({
-            message : 'Profile Updated for user: ' + updatedItem.email
+    console.log('In update method');
+    const email = request.params.email;
+    console.log("request in update user in controller:" + JSON.stringify(request.body));
+    let updatedUser = request.body;
+    let dbuser ;
+    //Find by Email
+    userService.searchUserByEmail(email)
+        .then(item => {
+            dbuser = item;
+            dbuser.addressLine1 = updatedUser.addressLine1;
+            
+            //Update the user
+            userService.update(dbuser)
+                .then(updatedItem =>{
+                    // console.log('object updated successfully');
+                    // console.log(updatedItem);
+                    response.status(200).json({
+                        message : 'Profile updated for user with email id : ' + updatedItem.email
+                    });
+                    console.log("dbUSer:" + JSON.stringify(dbuser));
+                    console.log('Done');
+                })
+                .catch(err => {
+                    response.status(500).json({
+                        message: "Unable to update the user"
+                    });
+                })
+        })
+        .catch(err => {
+            response.status(500).json({
+                message: "Something went wrong"
+            });
         });
-        console.log('Done');
-    })
-    .catch(err => {
-        response.status(500).json({
-            message: "Unable to update the user"
-        });
-    })
-}
+    }
 
 
 let renderErrorResponse = (response) => {
