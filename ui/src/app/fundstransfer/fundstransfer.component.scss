@@ -64,11 +64,7 @@ label{
         font-weight: $f400;
        background-color: rgba(238, 229, 236, 0.767);
     }
-    // .textb{
-    //     background-color:rgba(238, 229, 236, 0.767);
-    //     border-style: none
-        
-    // }
+
 
     .left-section {
         
@@ -89,21 +85,6 @@ label{
             }
         }
     }
-
-
-    // .deleteBtn {
-    
-    //     @extend .btn;
-    //     background-color: rgb(190, 30, 30);
-    //     &:hover {
-    //         background-color: black;
-    //         color: white;
-    //     }
-    //     &:focus {
-    //         outline: 0;
-    //     }
-    // }
-   
    
 
     .updateBtn {
@@ -119,11 +100,8 @@ label{
         }
     }
    
-    
-// button class
-    .btn{
 
-    
+    .btn{    
     border: none;
     color: white;
     padding: 8px 14px;

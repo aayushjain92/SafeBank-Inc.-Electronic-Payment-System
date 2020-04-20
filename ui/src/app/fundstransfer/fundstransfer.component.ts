@@ -48,17 +48,13 @@ export class FundstransferComponent implements OnInit {
     }
   }
 
-  public onChange(event): void {  
-    // event will give you full breif of action
-    const newVal = event.target.value;
-    //console.log(newVal);
-  }
 
   // pass the transaction model to FundstransferService for crediting the amount
   credit(transaction : Transaction): void{
-    //this.transaction.ownerAccountNum =  this.user.account.AccountNumber;
     this.transaction.amount = Number(this.transaction.amount);
-    console.log(transaction);
+    this.transaction.category = "N.A.";
+    this.transaction.type = "Credit";
+    
     this.rest.creditAmount(transaction).subscribe((data) => {
       this.displayText = transaction.ownerAccountNum + ` has been credited successfully by USD ${transaction.amount}`;
     }, (err) => {
@@ -68,9 +64,9 @@ export class FundstransferComponent implements OnInit {
 
   // pass the transaction model to FundstransferService for debiting the amount
   debit(transaction : Transaction): void{
-    //this.transaction.ownerAccountNum =  this.user.account.AccountNumber;
-    
-    console.log(transaction);
+    this.transaction.amount = Number(this.transaction.amount);
+    this.transaction.type = "Debit";
+
     this.rest.debitAmount(transaction).subscribe((data) => {
       this.displayText = transaction.ownerAccountNum + ` has been debited successfully by USD ${transaction.amount}`;
     }, (err) => {
@@ -90,9 +86,9 @@ export class FundstransferComponent implements OnInit {
 
     // pass the transaction model to FundstransferService for transferring the amount to another account
     transfer(transaction : Transaction): void{
-      //this.transaction.ownerAccountNum =  this.user.account.AccountNumber;
-      
-      console.log(transaction);
+      this.transaction.category = "N.A.";
+      this.transaction.type = "Transfer";
+
       this.rest.transferAmount(transaction).subscribe((data) => {
         this.displayText = `Amount transferred successfully!`;
       }, (err) => {
