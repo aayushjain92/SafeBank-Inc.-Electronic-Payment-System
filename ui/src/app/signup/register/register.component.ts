@@ -124,7 +124,7 @@ export class RegisterComponent implements OnInit {
     //Personal info
     this.user.firstName = this.personalFormGroup.get('firstNameCtrl').value;
     this.user.lastName = this.personalFormGroup.get('lastNameCtrl').value;
-    this.user.phoneNum = this.personalFormGroup.get('phoneNumberCtrl').value;
+    this.user.phoneNumber = this.personalFormGroup.get('phoneNumberCtrl').value;
     this.user.email = this.personalFormGroup.get('emailIDCtrl').value;
     this.user.dob = new Date();
     //Address fields

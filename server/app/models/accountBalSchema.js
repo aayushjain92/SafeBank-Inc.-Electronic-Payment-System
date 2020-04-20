@@ -1,6 +1,8 @@
 'use strict';
+const {customAlphabet} = require('nanoid') ;
+
 const mongoose = require('mongoose');
-const shortid = require('shortid');
+const nanoid = customAlphabet('1234567890abcdefghijklmnopqrstuvwxyz', 9)
 const Schema = mongoose.Schema;
 
 /**
@@ -10,8 +12,8 @@ let AccBalSchema = new Schema({
 
     AccountNumber: {
         type: String,
-        default: function getShortId(){
-           let accNum = shortid.generate();
+        default: function getNanoId(){
+           let accNum = nanoid()
            return accNum.toUpperCase();
         }
     },

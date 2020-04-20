@@ -5,7 +5,7 @@ export class User {
     lastName: string;
     dob: Date;
     email: string;
-    phoneNum : number;
+    phoneNumber : number;
     accountType : string;
     ssn: number;
     addressLine1: string;

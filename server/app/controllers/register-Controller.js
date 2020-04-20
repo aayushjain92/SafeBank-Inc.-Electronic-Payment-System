@@ -49,21 +49,14 @@ exports.save = (request, response) => {
             // console.log(newUser);
             response.status(201);
             response.json(newUser);
+            //call to email service
+            console.log("calling email service");
+            emailService.sendEmail(newUser);
         };
         const userPromise = registerService.save(user);
         userPromise
             .then(userResult)
             .catch(renderErrorResponse(response));
-        // console.log('account creation')
-        // console.log(newAccount);
-        console.log(newUser);
-        console.log(newAccount);
-        console.log("prior email service");
-        //call to email service
-        emailService.sendEmail(newUser);
-
-        response.json(saveditem);
-        response.json(newUser);
     };
     const promise = accountService.save({});
     promise

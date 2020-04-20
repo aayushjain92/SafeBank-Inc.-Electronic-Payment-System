@@ -16,7 +16,7 @@ exports.sendEmail = function email(user) {
     to: user.email,
     subject: 'Welcome to Exterminators',
     html: 'Hello ' + user.firstName + ','+ '\n<h1>Welcome to Exterminators!!!</h1>' +
-      '<p>One stop solution to online banking. </p> <p>Your Account Number is : '
+      '<p>One stop solution to online banking. </p> <p>Your Account Number is : ' + user.account.AccountNumber
   };
   transporter.sendMail(mailOptions, function (error, info) {
     if (error) {
