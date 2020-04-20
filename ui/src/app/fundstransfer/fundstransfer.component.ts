@@ -8,6 +8,7 @@ import {FundstransferService} from '../services/fundstransfer.service';
 import { BeneficiaryService } from '../services/beneficiary.service';
 import { Transaction } from '../model/transaction.model';
 import { Beneficiary } from '../model/beneficiary';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 
 @Component({
@@ -34,6 +35,36 @@ export class FundstransferComponent implements OnInit {
     this.initializeTable();    
     this.getbeneficiary();
   }
+
+  creditValidateForm = new FormGroup({
+    amountFormControl : new FormControl('', [
+      Validators.required,
+      Validators.min(0.1),
+      Validators.pattern('^[0-9]+(\.[0-9]{1,2})?$'),
+    ]),
+  });
+
+  debitValidateForm = new FormGroup({
+    amountFormControl : new FormControl('', [
+      Validators.required,
+      Validators.min(0.1),
+      Validators.pattern('^[0-9]+(\.[0-9]{1,2})?$'),
+    ]),
+    categoryFormControl: new FormControl('', [
+      Validators.required,
+    ]),
+  });
+
+  beneficiaryValidateForm = new FormGroup({
+    amountFormControl : new FormControl('', [
+      Validators.required,
+      Validators.min(0.1),
+      Validators.pattern('^[0-9]+(\.[0-9]{1,2})?$'),
+    ]),
+    beneficiaryFormControl: new FormControl('', [
+      Validators.required,
+    ]),
+  });
 
   initializeTable() {
     let auth;
