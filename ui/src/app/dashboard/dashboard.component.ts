@@ -30,7 +30,7 @@ export class DashboardComponent implements OnInit {
       console.log('User found in dashboard');
       console.log(this.user);
       console.log('User found' + this.user.firstName);
-      console.log('Account number: ' + this.user.account.AccountNumber);
+      //console.log('Account number: ' + this.user.account.AccountNumber);
       // this.mainNavModal.openModal();
     }
     console.log("heere", this.user)

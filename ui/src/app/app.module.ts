@@ -62,8 +62,7 @@ import {MatTableModule} from '@angular/material/table';
     LogoutConfirmationDialogComponent,
     TransactiontableComponent,
     DashboardComponent,
-    NavComponent,
-    UserProfileComponent
+    UserProfileComponent,
     MainNavComponent,
     ChartComponent,
     DonateCovidComponent,

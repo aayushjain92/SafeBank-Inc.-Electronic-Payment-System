@@ -20,8 +20,7 @@ exports.searchUserByEmail = (email) => {
  * @param updatedUser
 */
 exports.update = (updatedUser) => {
-    // console.log('Object to update in db');
-    // console.log(updatedUser);
+    console.log('inside service of server');
     const promise = User.findByIdAndUpdate(updatedUser.id, updatedUser).exec();
     return promise;
 };

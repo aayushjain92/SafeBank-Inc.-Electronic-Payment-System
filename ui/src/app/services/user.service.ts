@@ -17,5 +17,7 @@ export class UserService {
     return this.http.get<Array<User>>(API_URL + 'users');
   }
 
-
+  updateUser(user: User): Observable<User> {
+    return this.http.put<User>(API_URL + 'users' + user.email, user);
+  }
 }

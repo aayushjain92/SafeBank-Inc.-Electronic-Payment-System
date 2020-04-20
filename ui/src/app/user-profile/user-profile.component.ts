@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators, FormControl} from '@angular/forms';
 import { User } from 'src/app/model/user';
-import { RegisterService } from 'src/app/services/register.service';
+import { Store } from '@ngrx/store';
+import * as fromAuth from './../store/reducers/login.reducer';
+import { Router } from '@angular/router';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -15,10 +18,19 @@ export class UserProfileComponent implements OnInit {
   credentialsFormGroup: FormGroup;
   ssnFormGroup: FormGroup;
   panelOpenState = false;
+  user: User;
 
-  constructor(private _formBuilder: FormBuilder, private service : RegisterService) {}
+  constructor(private store: Store<fromAuth.State>, private _formBuilder: FormBuilder, 
+    private service : UserService, private router: Router) {}
 
   ngOnInit() {
+    let authState;
+    this.store.subscribe(val => authState = val);
+    if (authState.auth.status.user == null) {
+      this.router.navigate(['/login']);
+    } else {
+      this.user = authState.auth.status.user;
+    }
     this.personalFormGroup = this._formBuilder.group({
       phoneNumberCtrl : ['', Validators.required]
     });
@@ -42,27 +54,23 @@ export class UserProfileComponent implements OnInit {
   get passwordInput() { return this.credentialsFormGroup.get('password'); } 
   get ssnInput() { return this.ssnFormGroup.get('ssn'); } 
 
-  user:User;
   updateUser(){
     //Personal info
-    // this.user.firstName = this.personalFormGroup.get('firstNameCtrl').value;
-    // this.user.lastName = this.personalFormGroup.get('lastNameCtrl').value;
-    // this.user.phoneNum = this.personalFormGroup.get('phoneNumberCtrl').value;
-    // this.user.email = this.personalFormGroup.get('emailIDCtrl').value;
-    // this.user.dob = new Date();
-    // //Address fields
-    // this.user.addressLine1 = this.addressFormGroup.get('addressLine1Ctrl').value;
-    // this.user.addressLine2 = this.addressFormGroup.get('addressLine2Ctrl').value;
-    // this.user.city = this.addressFormGroup.get('cityCtrl').value;
-    // this.user.state = this.addressFormGroup.get('stateCtrl').value;
-    // this.user.zip = this.addressFormGroup.get('zipCtrl').value;
-    // //Password
-    // //base64 encoded password
-    // this.user.password = btoa(this.credentialsFormGroup.get('password').value);
-    // console.log(this.user.password);
-    // //SSN Field
-    // this.user.ssn = this.ssnFormGroup.get('ssn').value;
+    this.user.phoneNum = this.personalFormGroup.get('phoneNumberCtrl').value;
 
+    // Address fields
+    this.user.addressLine1 = this.addressFormGroup.get('addressLine1Ctrl').value;
+    this.user.addressLine2 = this.addressFormGroup.get('addressLine2Ctrl').value;
+    this.user.city = this.addressFormGroup.get('cityCtrl').value;
+    this.user.state = this.addressFormGroup.get('stateCtrl').value;
+    this.user.zip = this.addressFormGroup.get('zipCtrl').value;
+
+    // base64 encoded password
+    this.user.password = btoa(this.credentialsFormGroup.get('password').value);
+    
+    //update user service call
+    this.service.updateUser(this.user);
+    
   }
 
 }

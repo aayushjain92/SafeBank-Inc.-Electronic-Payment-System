@@ -11,20 +11,28 @@
             <input matInput value="{{ user.firstName }}" readonly>
         </mat-form-field>
     
+        <br> 
+
         <mat-form-field>
             <mat-label>Last name</mat-label>
             <input matInput value="{{ user.lastName }}" readonly>
         </mat-form-field>
+
+        <br> 
 
         <mat-form-field>
             <mat-label>Phone Number</mat-label>
             <input matInput value="{{ user.phoneNum }}" formControlName="phoneNumCtrl" required>
         </mat-form-field>
 
+        <br> 
+
         <mat-form-field>
             <mat-label>Email</mat-label>
             <input matInput value="{{ user.email }}" readonly>
         </mat-form-field>
+
+        <br> 
 
         <mat-form-field>
             <mat-label>Date of Birth</mat-label>
@@ -39,25 +47,35 @@
             </mat-panel-title>
         </mat-expansion-panel-header>
       
+        <br> 
+
         <mat-form-field>
             <mat-label>Address Line 1</mat-label>
             <input matInput value="{{ user.addressLine1 }}" formControlName="addressLine1Ctrl" required>
         </mat-form-field>
+
+        <br> 
 
         <mat-form-field>
             <mat-label>Address Line 2</mat-label>
             <input matInput value="{{ user.addressLine2 }}" formControlName="addressLine2Ctrl" required>
         </mat-form-field>
 
+        <br> 
+
         <mat-form-field>
             <mat-label>City</mat-label>
             <input matInput value="{{ user.city }}" formControlName="cityCtrl" required>
         </mat-form-field> 
 
+        <br> 
+
         <mat-form-field>
             <mat-label>State</mat-label>
             <input matInput value="{{ user.state }}" formControlName="stateCtrl" required>
         </mat-form-field>
+
+        <br> 
 
         <mat-form-field>
             <mat-label>ZipCode</mat-label>
@@ -71,6 +89,8 @@
             Credential Details
             </mat-panel-title>
         </mat-expansion-panel-header>
+
+        <br> 
 
         <mat-form-field>
             <mat-label>Password</mat-label>
@@ -86,28 +106,32 @@
             </mat-panel-title>
         </mat-expansion-panel-header>
 
+        <br> 
+
         <mat-form-field>
             <mat-label>Account Number</mat-label>
-            <input matInput value="{{ user.accountNumber }}" readonly>
-            <mat-icon matSuffix (click)="hideSSN = !hideSSN">{{hideSSN ? 'visibility_off' : 'visibility'}}</mat-icon>
+            <input matInput value="{{ user.account.AccountNumber }}" readonly>
         </mat-form-field>
+
+        <br> 
 
         <mat-form-field>
             <mat-label>Account Type</mat-label>
             <input matInput value="{{ user.accountType }}" readonly>
-            <mat-icon matSuffix (click)="hideSSN = !hideSSN">{{hideSSN ? 'visibility_off' : 'visibility'}}</mat-icon>
         </mat-form-field>
+
+        <br> 
 
         <mat-form-field>
             <mat-label>Routing Number</mat-label>
-            <input matInput value="{{ user.routingNumber }}" readonly>
-            <mat-icon matSuffix (click)="hideSSN = !hideSSN">{{hideSSN ? 'visibility_off' : 'visibility'}}</mat-icon>
+            <input matInput value="{{ user.account.routingNumber }}" readonly>
         </mat-form-field>
 
+        <br> 
+        
         <mat-form-field>
             <mat-label>Soclal Security Number</mat-label>
             <input matInput value="{{ user.ssn }}" readonly>
-            <mat-icon matSuffix (click)="hideSSN = !hideSSN">{{hideSSN ? 'visibility_off' : 'visibility'}}</mat-icon>
         </mat-form-field>
     </mat-expansion-panel>
 

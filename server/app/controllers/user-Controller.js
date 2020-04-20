@@ -21,6 +21,28 @@ exports.list = (request, response) => {
         .catch(renderErrorResponse(response));
 };
 
+exports.updateUser = (request, response) => {
+    user = request.params.user;
+    console.log("user in server service:"+ JSON.stringify(user));
+
+    //Should user be checked whether it exists in db??
+
+    //Update the user
+    userService.update(user).then(updatedItem =>{
+        console.log("user in server service update method:"+ JSON.stringify(user));
+            response.status(200).json({
+            message : 'Profile Updated for user: ' + updatedItem.email
+        });
+        console.log('Done');
+    })
+    .catch(err => {
+        response.status(500).json({
+            message: "Unable to update the user"
+        });
+    })
+}
+
+
 let renderErrorResponse = (response) => {
     const errorCallback = (error) => {
         if (error) {

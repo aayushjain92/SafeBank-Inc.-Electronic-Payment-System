@@ -3,6 +3,8 @@
 const UserController = require('../controllers/user-Controller');
 
 module.exports = (app) => {
-    app.route('/users').get(UserController.list);
+    app.route('/users')
+    .get(UserController.list)
+    .put(UserController.updateUser);
 };
  
