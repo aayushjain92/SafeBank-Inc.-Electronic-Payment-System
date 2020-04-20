@@ -12,6 +12,7 @@ import { CcDashComponent } from './cc-dash/cc-dash.component';
 import { CustomercareComponent } from './customercare/customercare.component';
 import {FundstransferComponent} from './fundstransfer/fundstransfer.component'
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { LogoutConfirmationDialogComponent } from './login/logout-confirmation-dialog/logout-confirmation-dialog.component';
 
 const routes: Routes = [
   { path: '', component: LandingPageComponent },
@@ -25,7 +26,8 @@ const routes: Routes = [
   { path: 'contactus', component: ContactUsComponent },
   { path: 'complaints', component: CustomercareComponent },
   { path: 'fundstransfer', component: FundstransferComponent},
-  { path: 'profile', component: UserProfileComponent}
+  { path: 'profile', component: UserProfileComponent},
+  { path: 'logout', component: LogoutConfirmationDialogComponent}
 ];
 
 @NgModule({
