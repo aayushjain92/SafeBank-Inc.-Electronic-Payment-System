@@ -44,7 +44,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { CustomercareComponent } from './customercare/customercare.component';
 import { CcDashComponent } from './cc-dash/cc-dash.component';
 import { CcMainNavComponent } from './cc-main-nav/cc-main-nav.component';
-
+import {MatTableModule} from '@angular/material/table';
 @NgModule({
   declarations: [
     AppComponent,
@@ -89,6 +89,7 @@ import { CcMainNavComponent } from './cc-main-nav/cc-main-nav.component';
     MatSidenavModule,
     MatListModule,
     MatSnackBarModule,
+    MatTableModule,
   ],
 
   providers: [],

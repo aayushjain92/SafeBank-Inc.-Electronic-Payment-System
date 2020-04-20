@@ -3,6 +3,7 @@ import { Store, select } from '@ngrx/store';
 import * as fromAuth from './../store/reducers/login.reducer';
 import { User } from 'src/app/model/user';
 import { Router } from '@angular/router';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-cc-dash',
@@ -11,7 +12,11 @@ import { Router } from '@angular/router';
 })
 export class CcDashComponent implements OnInit {
   user: User;
-  constructor(private store: Store<fromAuth.State>, private router: Router) { }
+  users: User[];
+  displayedColumns: string[] = ['name', 'email', 'phone', 'accountNum', 'currentBalance', 'role'];
+  constructor(private store: Store<fromAuth.State>, 
+    private router: Router,
+    private service: UserService) { }
 
   ngOnInit(): void {
     let auth;
@@ -22,8 +27,11 @@ export class CcDashComponent implements OnInit {
     } else {
       this.user = auth.auth.status.user;
       console.log('User found in Customer Care dashboard');
-      
-      // this.mainNavModal.openModal();
+      this.service.getAllUser()
+        .subscribe(users => this.users = users); 
     }
+
+    
+
   }
 }
