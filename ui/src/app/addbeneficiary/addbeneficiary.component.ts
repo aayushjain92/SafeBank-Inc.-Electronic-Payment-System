@@ -47,11 +47,16 @@ export class AddbeneficiaryComponent implements OnInit {
   }
 
   initializeData() {
-    let self = this;
+    let auth;
     console.log(this.store);
-    this.store.subscribe(val => self.auth = val);
-    this.user = this.auth.auth.status.user;
-    console.log("table" + this.user.account.AccountNumber);
+    this.store.subscribe(val => auth = val);
+    if (auth.auth.status.user == null) {
+      this.router.navigate(['/login']);
+    } else {
+      this.user = auth.auth.status.user;
+      console.log('User found on Beneficiary');
+    }
+    console.log("beneficary" + this.user.account.AccountNumber);
   }
 
   // function to check the routing number
