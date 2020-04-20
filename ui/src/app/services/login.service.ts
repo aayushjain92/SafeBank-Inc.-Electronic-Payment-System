@@ -14,14 +14,11 @@ const API_URL = environment.apiUrl;
   providedIn: 'root'
 })
 export class LoginService {
-
-  
   users: User[];
 
   constructor(private http: HttpClient, 
     private store: Store<fromAuth.State>,
-    private router: Router
-    ) { }
+    private router: Router) { }
 
   getAllUser(): Observable<Array<User>> {
     return this.http.get<Array<User>>(API_URL + 'login');
@@ -33,13 +30,9 @@ export class LoginService {
     })
   }
 
-
-
   getUserByEmail(email : string): Observable<User> {
     return this.http.get<User>(API_URL + 'login/' + email);
   }
-
-
 
   loadUsers(): void {
     this.setUsersToArray();
@@ -48,7 +41,7 @@ export class LoginService {
 
   private loadStickiesIntoStore(users: Array<User>): void {
     this.store.dispatch(LoginPageActions.login({ users }));
-    console.log(this.store);
+    console.log("Initial store load:"+ this.store);
   }
 
   login(user: User): void {
@@ -69,6 +62,10 @@ export class LoginService {
         console.log('After enrichment>>');
         console.log(user);
         this.store.dispatch(AuthActions.loginSuccess({ user }));
+        // console.log("this.store.getState(): "+ this.store.);
+        // this.store.subscribe(function() {
+        //   localStorage.setItem('state', JSON.stringify(this.store.getState()));
+        // })      
         //how to use state in dashboard and other screens
         if(user.role != null && user.role === 'customercare'){
           this.router.navigate(['/ccdashboard']);
@@ -103,8 +100,19 @@ export class LoginService {
     return isauthenticated;
   }
 
-  logout(): void {
+  updateLastLogin(email : string){
+    this.http.put(API_URL + 'login/' + email + '/lastlogin', {})
+    .subscribe((response: any) => {
+      console.log('Last Login time updated in DB');
+    });
+  } 
+
+  logout(user: User): void {
+    this.updateLastLogin(user.email);
+    console.log("after updateLastLogin inside login service logout method: ");
+    //check if updateLastLogin is successful
     this.store.dispatch(LogoutActions.logout());
+    this.router.navigate(['/']);
   }
 }
 
