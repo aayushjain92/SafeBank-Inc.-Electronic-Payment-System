@@ -25,7 +25,7 @@ $gray: #f7f7f7;
 
 }
 .mat-icon {
-    font-size: 20px;
+    font-size: 25px;
   }
 // .icon{
 //     transform: scale(2);
@@ -228,3 +228,29 @@ label{
   .modal-container{
     padding: 20px;
   }
+
+
+  .funds-form {
+    min-width: 100px;
+    max-width: 200px;
+    width: 100%;
+  }
+  
+  .funds-full-width {
+    width: 100%;
+  }
+  
+
+.example-headers-align .mat-expansion-panel-header-title,
+.example-headers-align .mat-expansion-panel-header-description {
+  flex-basis: 0;
+}
+
+.example-headers-align .mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.example-headers-align .mat-form-field + .mat-form-field {
+  margin-left: 8px;
+}

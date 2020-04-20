@@ -9,7 +9,7 @@
                 <div id="fundsmanagement">
                     <h3 class="heading">{{title}}</h3>
 
-                    <mat-accordion>
+                    <mat-accordion class="example-headers-align">
 
                         <!-- to credit the amount -->
                         <mat-expansion-panel>
@@ -18,17 +18,34 @@
                                     <span>Deposit Money</span>
                                 </mat-panel-title>
                                 <mat-panel-description>
+                                    Add Money to your account
+                                    <mat-icon>money</mat-icon>
                                 </mat-panel-description>
                             </mat-expansion-panel-header>
 
-                            <label for="amount">Amount:</label>
+                            <!-- <label for="amount">Amount:</label>
                             <input class="textb " type="text" name=amount id="amount"
                                 [(ngModel)]="transaction.amount" required="required">
                             <br>
-                            <br>
+                            <br> -->
+
+                            <form class="funds-form">
+
+                                <mat-form-field class="funds-full-width">
+                                    <mat-label>Account Number</mat-label>
+                                    <input matInput disabled value="{{transaction.ownerAccountNum}}">
+                                </mat-form-field>
+
+                                <mat-form-field appearance="fill" class="funds-full-width">
+                                    <mat-label><mat-icon>attach_money</mat-icon>Amount</mat-label>                                
+                                    <input matInput type="number" name=amount id="amount"
+                                    [(ngModel)]="transaction.amount" required="required">
+                                </mat-form-field>
+                            </form>
 
                             <mat-action-row>
-                                <button class="deleteBtn" (click)="credit(transaction)">Deposit</button>
+                                <button mat-raised-button color="primary" (click)="credit(transaction)">Deposit</button>
+                                <!-- <button class="deleteBtn" (click)="credit(transaction)">Deposit</button> -->
                             </mat-action-row>
                         </mat-expansion-panel>
 
@@ -39,19 +56,88 @@
                                     <span>Withdraw Money</span>
                                 </mat-panel-title>
                                 <mat-panel-description>
+                                    Debit Money from your account
+                                    <mat-icon>remove</mat-icon>
                                 </mat-panel-description>
                             </mat-expansion-panel-header>
 
-                            <label for="amount">Amount:</label>
+                            <!-- <label for="amount">Amount:</label>                            
+                            <input class="textb " type="text" name=amount id="amount"
+                                [(ngModel)]="transaction.amount" required="required">
+                            <br> -->
+                            <form class="funds-form">
+
+                            <mat-form-field class="funds-full-width">
+                                <mat-label>Account Number</mat-label>
+                                <input matInput disabled value="{{transaction.ownerAccountNum}}">
+                                </mat-form-field>
+
+                            <mat-form-field appearance="fill" class="funds-full-width">
+                                <mat-label><mat-icon>attach_money</mat-icon>Amount</mat-label>                                
+                                <input matInput type="number" name=amount id="amount"
+                                [(ngModel)]="transaction.amount" required="required">
+                            </mat-form-field>
+
+                            <mat-form-field  class="funds-full-width">
+                                <mat-label>Category</mat-label>
+                                <mat-select [(value)]="transaction.category">
+                                  <mat-option value="option1">Food</mat-option>
+                                  <mat-option value="option2">Travel</mat-option>
+                                  <mat-option value="option3">Shopping</mat-option>
+                                  <mat-option value="option4">Fuel</mat-option>
+                                  <mat-option value="option5">Donation</mat-option>
+                                  <mat-option value="option6">EMI</mat-option>
+                                  <mat-option value="option7">Utility Bills</mat-option>
+                                  <mat-option value="option8">Other</mat-option>
+                                </mat-select>
+                              </mat-form-field>
+                            </form>
+                            <!-- <br> -->
+
+                            <mat-action-row>
+                                <button mat-raised-button color="primary" (click)="debit(transaction)">Withdraw</button>
+                                <!-- <button class="deleteBtn" (click)="debit(transaction)">Withdraw</button> -->
+                            </mat-action-row>
+                        </mat-expansion-panel>
+
+
+                        <!-- to transfer the amount -->
+                        <mat-expansion-panel>
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    <span>Transfer Money</span>
+                                </mat-panel-title>
+                                <mat-panel-description>
+                                    Transfer Money to another account
+                                    <mat-icon>send</mat-icon>
+                                </mat-panel-description>
+                            </mat-expansion-panel-header>
+
+                            <!-- <label for="amount">Amount:</label>
                             <input class="textb " type="text" name=amount id="amount"
                                 [(ngModel)]="transaction.amount" required="required">
                             <br>
-                            <br>
+                            <br> -->
+                            <form class="funds-form">
+
+                                <mat-form-field class="funds-full-width">
+                                    <mat-label>Account Number</mat-label>
+                                    <input matInput disabled value="{{transaction.ownerAccountNum}}">
+                                    </mat-form-field>
+    
+                                <mat-form-field appearance="fill" class="funds-full-width">
+                                    <mat-label><mat-icon>attach_money</mat-icon>Amount</mat-label>                                
+                                    <input matInput type="number" name=amount id="amount"
+                                    [(ngModel)]="transaction.amount" required="required">
+                                </mat-form-field>
+
+                                </form>
 
                             <mat-action-row>
-                                <button class="deleteBtn" (click)="debit(transaction)">Withdraw</button>
+                                <button class="deleteBtn" (click)="transfer(transaction)">Transfer</button>
                             </mat-action-row>
                         </mat-expansion-panel>
+
 
 
                         <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">

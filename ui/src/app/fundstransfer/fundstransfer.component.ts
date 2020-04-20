@@ -37,13 +37,14 @@ export class FundstransferComponent implements OnInit {
       this.router.navigate(['/login']);
     } else {
       this.user = auth.auth.status.user;
+      this.transaction.ownerAccountNum =  this.user.account.AccountNumber;
       console.log('User found on Fund Transfer');
     }
   }
 
   // pass the transaction model to FundstransferService for crediting the amount
   credit(transaction : Transaction): void{
-    this.transaction.ownerAccountNum =  this.user.account.AccountNumber;
+    //this.transaction.ownerAccountNum =  this.user.account.AccountNumber;
     this.transaction.amount = Number(this.transaction.amount);
     console.log(transaction);
     this.rest.creditAmount(transaction).subscribe((data) => {
@@ -55,7 +56,7 @@ export class FundstransferComponent implements OnInit {
 
   // pass the transaction model to FundstransferService for debiting the amount
   debit(transaction : Transaction): void{
-    this.transaction.ownerAccountNum =  this.user.account.AccountNumber;
+    //this.transaction.ownerAccountNum =  this.user.account.AccountNumber;
     
     console.log(transaction);
     this.rest.debitAmount(transaction).subscribe((data) => {
@@ -64,6 +65,18 @@ export class FundstransferComponent implements OnInit {
       console.log(err);
     });
   }
+
+    // pass the transaction model to FundstransferService for transferring the amount to another account
+    transfer(transaction : Transaction): void{
+      //this.transaction.ownerAccountNum =  this.user.account.AccountNumber;
+      
+      console.log(transaction);
+      this.rest.transferAmount(transaction).subscribe((data) => {
+        this.displayText = `Amount transferred successfully!`;
+      }, (err) => {
+        console.log(err);
+      });
+    }
 
   // the confirmation modal
   toggleModal() {
