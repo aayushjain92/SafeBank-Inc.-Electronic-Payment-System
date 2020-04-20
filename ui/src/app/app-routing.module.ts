@@ -11,6 +11,7 @@ import { LandingPageComponent } from './landing/landing-page/landing-page.compon
 import { RegisterComponent } from './signup/register/register.component';
 import { LoginComponent } from './login/login-component/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import {FundstransferComponent} from './fundstransfer/fundstransfer.component'
 
 const routes: Routes = [
   { path: '', component: LandingPageComponent },
@@ -27,7 +28,8 @@ const routes: Routes = [
   { path: 'beneficiary', component: BeneficiaryComponent },
   { path: 'addbeneficiary', component: AddbeneficiaryComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'dashboard', component: DashboardComponent }
+  { path: 'dashboard', component: DashboardComponent },
+  { path: 'fundstransfer', component: FundstransferComponent}
 ];
 
 @NgModule({
