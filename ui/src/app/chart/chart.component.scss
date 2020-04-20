@@ -1,0 +1,18 @@
+.tablestyle{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+    }
+
+// table enclosed in grid
+    .chart-container{
+        display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-column-gap: 64px;
+    margin-left: 622px;
+    margin-right: 57px;
+    position: relative;
+    padding-top: 81px;
+    height: 220px;
+    width: 684px;
+
+    }

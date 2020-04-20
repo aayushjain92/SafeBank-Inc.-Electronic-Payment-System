@@ -24,7 +24,7 @@ const routes: Routes = [
         { path: 'credentials', component: CredentialDetailsComponent }
       ]
   },
-  { path: 'beneficiary', component: BeneficiaryComponent },
+  { path: 'beneficiaries', component: BeneficiaryComponent },
   { path: 'addbeneficiary', component: AddbeneficiaryComponent },
   { path: 'login', component: LoginComponent },
   { path: 'dashboard', component: DashboardComponent }

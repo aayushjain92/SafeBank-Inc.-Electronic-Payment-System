@@ -43,6 +43,7 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
+import { ChartComponent } from './chart/chart.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { MatListModule } from '@angular/material/list';
     LogoutConfirmationDialogComponent,
     TransactiontableComponent,
     DashboardComponent,
-    MainNavComponent
+    MainNavComponent,
+    ChartComponent
   ],
 
   imports: [
