@@ -40,7 +40,7 @@ export class FundstransferComponent implements OnInit {
     amountFormControl : new FormControl('', [
       Validators.required,
       Validators.min(0.1),
-      Validators.pattern('^[0-9]+(\.[0-9]{1,2})?$'),
+      Validators.pattern('^[0-9]\\d*(?:\\.\\d{1,2})?$'),
     ]),
   });
 
@@ -48,7 +48,7 @@ export class FundstransferComponent implements OnInit {
     amountFormControl : new FormControl('', [
       Validators.required,
       Validators.min(0.1),
-      Validators.pattern('^[0-9]+(\.[0-9]{1,2})?$'),
+      Validators.pattern('^[0-9]\\d*(?:\\.\\d{1,2})?$'),
     ]),
     categoryFormControl: new FormControl('', [
       Validators.required,
@@ -59,7 +59,7 @@ export class FundstransferComponent implements OnInit {
     amountFormControl : new FormControl('', [
       Validators.required,
       Validators.min(0.1),
-      Validators.pattern('^[0-9]+(\.[0-9]{1,2})?$'),
+      Validators.pattern('^[0-9]\\d*(?:\\.\\d{1,2})?$'),
     ]),
     beneficiaryFormControl: new FormControl('', [
       Validators.required,
