@@ -36,11 +36,11 @@ export class FundstransferComponent implements OnInit {
 
   // pass the transaction model to FundstransferService for crediting the amount
   credit(transaction : Transaction): void{
-    this.transaction.ownerAccountNumber =  this.user.account.AccountNumber;
-    
+    this.transaction.ownerAccountNum =  this.user.account.AccountNumber;
+    this.transaction.amount = Number(this.transaction.amount);
     console.log(transaction);
     this.rest.creditAmount(transaction).subscribe((data) => {
-      this.displayText = transaction.ownerAccountNumber + ` has been credited successfully by USD ${transaction.amount}`;
+      this.displayText = transaction.ownerAccountNum + ` has been credited successfully by USD ${transaction.amount}`;
     }, (err) => {
       console.log(err);
     });
@@ -48,11 +48,11 @@ export class FundstransferComponent implements OnInit {
 
   // pass the transaction model to FundstransferService for debiting the amount
   debit(transaction : Transaction): void{
-    this.transaction.ownerAccountNumber =  this.user.account.AccountNumber;
+    this.transaction.ownerAccountNum =  this.user.account.AccountNumber;
     
     console.log(transaction);
     this.rest.debitAmount(transaction).subscribe((data) => {
-      this.displayText = transaction.ownerAccountNumber + ` has been debited successfully by USD ${transaction.amount}`;
+      this.displayText = transaction.ownerAccountNum + ` has been debited successfully by USD ${transaction.amount}`;
     }, (err) => {
       console.log(err);
     });

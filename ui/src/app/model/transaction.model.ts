@@ -1,6 +1,11 @@
 export class Transaction {
-    ownerAccountNumber: string;
-    beneficiaryAccountNumber: string;
+    _id?: string;
+    ownerAccountNum: string;
+    beneficiaryAccountNumber?: string;
     amount: number;
+    type?: string;
+    category?: string;
+    transactionDate?: Date;
+
 }
 
