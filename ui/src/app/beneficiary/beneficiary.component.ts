@@ -25,7 +25,8 @@ export class BeneficiaryComponent implements OnInit {
   benefeciary: Beneficiary;
   routingNumber: number;
 
-  constructor(public rest: BeneficiaryService, private route: ActivatedRoute, private router: Router, private store: Store<fromAuth.State>
+  constructor(public rest: BeneficiaryService, private route: ActivatedRoute, 
+    private router: Router, private store: Store<fromAuth.State>
   ) { }
   user: User;
   auth: any;
@@ -37,10 +38,15 @@ export class BeneficiaryComponent implements OnInit {
 
   // intitialized data for a loggedin User
   initializeData() {
-    let self = this;
+    let auth;
     console.log(this.store);
-    this.store.subscribe(val => self.auth = val);
-    this.user = this.auth.auth.status.user;
+    this.store.subscribe(val => auth = val);
+    if (auth.auth.status.user == null) {
+      this.router.navigate(['/login']);
+    } else {
+      this.user = auth.auth.status.user;
+      console.log('User found on Beneficiary');
+    }
     console.log("beneficary" + this.user.account.AccountNumber);
   }
 
