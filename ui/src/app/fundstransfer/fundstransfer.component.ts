@@ -5,7 +5,9 @@ import { Store } from '@ngrx/store';
 import * as fromAuth from './../store/reducers/login.reducer';
 import { User } from 'src/app/model/user';
 import {FundstransferService} from '../services/fundstransfer.service';
+import { BeneficiaryService } from '../services/beneficiary.service';
 import { Transaction } from '../model/transaction.model';
+import { Beneficiary } from '../model/beneficiary';
 
 
 @Component({
@@ -16,7 +18,10 @@ import { Transaction } from '../model/transaction.model';
 export class FundstransferComponent implements OnInit {
   title = 'Funds Transfer';
   transaction: Transaction;
-  constructor(public rest: FundstransferService, private route: ActivatedRoute, 
+  beneficiaries: any;
+  selectedBeneficiary: string;
+
+  constructor(public restBeneficiary: BeneficiaryService, public rest: FundstransferService, private route: ActivatedRoute, 
     private router: Router, private store: Store<fromAuth.State>) {
     this.transaction = new Transaction();
   }
@@ -27,6 +32,7 @@ export class FundstransferComponent implements OnInit {
 
   ngOnInit(): void {
     this.initializeTable();    
+    this.getbeneficiary();
   }
 
   initializeTable() {
@@ -40,6 +46,12 @@ export class FundstransferComponent implements OnInit {
       this.transaction.ownerAccountNum =  this.user.account.AccountNumber;
       console.log('User found on Fund Transfer');
     }
+  }
+
+  public onChange(event): void {  
+    // event will give you full breif of action
+    const newVal = event.target.value;
+    //console.log(newVal);
   }
 
   // pass the transaction model to FundstransferService for crediting the amount
@@ -64,6 +76,16 @@ export class FundstransferComponent implements OnInit {
     }, (err) => {
       console.log(err);
     });
+  }
+
+
+  // get beneficiaries 
+  getbeneficiary() {
+    this.restBeneficiary.getbeneficiary(this.user.account.AccountNumber)
+      .subscribe(data => {
+        this.beneficiaries = data;
+
+      });
   }
 
     // pass the transaction model to FundstransferService for transferring the amount to another account

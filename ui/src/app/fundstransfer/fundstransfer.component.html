@@ -123,7 +123,21 @@
                                 <mat-form-field class="funds-full-width">
                                     <mat-label>Account Number</mat-label>
                                     <input matInput disabled value="{{transaction.ownerAccountNum}}">
-                                    </mat-form-field>
+                                </mat-form-field>
+
+                                <mat-form-field  class="funds-full-width">
+                                    <mat-label>Choose Beneficiary:</mat-label>
+                                    <mat-select [(value)]="transaction.beneficiaryAccountNumber">
+                                        <mat-option *ngFor="let beneficiary of beneficiaries" value= {{beneficiary.accountNumber}}>
+                                            {{ beneficiary.firstName + ' ' + beneficiary.lastName }}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+
+                                <mat-form-field class="funds-full-width">
+                                    <mat-label>Beneficiary Account Number</mat-label>
+                                    <input matInput disabled value="{{transaction.beneficiaryAccountNumber}}">
+                                </mat-form-field>
     
                                 <mat-form-field appearance="fill" class="funds-full-width">
                                     <mat-label><mat-icon class="matbtn">attach_money</mat-icon>Amount</mat-label>                                
