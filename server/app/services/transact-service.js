@@ -52,6 +52,21 @@ exports.transfer = function (transaction, ownerAccount, beneficiaryAccount) {
 
 };
 
+exports.transferInOtherBank = function (transaction, ownerAccount) {
+ 
+    return new Promise(async(resolve, reject)=>{
+        try{      
+            ownerAccount.CurrentBalance = ownerAccount.CurrentBalance - transaction.amount;            
+            await Account.findOneAndUpdate({_id: ownerAccount._id}, ownerAccount);
+            resolve(true);
+        } catch (error) {
+            reject(error);
+        }
+    }
+    )
+
+};
+
 
 /**
  * Saves and returns the new transaction object.
