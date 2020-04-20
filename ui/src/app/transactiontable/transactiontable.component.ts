@@ -67,9 +67,9 @@ export class TransactiontableComponent implements OnInit {
 
     doc.text(30, 20, "Exterminators");
     doc.autoTable({
-      head: [['Account Number', 'Type', 'Amount', 'Transaction Date']],
+      head: [['Account Number', 'Type', 'Category', 'Amount($)', 'Transaction Date']],
       body: pdf.map(transaction => {
-        return [transaction["ownerAccountNum"], transaction["type"], transaction["amount"], transaction["transactionDate"]]
+        return [transaction["ownerAccountNum"], transaction["type"], transaction["category"], transaction["amount"], transaction["transactionDate"]]
       })
     })
 

@@ -7,7 +7,8 @@
                     <th scope="col">Transaction Date</th>
                     <th scope="col">Account Number</th>
                     <th scope="col">Type</th>
-                    <th scope="col">Amount</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Amount($)</th>
                 </tr>
             </thead>
 
@@ -17,6 +18,7 @@
                         <td>{{txns.transactionDate}}</td>
                         <td>{{txns.ownerAccountNum}}</td>
                         <td>{{txns.type}}</td>
+                        <td>{{txns.category}}</td>
                         <td>{{txns.amount}}</td>
                     </tr>
                 </ng-container>
