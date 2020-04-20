@@ -63,7 +63,7 @@ export class UserProfileComponent implements OnInit {
       firstNameCtrl : this.user.firstName,
       lastNameCtrl : this.user.lastName,
       emailIDCtrl : this.user.email,
-      phoneNumCtrl : this.user.phoneNum,
+      phoneNumCtrl : this.user.phoneNumber,
       dobCtrl: this.user.dob
     });
 
