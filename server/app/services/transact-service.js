@@ -24,7 +24,7 @@ exports.update = function (account, amount) {
     
     return new Promise(async(resolve, reject)=>{
         try{      
-            account.CurrentAccount = amount;
+            account.CurrentBalance = amount;
             await Account.findOneAndUpdate({_id: account._id}, account);
             resolve(true);
         } catch (error) {
@@ -39,8 +39,8 @@ exports.transfer = function (transaction, ownerAccount, beneficiaryAccount) {
  
     return new Promise(async(resolve, reject)=>{
         try{      
-            ownerAccount.CurrentAccount = ownerAccount.CurrentAccount - transaction.amount;
-            beneficiaryAccount.CurrentAccount = beneficiaryAccount.CurrentAccount + transaction.amount;
+            ownerAccount.CurrentBalance = ownerAccount.CurrentBalance - transaction.amount;
+            beneficiaryAccount.CurrentBalance = beneficiaryAccount.CurrentBalance + transaction.amount;
             await Account.findOneAndUpdate({_id: ownerAccount._id}, ownerAccount);
             await Account.findOneAndUpdate({_id: beneficiaryAccount._id}, beneficiaryAccount);
             resolve(true);

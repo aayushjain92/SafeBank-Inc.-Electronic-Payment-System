@@ -26,6 +26,8 @@ import { LogoutConfirmationDialogComponent } from './login/logout-confirmation-d
 import { AuthEffects } from './store/effects/auth.effects';
 import { TransactiontableComponent } from './transactiontable/transactiontable.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { FundstransferComponent } from './fundstransfer/fundstransfer.component';
+
 //Angular material design
 import { MatSliderModule } from '@angular/material/slider';
 import { MatStepperModule } from '@angular/material/stepper';
@@ -45,6 +47,7 @@ import { CustomercareComponent } from './customercare/customercare.component';
 import { CcDashComponent } from './cc-dash/cc-dash.component';
 import { CcMainNavComponent } from './cc-main-nav/cc-main-nav.component';
 import {MatTableModule} from '@angular/material/table';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -62,7 +65,8 @@ import {MatTableModule} from '@angular/material/table';
     ContactUsComponent,
     CustomercareComponent,
     CcDashComponent,
-    CcMainNavComponent
+    CcMainNavComponent,
+    FundstransferComponent
   ],
 
   imports: [

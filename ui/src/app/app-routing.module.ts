@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-
 import { BeneficiaryComponent } from './beneficiary/beneficiary.component';
 import { AddbeneficiaryComponent } from './addbeneficiary/addbeneficiary.component';
 import { LandingPageComponent } from './landing/landing-page/landing-page.component';
@@ -11,6 +10,7 @@ import { DonateCovidComponent } from './donate-covid/donate-covid.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { CcDashComponent } from './cc-dash/cc-dash.component';
 import { CustomercareComponent } from './customercare/customercare.component';
+import {FundstransferComponent} from './fundstransfer/fundstransfer.component'
 
 const routes: Routes = [
   { path: '', component: LandingPageComponent },
@@ -23,6 +23,7 @@ const routes: Routes = [
   { path: 'donatecovid', component: DonateCovidComponent },
   { path: 'contactus', component: ContactUsComponent },
   { path: 'complaints', component: CustomercareComponent },
+  { path: 'fundstransfer', component: FundstransferComponent}
 ];
 
 @NgModule({
