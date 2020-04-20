@@ -25,7 +25,7 @@ export class BeneficiaryService {
 
 
   // end point to get all items
-  getbeneficiary(accountNumber): Observable<any> {
+  getbeneficiary(accountNumber : string): Observable<any> {
 
     return this.http.get(`${endpoint + 'beneficiaries'}/${accountNumber}`);
   }
