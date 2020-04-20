@@ -33,9 +33,13 @@ export class LoginService {
     })
   }
 
+
+
   getUserByEmail(email : string): Observable<User> {
     return this.http.get<User>(API_URL + 'login/' + email);
   }
+
+
 
   loadUsers(): void {
     this.setUsersToArray();
@@ -66,7 +70,12 @@ export class LoginService {
         console.log(user);
         this.store.dispatch(AuthActions.loginSuccess({ user }));
         //how to use state in dashboard and other screens
-        this.router.navigate(['/dashboard']);
+        if(user.role != null && user.role === 'customercare'){
+          this.router.navigate(['/ccdashboard']);
+        } else {
+          this.router.navigate(['/dashboard']);
+        }
+        
         console.log('User added>>>');
         console.log(this.store);
       })

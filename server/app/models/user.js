@@ -1,11 +1,14 @@
 'use strict';
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const accBalSchema = require("./accountBalSchema").AccBalSchema;
 
 /**
  * Mongoose schema for todolist object.
  */
 let UserSchema = new Schema({
+
+    account : accBalSchema,
 
     firstName: {
         type: String,
@@ -25,10 +28,6 @@ let UserSchema = new Schema({
     },
     phoneNumber:{
         type: Number
-    },
-    accountType:{
-        type: String,
-        default : "Checking"
     },
     ssn:{
         type: Number,
@@ -62,6 +61,23 @@ let UserSchema = new Schema({
         type: String,
         enum : ['active','inactive', 'deleted'],
         default: 'active'
+    },
+    createdDate: { 
+        type : Date, 
+        default: Date.now
+    },
+    modifiedDate: { 
+        type : Date, 
+        default: Date.now
+    },
+    lastLoginDate: { 
+        type : Date, 
+        default: Date.now
+    },
+    role: { 
+        type : String,
+        enum : ['user','admin', 'customercare'], 
+        default: 'user'
     },
 
 },

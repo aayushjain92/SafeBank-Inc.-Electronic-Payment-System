@@ -17,13 +17,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BeneficiaryComponent } from './beneficiary/beneficiary.component';
 import { AddbeneficiaryComponent } from './addbeneficiary/addbeneficiary.component';
-import { RegisterNavBarComponent } from './signup/register-nav-bar/register-nav-bar.component';
-import { PersonalDetailsComponent } from './signup/personal-details/personal-details.component';
 import { LandingPageComponent } from './landing/landing-page/landing-page.component';
 import { RegisterComponent } from './signup/register/register.component';
-import { AddressDetailsComponent } from './signup/address-details/address-details.component';
-import { AccountDetailsComponent } from './signup/account-details/account-details.component';
-import { CredentialDetailsComponent } from './signup/credential-details/credential-details.component';
 import { LoginComponent } from './login/login-component/login.component';
 import { LoginFormComponent } from './login/login-form/login-form/login-form.component';
 import * as fromAuth from './store/reducers';
@@ -31,7 +26,7 @@ import { LogoutConfirmationDialogComponent } from './login/logout-confirmation-d
 import { AuthEffects } from './store/effects/auth.effects';
 import { TransactiontableComponent } from './transactiontable/transactiontable.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { NavComponent } from './nav/nav.component';
+import { FundstransferComponent } from './fundstransfer/fundstransfer.component';
 
 //Angular material design
 import { MatSliderModule } from '@angular/material/slider';
@@ -41,18 +36,27 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { MainNavComponent } from './main-nav/main-nav.component';
+import { LayoutModule } from '@angular/cdk/layout';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
+import { ChartComponent } from './chart/chart.component';
+import { DonateCovidComponent } from './donate-covid/donate-covid.component';
+import { ContactUsComponent } from './contact-us/contact-us.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { CustomercareComponent } from './customercare/customercare.component';
+import { CcDashComponent } from './cc-dash/cc-dash.component';
+import { CcMainNavComponent } from './cc-main-nav/cc-main-nav.component';
+import {MatTableModule} from '@angular/material/table';
+
 @NgModule({
   declarations: [
     AppComponent,
     BeneficiaryComponent,
     AddbeneficiaryComponent,
-    RegisterNavBarComponent,
-    PersonalDetailsComponent,
     LandingPageComponent,
     RegisterComponent,
-    AddressDetailsComponent,
-    AccountDetailsComponent,
-    CredentialDetailsComponent,
     LoginComponent,
     LoginFormComponent,
     LogoutConfirmationDialogComponent,
@@ -60,6 +64,14 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     DashboardComponent,
     NavComponent,
     UserProfileComponent
+    MainNavComponent,
+    ChartComponent,
+    DonateCovidComponent,
+    ContactUsComponent,
+    CustomercareComponent,
+    CcDashComponent,
+    CcMainNavComponent,
+    FundstransferComponent
   ],
 
   imports: [
@@ -81,6 +93,12 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     MatDatepickerModule,
     MatSelectModule,
     MatButtonModule,
+    LayoutModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatListModule,
+    MatSnackBarModule,
+    MatTableModule,
   ],
 
   providers: [],

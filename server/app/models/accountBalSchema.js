@@ -2,13 +2,11 @@
 const mongoose = require('mongoose');
 const shortid = require('shortid');
 const Schema = mongoose.Schema;
-const userSchema = require("./user").UserSchema;
+
 /**
  * Mongoose schema for todolist object.
  */
 let AccBalSchema = new Schema({
-
-    user: userSchema,
 
     AccountNumber: {
         type: String,
@@ -48,4 +46,7 @@ AccBalSchema.set('toJSON', {
     virtuals: true
 });
 
-module.exports = mongoose.model('accounts', AccBalSchema);
+const Account = mongoose.model("accounts", AccBalSchema);
+
+module.exports = {Account, AccBalSchema};
+
