@@ -25,34 +25,37 @@ export class FundstransferComponent implements OnInit {
   panelOpenState = false;
 
   ngOnInit(): void {
-
-    this.initializeTable();
-    //this.getbeneficiary();
+    this.initializeTable();    
   }
 
   initializeTable() {
     let self = this;
-    //console.log(this.store);
     this.store.subscribe(val => self.auth = val);
     this.user = this.auth.auth.status.user;
-    console.log("funds" + this.user.account.AccountNumber);
   }
 
-
+  // pass the transaction model to FundstransferService for crediting the amount
   credit(transaction : Transaction): void{
     this.transaction.ownerAccountNumber =  this.user.account.AccountNumber;
-    //transaction.ownerAccountNumber = this.user.account.AccountNumber;
-    //this.rest.creditAmount(transaction);
-    // this.router.navigate(['/login', {}]);
-
+    
     console.log(transaction);
     this.rest.creditAmount(transaction).subscribe((data) => {
-      this.displayText = transaction.ownerAccountNumber + ` has been credited successfully by USD {transaction.amount}`;
-      console.log(transaction);
+      this.displayText = transaction.ownerAccountNumber + ` has been credited successfully by USD ${transaction.amount}`;
     }, (err) => {
       console.log(err);
     });
+  }
 
+  // pass the transaction model to FundstransferService for debiting the amount
+  debit(transaction : Transaction): void{
+    this.transaction.ownerAccountNumber =  this.user.account.AccountNumber;
+    
+    console.log(transaction);
+    this.rest.debitAmount(transaction).subscribe((data) => {
+      this.displayText = transaction.ownerAccountNumber + ` has been debited successfully by USD ${transaction.amount}`;
+    }, (err) => {
+      console.log(err);
+    });
   }
 
   // the confirmation modal

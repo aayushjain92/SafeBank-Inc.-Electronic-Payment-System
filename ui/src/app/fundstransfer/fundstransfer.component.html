@@ -28,9 +28,31 @@
                             <br>
 
                             <mat-action-row>
-                                <button class="deleteBtn" (click)="credit(transaction)">Credit</button>
+                                <button class="deleteBtn" (click)="credit(transaction)">Deposit</button>
                             </mat-action-row>
                         </mat-expansion-panel>
+
+                        <!-- to debit the amount -->
+                        <mat-expansion-panel>
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    <span>Withdraw Money</span>
+                                </mat-panel-title>
+                                <mat-panel-description>
+                                </mat-panel-description>
+                            </mat-expansion-panel-header>
+
+                            <label for="amount">Amount:</label>
+                            <input class="textb " type="text" name=amount id="amount"
+                                [(ngModel)]="transaction.amount" required="required">
+                            <br>
+                            <br>
+
+                            <mat-action-row>
+                                <button class="deleteBtn" (click)="debit(transaction)">Withdraw</button>
+                            </mat-action-row>
+                        </mat-expansion-panel>
+
 
                         <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
                         </mat-expansion-panel>
