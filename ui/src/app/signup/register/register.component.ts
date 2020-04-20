@@ -92,6 +92,7 @@ export class RegisterComponent implements OnInit {
         // Validators.pattern("[0-9 ]{10}")
       ],
       emailIDCtrl : ['', Validators.required],
+      dobCtrl: []
     });
     this.addressFormGroup = this._formBuilder.group({
       addressLine1Ctrl: ['', Validators.required],
@@ -126,7 +127,7 @@ export class RegisterComponent implements OnInit {
     this.user.lastName = this.personalFormGroup.get('lastNameCtrl').value;
     this.user.phoneNumber = this.personalFormGroup.get('phoneNumberCtrl').value;
     this.user.email = this.personalFormGroup.get('emailIDCtrl').value;
-    this.user.dob = new Date();
+    this.user.dob = this.personalFormGroup.get('dobCtrl').value;
     //Address fields
     this.user.addressLine1 = this.addressFormGroup.get('addressLine1Ctrl').value;
     this.user.addressLine2 = this.addressFormGroup.get('addressLine2Ctrl').value;

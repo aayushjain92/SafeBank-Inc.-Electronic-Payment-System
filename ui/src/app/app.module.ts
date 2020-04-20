@@ -35,6 +35,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 import { MainNavComponent } from './main-nav/main-nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -49,6 +50,8 @@ import { CcDashComponent } from './cc-dash/cc-dash.component';
 import { CcMainNavComponent } from './cc-main-nav/cc-main-nav.component';
 import {MatTableModule} from '@angular/material/table';
 import {MatSortModule} from '@angular/material/sort';
+import { MatDialogModule } from '@angular/material/dialog';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -61,6 +64,7 @@ import {MatSortModule} from '@angular/material/sort';
     LogoutConfirmationDialogComponent,
     TransactiontableComponent,
     DashboardComponent,
+    UserProfileComponent,
     MainNavComponent,
     ChartComponent,
     DonateCovidComponent,
@@ -97,6 +101,7 @@ import {MatSortModule} from '@angular/material/sort';
     MatSnackBarModule,
     MatTableModule,
     MatSortModule,
+    MatDialogModule
   ],
 
   providers: [],

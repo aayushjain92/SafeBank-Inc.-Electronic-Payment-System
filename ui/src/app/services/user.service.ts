@@ -17,5 +17,9 @@ export class UserService {
     return this.http.get<Array<User>>(API_URL + 'users');
   }
 
-
+  updateUser(user: User): Observable<User> {
+    console.log("inside user-service in ui");
+    console.log("url in updateUSer: "+ API_URL + 'users/' + user.email);
+    return this.http.put<User>(API_URL + 'users/' + user.email, user);
+  }
 }
