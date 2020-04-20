@@ -61,38 +61,51 @@ export class AddbeneficiaryComponent implements OnInit {
 
   // function to check the routing number
   check() {
-    // calling external api for verifying routing number
-    const endpoint = 'https://www.routingnumbers.info/api/name.json?rn=';
-    this.routingNumber = this.routingNumber;
+    const userRoutingValue = (<HTMLInputElement>document.getElementById("routingNumber")).value;
+    // check if roouting number is of Exterminator bank
+    if (userRoutingValue === "EX112223") {
+      this.routingNumberCheck = true;
+      this.enterVal = false;
+    } else {
+      this.routingNumberCheck = false;
+      this.enterVal = true;
+      // calling external api for verifying routing number
+      const endpoint = 'https://www.routingnumbers.info/api/name.json?rn=';
+      this.routingNumber = this.routingNumber;
 
-    this.http.get(`${endpoint + this.routingNumber}`)
-      .subscribe(data => {
-        this.routing = data;
-        console.log(this.routing)
+      this.http.get(`${endpoint + this.routingNumber}`)
+        .subscribe(data => {
+          this.routing = data;
+          console.log(this.routing)
 
-        // status code filtered and then allowed user to register or add a beneficiary
-        if (this.routing["code"] === 200) {
-          this.routingNumberCheck = true;
-          this.enterVal = false;
-          console.log("success");
-        } else if (this.routing["code"] === 404) {
-          this.routingNumberCheck = false;
-          this.enterVal = true;
-          this.error = "Incorrect Routing Number";
-          let timeoutId = setTimeout(() => {
+          // status code filtered and then allowed user to register or add a beneficiary
+          if (this.routing["code"] === 200) {
+            this.routingNumberCheck = true;
             this.enterVal = false;
-          }, 2000);
-          console.log("fail");
-        } else if (this.routing["code"] === 400) {
-          this.routingNumberCheck = false;
-          this.enterVal = true;
-          this.error = "Routing Number should be 9 digits";
-          let timeoutId = setTimeout(() => {
-            this.enterVal = false;
-          }, 3000);
-        }
+            console.log("success");
+          } else if (this.routing["code"] === 404) {
+            this.routingNumberCheck = false;
+            this.enterVal = true;
+            this.error = "Incorrect Routing Number";
+            setTimeout(() => {
+              this.enterVal = false;
+              this.error = "";
+            }, 2000);
+            console.log("fail");
+          } else if (this.routing["code"] === 400) {
+            this.routingNumberCheck = false;
+            this.enterVal = true;
+            this.error = "Routing Number should be 9 digits";
+            setTimeout(() => {
+              this.enterVal = false;
+              this.error = "";
+            }, 3000);
+          }
 
-      });
+        });
+
+
+    }
 
 
   }

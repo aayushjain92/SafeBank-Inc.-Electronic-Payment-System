@@ -25,7 +25,7 @@ export class BeneficiaryComponent implements OnInit {
   benefeciary: Beneficiary;
   routingNumber: number;
 
-  constructor(public rest: BeneficiaryService, private route: ActivatedRoute, 
+  constructor(public rest: BeneficiaryService, private route: ActivatedRoute,
     private router: Router, private store: Store<fromAuth.State>
   ) { }
   user: User;
