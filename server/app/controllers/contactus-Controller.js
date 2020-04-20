@@ -54,6 +54,24 @@ exports.save = (request, response) => {
         .catch(renderErrorResponse(response));
 };
 
+/**
+ * Sets response for item search and return all.
+ *
+ * @param request
+ * @param response
+*/
+exports.list = (request, response) => {
+    const params = {};
+    const promise = contactusService.SearchAll(params);
+    const result = (items) => {
+        response.status(200);
+        response.json(items);
+    };
+    promise
+        .then(result)
+        .catch(renderErrorResponse(response));
+};
+
 
 // /**
 //  * Throws error if error object is present.

@@ -4,10 +4,12 @@ const mongoose = require('mongoose'),
 
 
 // seach for all the ContactUs
-exports.Search = (params) => {
+exports.SearchAll = (params) => {
     const promise = ContactUs.find(params).exec();
     return promise;
 };
+
+
 
 /**
  * Saves the new ContactUs object.
@@ -18,3 +20,4 @@ exports.save = (contactus) => {
     const newContactUs = new ContactUs(contactus);
     return newContactUs.save();
 };
+

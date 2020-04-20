@@ -13,10 +13,12 @@ module.exports = (app) => {
     const loginRoutes = require('./routes/login-routes');
     const accountRoutes = require('./routes/account-routes');
     const contactusRoutes = require('./routes/contactus-routes');
+    const userRoutes = require('./routes/user-routes');
     transactRoutes(app);
     beneficiaryRoutes(app);
     registerRoutes(app);
     loginRoutes(app);
     accountRoutes(app);
     contactusRoutes(app);
+    userRoutes(app);
 };

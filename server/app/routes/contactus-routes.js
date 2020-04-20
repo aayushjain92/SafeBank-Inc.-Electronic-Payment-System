@@ -6,6 +6,6 @@ const contactUsController = require('../controllers/contactus-Controller');
 
 module.exports = (app) => {
     app.route('/complaints')
-        // .get(contactUsController.list)
+        .get(contactUsController.list)
         .post(contactUsController.save);
 };
