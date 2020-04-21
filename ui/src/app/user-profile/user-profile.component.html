@@ -192,7 +192,9 @@
             <mat-form-field>
                  <!-- Social Security Number -- readonly -->
                 <mat-label>Social Security Number</mat-label>
-                <input matInput formControlName= "ssn" readonly>
+                <input matInput formControlName= "ssn" readonly [type]="hideSSN ? 'password' : 'text'">
+                <!--icon to show values if hidden-->
+                <mat-icon matSuffix (click)="hideSSN = !hideSSN">{{hideSSN ? 'visibility_off' : 'visibility'}}</mat-icon>
             </mat-form-field>
         </form>
         </mat-expansion-panel>

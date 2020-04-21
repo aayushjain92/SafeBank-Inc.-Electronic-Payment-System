@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators, FormControl} from '@angular/forms';
 import { User } from 'src/app/model/user';
+import { Account } from 'src/app/model/account.model';
 import { Store } from '@ngrx/store';
 import * as fromAuth from './../store/reducers/login.reducer';
 import { Router } from '@angular/router';
@@ -39,7 +40,7 @@ export class UserProfileComponent implements OnInit {
       //Form Controllers
       firstNameCtrl: ['', Validators.required],
       lastNameCtrl: ['', Validators.required],
-      phoneNumberCtrl: ['', [Validators.required, Validators.minLength, Validators.pattern("^[0-9]*$")]],
+      phoneNumCtrl: ['', [Validators.required, Validators.minLength, Validators.pattern("^[0-9]*$")]],
       emailIDCtrl: ['', [Validators.required, Validators.email]],
       dobCtrl: ['', [Validators.required]]
     });
@@ -107,6 +108,8 @@ export class UserProfileComponent implements OnInit {
   get passwordInput() { return this.credentialsFormGroup.get('password'); } 
   get ssnInput() { return this.ssnFormGroup.get('ssn'); } 
 
+  account = new Account();
+
   updateUser(){
     this.user = new User();
     //Personal info
@@ -130,18 +133,15 @@ export class UserProfileComponent implements OnInit {
     //Account Details
     //setting existing values to new object
     this.user.ssn = this.ssnFormGroup.getRawValue().ssn;
-    this.user.account.AccountNumber = this.ssnFormGroup.getRawValue().accNumCtrl;
-    this.user.account.routingNumber = this.ssnFormGroup.getRawValue().routingNumCtrl;
+    this.account.AccountNumber = this.ssnFormGroup.getRawValue().accNumCtrl;
+    this.account.routingNumber = this.ssnFormGroup.getRawValue().routingNumCtrl;
     this.user.accountType =  this.ssnFormGroup.getRawValue().accTypeCtrl;
+    this.user.account = this.account;
 
     // base64 encoded password
     this.user.password = btoa(this.credentialsFormGroup.get('password').value);
 
     //update user service call
-    this.service.updateUser(this.user).subscribe(
-      (user: User) => {
-        this.router.navigate(['/dashboard']);
-      }
-    );
+    this.service.updateUser(this.user);
   }
 }
