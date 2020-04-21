@@ -36,7 +36,6 @@ export class UserService {
       console.log("user in update user: "+ JSON.stringify(user));
       console.log("store in update user: "+ this.store);
       this.store.dispatch(AuthActions.updateUser({user}));
-        this.router.navigate(['/dashboard']);
     });
 }
 }
