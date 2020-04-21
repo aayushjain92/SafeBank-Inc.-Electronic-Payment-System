@@ -45,6 +45,7 @@ export class DonateCovidComponent implements OnInit {
   debit(transaction : Transaction): void{
     this.transaction.ownerAccountNum =  this.user.account.AccountNumber;
     this.transaction.category = 'Donation';
+    this.transaction.type = 'Debit';
     console.log(transaction);
     this.rest.debitAmount(transaction).subscribe((data) => {
       this.openSnackBar(transaction.ownerAccountNum + ` 
