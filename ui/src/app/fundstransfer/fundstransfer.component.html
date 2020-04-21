@@ -222,7 +222,7 @@
                                     <mat-label>
                                         <mat-icon class="matbtn">attach_money</mat-icon>Amount
                                     </mat-label>
-                                    <input matInput [formControl]="beneficiaryValidateForm.get('amountFormControl')" type="number" name=amount id="amount"
+                                    <input matInput [formControl]="beneficiaryValidateForm.get('amountFormControl')" name=amount id="amount"
                                         [(ngModel)]="transaction.amount" required="required">
                                     <mat-error *ngIf="beneficiaryValidateForm.get('amountFormControl').hasError('pattern') && !beneficiaryValidateForm.get('amountFormControl').hasError('required')">
                                         Please enter a valid non-negative amount with maximum 2 decimal places and no leading zeros
