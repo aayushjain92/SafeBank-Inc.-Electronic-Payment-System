@@ -63,7 +63,7 @@ export class AddbeneficiaryComponent implements OnInit {
   check() {
     const userRoutingValue = (<HTMLInputElement>document.getElementById("routingNumber")).value;
     // check if roouting number is of Exterminator bank
-    if (userRoutingValue === "EX112223") {
+    if (userRoutingValue === "111222333") {
       this.routingNumberCheck = true;
       this.enterVal = false;
     } else {

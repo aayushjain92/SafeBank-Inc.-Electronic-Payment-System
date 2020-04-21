@@ -41,13 +41,14 @@
         *ngIf="isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span>
-        <button type="button" mat-button (click)="drawer.toggle()">
-          Welcome to SafeBank
-        </button>
-      </span>
-      <span class="spacer"></span>
-      <div>
+
+      <!-- <button type="button" mat-button>
+          SafeBank
+        </button> -->
+      <div class="safebankheading">SafeBank</div>
+
+
+      <div class="logout-btn">
         <a routerLink="/logout">Logout</a>
       </div>
     </mat-toolbar>

@@ -1,17 +1,27 @@
 .tablestyle{
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     transition: 0.3s;
+    background-color: #f8f8f9;
     }
 
 // table enclosed in grid
     .wrapper{
         display: grid;
-        grid-template-columns: repeat(1, 1fr);
+        grid-template-columns: repeat(2, 1fr);
         grid-column-gap: 64px;
-        margin-left: 622px;
-        margin-right: 57px;
+        margin-left: 17%;
+        margin-right: 31px;
+        /* max-width: 595px; */
+        float: right;
+    
     }
 
     .generatatepdf{
-        margin-left: 10px
+        margin-left: 10px;
+    }
+
+    .backgroundimage{
+        background-image: url('/assets/Dashboard_pic.jpg');
+        background-size: cover;
+        border-radius: 12px;
     }

@@ -8,11 +8,12 @@
         display: grid;
     grid-template-columns: repeat(1, 1fr);
     grid-column-gap: 64px;
-    margin-left: 622px;
+    margin-left: 30%;
     margin-right: 57px;
     position: relative;
     padding-top: 36px;
     height: 220px;
-    width: 684px;
-
+    /* width: 684px; */
+    float: right;
+    width: 565px;
     }

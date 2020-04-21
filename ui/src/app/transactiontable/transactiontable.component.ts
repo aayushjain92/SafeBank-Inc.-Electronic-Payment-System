@@ -30,6 +30,7 @@ export class TransactiontableComponent implements OnInit {
   ngOnInit(): void {
     this.initializeTableTxn();
     this.getbeneficiary();
+
   }
 
 
@@ -46,7 +47,11 @@ export class TransactiontableComponent implements OnInit {
 
     this.rest.getTransactionbyaccountNumber(this.user.account.AccountNumber)
       .subscribe(data => {
-        this.transactions = data;
+        this.transactions = data.map(b => {
+          b.transactionDate = b.transactionDate.split("T")[0]
+          return b;
+        });
+
 
       });
 
@@ -69,10 +74,14 @@ export class TransactiontableComponent implements OnInit {
     doc.autoTable({
       head: [['Account Number', 'Type', 'Category', 'Amount($)', 'Transaction Date']],
       body: pdf.map(transaction => {
-        return [transaction["ownerAccountNum"], transaction["type"], transaction["category"], transaction["amount"], transaction["transactionDate"]]
+        return [transaction["ownerAccountNum"], transaction["type"], transaction["category"], transaction["amount"], transaction["transactionDate"].split("T")[0]]
       })
     })
 
     doc.save("Transaction Details");
   }
+
+
+
+
 }
