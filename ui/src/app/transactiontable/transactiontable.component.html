@@ -1,9 +1,5 @@
 <!-- table for 5 txns details -->
-<div class="wrapper">
-    <div class="backgroundimage">
-        <app-expense-chart></app-expense-chart>
-    </div>
-
+<div class="parent-wrapper">
     <div class="tablestyle">
         <table class="table table-hover">
             <thead class="text-warning">
@@ -30,14 +26,16 @@
             </tbody>
 
         </table>
-        <div>
+        <div class="footer-viewpdf">
 
-            <a class="generatatepdf" href="javascript:void(0);" (click)='getpdf()'>To View Detailed
-                Report(Generate PDF)</a>
+            <a class="generate-pdf" href="javascript:void(0);" (click)='getpdf()'>To View Detailed
+                Report (Generate PDF)</a>
 
         </div>
     </div>
-
+    <div class="backgroundimage">
+        <app-expense-chart></app-expense-chart>
+    </div>
 
 
 </div>
