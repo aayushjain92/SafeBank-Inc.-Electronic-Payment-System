@@ -21,6 +21,8 @@ export class RegisterComponent implements OnInit {
   addressFormGroup: FormGroup;
   credentialsFormGroup: FormGroup;
   ssnFormGroup: FormGroup;
+  minDate = new Date(1900, 0, 1);
+  maxDate =  new Date(new Date().setDate(new Date().getDate()-1))
 
   states: State[] = [
     {value: 'AL', viewValue: 'Alabama'},
@@ -86,26 +88,25 @@ export class RegisterComponent implements OnInit {
     this.personalFormGroup = this._formBuilder.group({
       firstNameCtrl : ['', Validators.required],
       lastNameCtrl : ['', Validators.required],
-      phoneNumberCtrl : ['', Validators.required, 
-        // Validators.maxLength(10), 
-        // Validators.minLength(10),
-        // Validators.pattern("[0-9 ]{10}")
-      ],
-      emailIDCtrl : ['', Validators.required],
-      dobCtrl: []
+      phoneNumberCtrl : ['', [Validators.required, Validators.minLength, Validators.pattern("^[0-9]*$")]],
+      emailIDCtrl : ['', [Validators.required, Validators.email]],
+      dobCtrl: ['', [Validators.required]]
     });
     this.addressFormGroup = this._formBuilder.group({
       addressLine1Ctrl: ['', Validators.required],
       addressLine2Ctrl: ['', Validators.required],
       cityCtrl: ['', Validators.required],
       stateCtrl: ['', Validators.required],
-      zipCtrl: ['', Validators.required]
+      zipCtrl: ['', [Validators.required, Validators.pattern("^[0-9]*$"), Validators.minLength(5), Validators.maxLength(5)]]
     });
+
     this.credentialsFormGroup = this._formBuilder.group({
-      password: new FormControl('', [Validators.required, Validators.minLength(9)])
+      password: new FormControl('', [Validators.required, 
+      Validators.pattern("(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}")])
     });
+
     this.ssnFormGroup = this._formBuilder.group({
-      ssn: new FormControl('', [Validators.required] )
+      ssn: new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$")] )
     })
     
   }
