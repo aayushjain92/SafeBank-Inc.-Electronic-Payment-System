@@ -5,7 +5,6 @@ import { Store } from '@ngrx/store';
 import * as fromAuth from './../store/reducers/login.reducer';
 import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
-import { threadId } from 'worker_threads';
 
 @Component({
   selector: 'app-user-profile',
