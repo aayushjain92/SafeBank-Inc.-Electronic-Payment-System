@@ -99,7 +99,19 @@ export class FundstransferComponent implements OnInit {
     this.transaction.type = "Debit";
 
     this.rest.debitAmount(transaction).subscribe((data) => {
-      this.displayText = transaction.ownerAccountNum + ` has been debited successfully by USD ${transaction.amount}`;
+      if(data instanceof Transaction){
+        this.displayText = transaction.ownerAccountNum + ` has been debited successfully by USD ${transaction.amount}`;
+      }else{
+        const obj = JSON.parse(JSON.stringify(data));
+        if(obj.status = 401){
+          if(obj.message == "Account doesnt exist or Insufficient Funds"){
+            this.displayText = "Insufficient funds, please try changing the amount to a lesser value";
+          }
+          else{
+            this.displayText = obj.message;
+          }
+        }
+      }  
     }, (err) => {
       console.log(err);
     });
@@ -115,17 +127,53 @@ export class FundstransferComponent implements OnInit {
       });
   }
 
-    // pass the transaction model to FundstransferService for transferring the amount to another account
-    transfer(transaction : Transaction): void{
-      this.transaction.category = "N.A.";
-      this.transaction.type = "Transfer";
+    // transferring amount to account in the same bank 
+    transferInSameBank(transaction : Transaction): void{
+      this.transaction.category = "TRANSFER";
 
-      this.rest.transferAmount(transaction).subscribe((data) => {
-        this.displayText = `Amount transferred successfully!`;
+      this.rest.transferAmountSameBank(transaction).subscribe((data) => {
+        if(data instanceof Transaction){
+          this.displayText = `Amount transferred successfully!`;
+        }else{
+          const obj = JSON.parse(JSON.stringify(data));
+          if(obj.status = 401){
+            if(obj.message == "Account doesnt exist or Insufficient Funds"){
+              this.displayText = "Insufficient funds, please try changing the amount to a lesser value";
+            }
+            else{
+              this.displayText = obj.message;
+            }
+          }
+        }  
+        
       }, (err) => {
         console.log(err);
       });
     }
+
+    // transferring amount to account in a different bank 
+    transferInOtherBank(transaction : Transaction): void{
+      this.transaction.category = "TRANSFER";
+      this.transaction.type = "Debit"; 
+      this.rest.transferAmountOtherBank(transaction).subscribe((data) => {
+        if(data instanceof Transaction){
+          this.displayText = `Amount transferred successfully!`;
+        }else{
+          const obj = JSON.parse(JSON.stringify(data));
+          if(obj.status = 401){
+            if(obj.message == "Account doesnt exist or Insufficient Funds"){
+              this.displayText = "Insufficient funds, please try changing the amount to a lesser value";
+            }else{
+              this.displayText = obj.message;
+            }
+          }
+        }  
+        
+      }, (err) => {
+        console.log(err);
+      });
+    }
+
 
   // the confirmation modal
   toggleModal() {

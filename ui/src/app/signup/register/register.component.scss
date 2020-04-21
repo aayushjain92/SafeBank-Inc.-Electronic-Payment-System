@@ -14,3 +14,14 @@ button {
     margin-right: 15px;
 }
 
+.register-image{
+    background-image: url('/assets/apple-background.jpg');
+    background-size: cover;
+    border-radius: 12px;
+    
+}
+.mat-stepper-horizontal{
+    background-image: url('/assets/apple-background.jpg');
+    background-size: cover;
+    height:100vh;
+}

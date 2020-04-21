@@ -51,6 +51,7 @@ import { CcMainNavComponent } from './cc-main-nav/cc-main-nav.component';
 import {MatTableModule} from '@angular/material/table';
 import {MatSortModule} from '@angular/material/sort';
 import { MatDialogModule } from '@angular/material/dialog';
+import { ExpenseChartComponent } from './expense-chart/expense-chart.component';
 
 @NgModule({
   declarations: [
@@ -72,7 +73,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     CustomercareComponent,
     CcDashComponent,
     CcMainNavComponent,
-    FundstransferComponent
+    FundstransferComponent,
+    ExpenseChartComponent
   ],
 
   imports: [

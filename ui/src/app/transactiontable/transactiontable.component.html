@@ -1,5 +1,8 @@
 <!-- table for 5 txns details -->
 <div class="wrapper">
+    <div class="backgroundimage">
+
+    </div>
     <div class="tablestyle">
         <table class="table table-hover">
             <thead class="text-warning">
@@ -14,7 +17,7 @@
 
             <tbody>
                 <ng-container *ngFor="let txns of transactions">
-                    <tr class>
+                    <tr>
                         <td>{{txns.transactionDate}}</td>
                         <td>{{txns.ownerAccountNum}}</td>
                         <td>{{txns.type}}</td>
@@ -22,11 +25,18 @@
                         <td>{{txns.amount}}</td>
                     </tr>
                 </ng-container>
-                <a class="generatatepdf" href="javascript:void(0);" (click)='getpdf()'>GeneratePdf</a>
+
             </tbody>
 
         </table>
+        <div>
+
+            <a class="generatatepdf" href="javascript:void(0);" (click)='getpdf()'>To View Detailed
+                Report(Generate PDF)</a>
+
+        </div>
     </div>
+
 
 
 </div>

@@ -1,5 +1,5 @@
 'use strict';
-const {customAlphabet} = require('nanoid') ;
+const { customAlphabet } = require('nanoid');
 
 const mongoose = require('mongoose');
 const nanoid = customAlphabet('1234567890abcdefghijklmnopqrstuvwxyz', 9)
@@ -12,25 +12,25 @@ let AccBalSchema = new Schema({
 
     AccountNumber: {
         type: String,
-        default: function getNanoId(){
-           let accNum = nanoid()
-           return accNum.toUpperCase();
+        default: function getNanoId() {
+            let accNum = nanoid()
+            return accNum.toUpperCase();
         }
     },
-    
-    CurrentBalance: { 
-        type : Number,
+
+    CurrentBalance: {
+        type: Number,
         default: 0,
     },
 
-    routingNumber :{
-        type: String,
-        default: "EX112223"
+    routingNumber: {
+        type: Number,
+        default: "111222333"
     },
 
     status: {
         type: String,
-        enum : ['active','inactive', 'deleted'],
+        enum: ['active', 'inactive', 'deleted'],
         default: 'active'
     },
 },
@@ -50,5 +50,5 @@ AccBalSchema.set('toJSON', {
 
 const Account = mongoose.model("accounts", AccBalSchema);
 
-module.exports = {Account, AccBalSchema};
+module.exports = { Account, AccBalSchema };
 

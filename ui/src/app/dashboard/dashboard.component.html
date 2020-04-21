@@ -1,12 +1,31 @@
 <app-main-nav>
 </app-main-nav>
-<div class="wrapper">
+<div class="txn-wrapper">
     <div class="tablestyle">
-        <p>Welcome !! {{user.firstName}}</p>
+        <div class="profile-wrapper">
+            <span class="profile-pic">
+                <img src="assets/8finished.png" alt="AVATAR">
+            </span>
+            <div class="welcome">Welcome back, {{user.firstName}}!!
+            </div>
+
+        </div>
+
+        <div class="balance">
+            <div>Total Balance</div>
+            <div>
+                ${{accountDetails? accountDetails.CurrentBalance : "" }}
+            </div>
+        </div>
+        <div style="clear: both;"></div>
+
+
+
     </div>
 </div>
 
+
 <app-transactiontable></app-transactiontable>
 <app-chart></app-chart>
-
+<app-expense-chart></app-expense-chart>
 

@@ -1,6 +1,7 @@
 <!-- <app-register-nav-bar [user]="user" [button]="button"></app-register-nav-bar> -->
 
 <mat-horizontal-stepper [linear]="isLinear" #stepper>
+
   <!--Personal Details form-->
   <mat-step [stepControl]="personalFormGroup">
     <mat-card class="center-content">
@@ -105,6 +106,7 @@
       </mat-card-content>
     </mat-card>
   </mat-step>
+
 
   <!--Address details form-->
   <div>
@@ -309,7 +311,6 @@
         <mat-card-content>
           <!-- last tab with submit reset options-->
           <ng-template matStepLabel>Done</ng-template>
-
           <p>You are now done.</p>
           <br>
           <div>
