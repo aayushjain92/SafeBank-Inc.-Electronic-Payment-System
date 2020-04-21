@@ -191,6 +191,7 @@ export class FundstransferComponent implements OnInit {
         console.log(err);
       });
     }
+    
   //Snack bar to show the successs/error message
   openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action, {
