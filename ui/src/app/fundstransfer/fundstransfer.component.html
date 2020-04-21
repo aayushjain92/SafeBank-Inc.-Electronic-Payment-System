@@ -139,7 +139,7 @@
                                             {{ beneficiary.firstName + ' ' + beneficiary.lastName }}
                                         </mat-option> -->
                                         <ng-container *ngFor="let beneficiary of beneficiaries">
-                                            <mat-option *ngIf="beneficiary.routingNumber==='111222333'" value={{beneficiary.accountNumber}}>
+                                            <mat-option *ngIf="beneficiary.routingNumber===111222333" value={{beneficiary.accountNumber}}>
                                                 {{ beneficiary.firstName + ' ' + beneficiary.lastName }}
                                             </mat-option> 
                                         </ng-container>
@@ -203,7 +203,7 @@
                                             {{ beneficiary.firstName + ' ' + beneficiary.lastName }}
                                         </mat-option> -->
                                         <ng-container *ngFor="let beneficiary of beneficiaries">
-                                            <mat-option *ngIf="beneficiary.routingNumber!=='111222333'" value={{beneficiary.accountNumber}}>
+                                            <mat-option *ngIf="beneficiary.routingNumber!==111222333" value={{beneficiary.accountNumber}}>
                                                 {{ beneficiary.firstName + ' ' + beneficiary.lastName }}
                                             </mat-option> 
                                         </ng-container>
@@ -225,7 +225,7 @@
                                     <input matInput [formControl]="beneficiaryValidateForm.get('amountFormControl')" type="number" name=amount id="amount"
                                         [(ngModel)]="transaction.amount" required="required">
                                     <mat-error *ngIf="beneficiaryValidateForm.get('amountFormControl').hasError('pattern') && !beneficiaryValidateForm.get('amountFormControl').hasError('required')">
-                                        Please enter a valid amount
+                                        Please enter a valid non-negative amount with maximum 2 decimal places and no leading zeros
                                     </mat-error>
                                     <mat-error *ngIf="beneficiaryValidateForm.get('amountFormControl').hasError('required')">
                                         Amount is <strong>required</strong>
