@@ -31,10 +31,9 @@ export class UserService {
   }
 
   updateUser(user: User): void {
-    console.log("inside update user");
+    // console.log("inside update user");
     this.update(user).subscribe((userDetails:User) => {
-      console.log("user in update user: "+ JSON.stringify(user));
-      console.log("store in update user: "+ this.store);
+      // console.log("user in update user: "+ JSON.stringify(user));
       this.store.dispatch(AuthActions.updateUser({user}));
     });
 }

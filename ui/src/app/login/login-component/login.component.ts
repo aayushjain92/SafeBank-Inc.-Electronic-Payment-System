@@ -25,7 +25,6 @@ export class LoginComponent implements OnInit {
 
 
   onSubmit(user : User) {
-    console.log('in login comp parent >>' + user);
     this.loginApi.login(user);
   }
 
