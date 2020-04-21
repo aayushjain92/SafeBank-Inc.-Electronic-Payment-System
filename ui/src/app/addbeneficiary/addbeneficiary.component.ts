@@ -131,8 +131,8 @@ export class AddbeneficiaryComponent implements OnInit {
         this.routing = data;
         // checking if the beneficary already exists
         console.log("this", data);
-        console.log(this.routing.parentAccountNumber);
-        console.log(this.user.account.AccountNumber);
+        // console.log(this.routing.parentAccountNumber);
+        // console.log(this.user.account.AccountNumber);
         if (this.routing != null && this.routing.parentAccountNumber === this.user.account.AccountNumber) {
           console.log("this", data);
           this.beneficiaryCheck = true;
