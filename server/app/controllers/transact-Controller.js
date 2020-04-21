@@ -29,14 +29,15 @@ exports.transfer = async function (request, response) {
         // transfer funds
         await Service.transfer(transaction, ownerAccount, beneficiaryAccount);
 
-        // logging transaction 
-        const tx = await Service.save(transaction);
+        // logging transaction 1 (the owner transfers the amount)
+        // logging transaction 2 (the beneficiary receives the amount)
+        const tx = await Service.saveSameBankTransferTransactions(transaction);
         return response.json({
             status: 200,
-            message: "transaction successful",
+            message: "Amount transferred successfully!",
             data: tx
         });
-
+        
 
     } catch (error) {
         return response.json({
@@ -69,7 +70,7 @@ exports.transferInOtherBank = async function (request, response) {
         const tx = await Service.save(transaction);
         return response.json({
             status: 200,
-            message: "transaction successful",
+            message: "Amount transferred successfully!",
             data: tx
         });
 
@@ -104,7 +105,7 @@ exports.credit = async function (request, response) {
         const tx = await Service.save(transaction);
         return response.json({
             status: 200,
-            message: "transaction successful",
+            message: "Transaction successful!",
             data: tx
         });
 
@@ -139,7 +140,7 @@ exports.debit = async function (request, response) {
         const tx = await Service.save(transaction);
         return response.json({
             status: 200,
-            message: "transaction successful",
+            message: "Transaction successful!",
             data: tx
         });
 
