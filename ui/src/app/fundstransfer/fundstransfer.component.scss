@@ -3,11 +3,10 @@ $cambo: 'Cambo', serif;
 $f400: 400;
 $gray: #f7f7f7;
 
+
 .crumb{
     padding-right: 48px;
     float: right;
-    
-        
 }
 // Add a beneficary link
 .anav:link {
@@ -21,7 +20,8 @@ $gray: #f7f7f7;
       }
 
 .heading{
-    color:blue;
+    color:white;
+    font-size: 30px;
 
 }
 .mat-icon {
@@ -36,13 +36,16 @@ $gray: #f7f7f7;
 .main{
 
     width: 100%;
-    
+    background-image: url('/assets/fundtransfer.jpg');
+    background-size: cover;
+    // opacity: 0.5;
+    height:100vh;
+
 }
 
-.container{
-    // display: flex;
-    
 
+.container{
+    // display: flex; 
     .mainContent {
         padding: 100px 10px 30px;
         box-sizing:border-box;
@@ -68,10 +71,9 @@ label{
 
     .left-section {
         
-        border-right: 1px solid #d7d7d7;
         min-height: 445px;
         padding-left: 96px;
-        #fundsmanagement {
+        .fundsmanagement {
             > div {
                 border-bottom: 2px solid #464646;
                 padding-bottom: 20px;
@@ -240,3 +242,5 @@ label{
 .example-headers-align .mat-form-field{
     margin-left: 8px;
   }
+
+
