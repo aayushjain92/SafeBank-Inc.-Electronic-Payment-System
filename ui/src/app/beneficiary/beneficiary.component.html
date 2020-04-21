@@ -2,6 +2,7 @@
 
 </app-main-nav>
 
+
 <div id="main" class="main">
 
     <!-- main accordion section -->
@@ -10,6 +11,7 @@
         <div id="mainContent" class="mainContent">
 
             <div class="left-section">
+
                 <div class="crumb">
                     <a class="anav anavl" [routerLink]="['/beneficiaries/add']" routerLinkActive="router-link-active">
                         <mat-icon class="icon">person_add</mat-icon>Add
@@ -18,6 +20,13 @@
 
                 <div id="todoLists">
                     <h3 class="heading">{{title}}</h3>
+                    <!-- display msg for the new user or no beneficaries  -->
+                    <div *ngIf="beneficiaries?.length== 0">
+                        <div class=" alert alert-info">
+                            Please Click on <strong>Add</strong> a new Beneficiary link on top right
+                        </div>
+                    </div>
+
 
                     <div *ngFor="let beneficiary of beneficiaries">
                         <mat-accordion>
@@ -97,3 +106,5 @@
     </div>
 
 </div>
+
+<app-footer></app-footer>

@@ -52,6 +52,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatSortModule} from '@angular/material/sort';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ExpenseChartComponent } from './expense-chart/expense-chart.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -74,7 +75,8 @@ import { ExpenseChartComponent } from './expense-chart/expense-chart.component';
     CcDashComponent,
     CcMainNavComponent,
     FundstransferComponent,
-    ExpenseChartComponent
+    ExpenseChartComponent,
+    FooterComponent
   ],
 
   imports: [
