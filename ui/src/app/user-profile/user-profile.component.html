@@ -1,8 +1,10 @@
-<app-main-nav>
+<!-- Nav Bar -->
+<app-main-nav></app-main-nav>
 
-</app-main-nav>
+<!-- User Profile -->
 <div class="center-content">
-    <mat-accordion #profile>
+    <mat-accordion>
+        <!-- Expansion panel for personal info -->
         <mat-expansion-panel class="expansion-panel">
             <mat-expansion-panel-header>
                 <mat-panel-title>
@@ -10,6 +12,7 @@
                 </mat-panel-title>
             </mat-expansion-panel-header>
             <form [formGroup] = "personalFormGroup">
+            <!-- FirstName Field -- read Only -->
             <mat-form-field>
                 <mat-label>First name</mat-label>
                 <input matInput readonly formControlName="firstNameCtrl">
@@ -17,27 +20,43 @@
         
             <br> 
     
+            <!-- Last Name Field -- read Only -->
             <mat-form-field>
                 <mat-label>Last name</mat-label>
                 <input matInput readonly formControlName="lastNameCtrl">
             </mat-form-field>
     
             <br> 
-    
+            
+            <!-- Phone Number Field -- Could be updated -->
             <mat-form-field>
                 <mat-label>Phone Number</mat-label>
-                <input matInput formControlName="phoneNumCtrl" required>
+                <input matInput formControlName="phoneNumCtrl" required maxlength="10" minlength="10">
+                <!--Error if phone number is not provided-->
+              <mat-error *ngIf="personalFormGroup.get('phoneNumCtrl').hasError('required')">
+                Phone Number is required
+              </mat-error>
+              <!--Error if phone number length is less than 10 digits-->
+              <mat-error *ngIf="personalFormGroup.get('phoneNumCtrl').hasError('minlength')">
+                Phone Number should have 10 digits
+              </mat-error>
+              <!--Error if phone number has characters other than digits-->
+              <mat-error *ngIf="personalFormGroup.get('phoneNumCtrl').hasError('pattern')">
+                Phone number should have numbers only
+              </mat-error>
             </mat-form-field>
     
             <br> 
-    
+            
+            <!-- Email id Field -- read Only -->
             <mat-form-field>
                 <mat-label>Email</mat-label>
                 <input matInput readonly formControlName="emailIDCtrl">
             </mat-form-field>
     
             <br> 
-    
+            
+            <!-- Date of Birth Field -- read Only -->
             <mat-form-field>
                 <mat-label>Date of Birth</mat-label>
                 <input matInput readonly formControlName="dobCtrl">
@@ -45,6 +64,7 @@
         </form>
         </mat-expansion-panel>
     
+        <!-- Expansion panel for address info -->
         <mat-expansion-panel class="expansion-panel">
             <mat-expansion-panel-header>
                 <mat-panel-title>
@@ -53,58 +73,90 @@
             </mat-expansion-panel-header>
           
             <br> 
+            <!-- Address Line 1 Field -- could be updated -->
             <form [formGroup] = "addressFormGroup">
             <mat-form-field>
                 <mat-label>Address Line 1</mat-label>
                 <input matInput formControlName="addressLine1Ctrl" required>
+                <!--Error if value is not provided-->
+                <mat-error *ngIf="addressFormGroup.get('addressLine1Ctrl').hasError('required')">
+                    Address is required
+                  </mat-error>
             </mat-form-field>
     
             <br> 
     
+            <!-- Address Line 1 Field -- could be updated -->
             <mat-form-field>
                 <mat-label>Address Line 2</mat-label>
                 <input matInput formControlName="addressLine2Ctrl" required>
+                <!--Error if value is not provided-->
+                <mat-error *ngIf="addressFormGroup.get('addressLine2Ctrl').hasError('required')">
+                    Address is required
+                  </mat-error>
             </mat-form-field>
     
             <br> 
     
+            <!-- City Field -- could be updated -->
             <mat-form-field>
                 <mat-label>City</mat-label>
                 <input matInput formControlName="cityCtrl" required>
+                <!--Error if value is not provided-->
+                <mat-error *ngIf="addressFormGroup.get('cityCtrl').hasError('required')">
+                    City is required
+                  </mat-error>
             </mat-form-field> 
     
             <br> 
     
+            <!-- State Field -- could be updated -->
             <mat-form-field>
                 <mat-label>State</mat-label>
                 <input matInput formControlName="stateCtrl" required>
+                <!--Error if value is not provided-->
+                <mat-error *ngIf="addressFormGroup.get('stateCtrl').hasError('required')">
+                    State is required
+                  </mat-error>
             </mat-form-field>
     
             <br> 
-    
+
+            <!-- ZipCode Field -- could be updated -->
             <mat-form-field>
                 <mat-label>ZipCode</mat-label>
                 <input matInput formControlName="zipCtrl" required>
+                <!--Error if value is not provided-->
+                <mat-error *ngIf="addressFormGroup.get('zipCtrl').hasError('required')">
+                    Zip Code is required
+                  </mat-error>
             </mat-form-field>
             </form>
         </mat-expansion-panel>
     
+        <!-- Expansion panel for credential info -->
         <mat-expansion-panel class="expansion-panel">
+            <!-- Header -->
             <mat-expansion-panel-header>
                 <mat-panel-title>
                 Credential Details
                 </mat-panel-title>
             </mat-expansion-panel-header>
     
+             <!-- Password Field -- could be updated -->
             <form [formGroup] = "credentialsFormGroup">
             <mat-form-field>
                 <mat-label>Password</mat-label>
-                <input matInput formControlName="password" required>
+                <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" required>
+                <!--Icon to show password if hidden-->
+                <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
             </mat-form-field>
             </form>
         </mat-expansion-panel>
     
+        <!-- Expansion panel for Account info -->
         <mat-expansion-panel class="expansion-panel">
+            <!-- header -->
             <mat-expansion-panel-header>
                 <mat-panel-title>
                     Account Details
@@ -113,21 +165,24 @@
     
             <br> 
             <form [formGroup] = "ssnFormGroup">
+                <!-- Account Number -- readonly -->
             <mat-form-field>
                 <mat-label>Account Number</mat-label>
                 <input matInput formControlName= "accNumCtrl" readonly>
             </mat-form-field>
     
-            <!-- <br> 
+            <br> 
     
             <mat-form-field>
+                 <!-- Account Type -- readonly -->
                 <mat-label>Account Type</mat-label>
                 <input matInput readonly>
-            </mat-form-field> -->
+            </mat-form-field>
     
             <br> 
     
             <mat-form-field>
+                 <!-- Routing Number -- readonly -->
                 <mat-label>Routing Number</mat-label>
                 <input matInput formControlName= "routingNumCtrl" readonly>
             </mat-form-field>
@@ -135,6 +190,7 @@
             <br> 
             
             <mat-form-field>
+                 <!-- Social Security Number -- readonly -->
                 <mat-label>Social Security Number</mat-label>
                 <input matInput formControlName= "ssn" readonly>
             </mat-form-field>
@@ -142,7 +198,7 @@
         </mat-expansion-panel>
         
         <div>  
-            <!-- <button mat-raised-button color="primary" >Back</button> -->
+            <!-- Submit Button -->
             <button mat-raised-button color="primary" (click)="updateUser()">Submit</button>
         </div> 
       </mat-accordion>
