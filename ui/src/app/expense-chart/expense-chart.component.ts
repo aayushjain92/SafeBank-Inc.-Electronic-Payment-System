@@ -71,7 +71,7 @@ export class ExpenseChartComponent implements OnInit {
               emi += transaction.amount;
             } else if (transaction.category == 'Donation') {
               donation += transaction.amount;
-            } else if (transaction.category == 'Travel') {
+            } else if (transaction.category == 'Utility Bills') {
               utilityBills += transaction.amount;
             } else if(transaction.category == 'TRANSFER'){
               transfer += transaction.amount;

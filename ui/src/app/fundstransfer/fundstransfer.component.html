@@ -259,34 +259,10 @@
 
                         <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
                         </mat-expansion-panel>
-
-
                     </mat-accordion>
                 </div>
             </div>
         </div>
     </div>
-</div>
-
-<!-- The Modal -->
-<div id="myModal" class="modal" [ngStyle]="{'display': displayText ? 'block' : 'none' }">
-
-    <!-- Modal content -->
-    <div class="modal-content">
-        <!-- <div class="modal-header">
-            <h4 class="modal-title" id="myModalLabel">Exterminator</h4>
-        </div> -->
-        <div class="header">
-            <img height="40px" width="40px" src="https://www.tanie-konto.pl/wp-content/uploads/idea-bank-logo.jpg">
-        </div>
-        <div class="modal-container">
-            <p>{{displayText}}</p>
-            <div class="crumbl">
-                <a class="deletmod deletmodl" [routerLink]="[]" (click)="toggleModal()">OK</a>
-            </div>
-        </div>
-
-    </div>
-
 </div>
 <app-footer></app-footer>
