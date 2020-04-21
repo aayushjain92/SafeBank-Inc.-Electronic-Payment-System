@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import * as fromAuth from './../store/reducers/login.reducer';
 import { User } from 'src/app/model/user';
 import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
+import { MatSort } from '@angular/material/sort';
+import {MatTableDataSource} from '@angular/material/table';
 
 @Component({
   selector: 'app-cc-dash',
@@ -13,7 +15,10 @@ import { UserService } from '../services/user.service';
 export class CcDashComponent implements OnInit {
   user: User;
   users: User[];
-  displayedColumns: string[] = ['name', 'email', 'phone', 'accountNum', 'currentBalance', 'role'];
+  dataSource;
+  displayedColumns: string[] = ['name', 'email', 'phone', 'accountNum', 'role'];
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
+
   constructor(private store: Store<fromAuth.State>, 
     private router: Router,
     private service: UserService) { }
@@ -28,9 +33,14 @@ export class CcDashComponent implements OnInit {
       this.user = auth.auth.status.user;
       console.log('User found in Customer Care dashboard');
       this.service.getAllUser()
-        .subscribe(users => this.users = users); 
+        .subscribe(users => {
+          this.users = users;
+          this.dataSource = new MatTableDataSource(this.users);
+          this.dataSource.sort = this.sort;
+        }); 
+      
     }
-
+    
     
 
   }

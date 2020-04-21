@@ -23,15 +23,17 @@ export class FundstransferService {
     return this.http.put<Transaction>(endpoint + 'debit', transaction);
   }
 
-  // // end point to get a list of beneficiaries
-  // getbeneficiary(accountNumber : string): Observable<any> {
-  //   return this.http.get(`${endpoint + 'beneficiaries'}/${accountNumber}`);
-  // }
-
-  // end point to transfer the amount
-  transferAmount(transaction: Transaction): Observable<Transaction> {
+  // end point to transfer the amount to the same bank
+  transferAmountSameBank(transaction: Transaction): Observable<Transaction> {
     return this.http.put<Transaction>(endpoint + 'transfer', transaction);
   }
+
+  // end point to transfer the amount to another bank
+  transferAmountOtherBank(transaction: Transaction): Observable<Transaction> {
+    return this.http.put<Transaction>(endpoint + 'transferinotherbank', transaction);
+  }
+
+
 
 
 }

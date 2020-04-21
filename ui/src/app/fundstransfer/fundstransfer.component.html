@@ -34,10 +34,10 @@
                                     <mat-label>
                                         <mat-icon class="matbtn">attach_money</mat-icon>Amount
                                     </mat-label>
-                                    <input matInput [formControl]="creditValidateForm.get('amountFormControl')" type="number" name=amount id="amount"
+                                    <input matInput [formControl]="creditValidateForm.get('amountFormControl')" name=amount id="amount"
                                         [(ngModel)]="transaction.amount" required="required">
                                     <mat-error *ngIf="creditValidateForm.get('amountFormControl').hasError('pattern') && !creditValidateForm.get('amountFormControl').hasError('required')">
-                                        Please enter a valid amount
+                                        Please enter a valid non-negative amount with maximum 2 decimal places and no leading zeros
                                     </mat-error>
                                     <mat-error *ngIf="creditValidateForm.get('amountFormControl').hasError('required')">
                                         Amount is <strong>required</strong>
@@ -45,6 +45,7 @@
                                 </mat-form-field>
 
                             </form>
+                            <br>
 
                             <mat-action-row>
                                 <button mat-raised-button color="primary" (click)="credit(transaction)" [disabled]="!creditValidateForm.valid">Deposit</button>
@@ -92,10 +93,10 @@
                                     <mat-label>
                                         <mat-icon class="matbtn">attach_money</mat-icon>Amount
                                     </mat-label>
-                                    <input matInput [formControl]="debitValidateForm.get('amountFormControl')" type="number" name=amount id="amount"
+                                    <input matInput [formControl]="debitValidateForm.get('amountFormControl')" name=amount id="amount"
                                         [(ngModel)]="transaction.amount" required="required">
                                     <mat-error *ngIf="debitValidateForm.get('amountFormControl').hasError('pattern') && !debitValidateForm.get('amountFormControl').hasError('required')">
-                                        Please enter a valid amount
+                                        Please enter a valid non-negative amount with maximum 2 decimal places and no leading zeros
                                     </mat-error>
                                     <mat-error *ngIf="debitValidateForm.get('amountFormControl').hasError('required')">
                                         Amount is <strong>required</strong>
@@ -103,7 +104,7 @@
                                 </mat-form-field>
 
                             </form>
-
+                            <br>
 
                             <mat-action-row>
                                 <button mat-raised-button color="primary" (click)="debit(transaction)" [disabled]="!debitValidateForm.valid">Withdraw</button>
@@ -111,14 +112,14 @@
                         </mat-expansion-panel>
 
 
-                        <!-- to transfer the amount -->
+                        <!-- to transfer the amount in same bank -->
                         <mat-expansion-panel>
                             <mat-expansion-panel-header>
                                 <mat-panel-title>
-                                    <span>Transfer Money</span>
+                                    <span>Intrabank Transfer</span>
                                 </mat-panel-title>
                                 <mat-panel-description>
-                                    Transfer Money to another account
+                                    Transfer money to an account in the same bank
                                     <mat-icon>send</mat-icon>
                                 </mat-panel-description>
                             </mat-expansion-panel-header>
@@ -133,10 +134,79 @@
                                 <mat-form-field class="funds-full-width">
                                     <mat-label>Choose Beneficiary:</mat-label>
                                     <mat-select [(value)]="transaction.beneficiaryAccountNumber" [formControl]="beneficiaryValidateForm.get('beneficiaryFormControl')">
-                                        <mat-option *ngFor="let beneficiary of beneficiaries"
+                                        <!-- <mat-option *ngFor="let beneficiary of beneficiaries"
                                             value={{beneficiary.accountNumber}}>
                                             {{ beneficiary.firstName + ' ' + beneficiary.lastName }}
-                                        </mat-option>
+                                        </mat-option> -->
+                                        <ng-container *ngFor="let beneficiary of beneficiaries">
+                                            <mat-option *ngIf="beneficiary.routingNumber==='111222333'" value={{beneficiary.accountNumber}}>
+                                                {{ beneficiary.firstName + ' ' + beneficiary.lastName }}
+                                            </mat-option> 
+                                        </ng-container>
+                                    </mat-select>
+                                    <mat-error *ngIf="beneficiaryValidateForm.get('beneficiaryFormControl').hasError('required')">
+                                        Selection is <strong>required</strong>
+                                    </mat-error>
+                                </mat-form-field>
+
+                                <mat-form-field class="funds-full-width">
+                                    <mat-label>Beneficiary Account Number</mat-label>
+                                    <input matInput disabled value="{{transaction.beneficiaryAccountNumber}}">
+                                </mat-form-field>
+
+                                <mat-form-field appearance="fill" class="funds-full-width">
+                                    <mat-label>
+                                        <mat-icon class="matbtn">attach_money</mat-icon>Amount
+                                    </mat-label>
+                                    <input matInput [formControl]="beneficiaryValidateForm.get('amountFormControl')" name=amount id="amount"
+                                        [(ngModel)]="transaction.amount" required="required">
+                                    <mat-error *ngIf="beneficiaryValidateForm.get('amountFormControl').hasError('pattern') && !beneficiaryValidateForm.get('amountFormControl').hasError('required')">
+                                        Please enter a valid non-negative amount with maximum 2 decimal places and no leading zeros
+                                    </mat-error>
+                                    <mat-error *ngIf="beneficiaryValidateForm.get('amountFormControl').hasError('required')">
+                                        Amount is <strong>required</strong>
+                                    </mat-error>
+                                </mat-form-field>
+
+                            </form>
+                            <br>
+
+                            <mat-action-row>
+                                <button mat-raised-button color="primary" (click)="transferInSameBank(transaction)" [disabled]="!beneficiaryValidateForm.valid">Transfer</button>
+                            </mat-action-row>
+                        </mat-expansion-panel>
+
+                        <!-- to transfer the amount in another bank -->
+                        <mat-expansion-panel>
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    <span>Interbank Transfer</span>
+                                </mat-panel-title>
+                                <mat-panel-description>
+                                    Transfer money to an account in another bank
+                                    <mat-icon>send</mat-icon>
+                                </mat-panel-description>
+                            </mat-expansion-panel-header>
+
+                            <form class="funds-form" [formGroup]="beneficiaryValidateForm">
+
+                                <mat-form-field class="funds-full-width">
+                                    <mat-label>Account Number</mat-label>
+                                    <input matInput disabled value="{{transaction.ownerAccountNum}}">
+                                </mat-form-field>
+
+                                <mat-form-field class="funds-full-width">
+                                    <mat-label>Choose Beneficiary:</mat-label>
+                                    <mat-select [(value)]="transaction.beneficiaryAccountNumber" [formControl]="beneficiaryValidateForm.get('beneficiaryFormControl')">
+                                        <!-- <mat-option *ngFor="let beneficiary of beneficiaries"
+                                            value={{beneficiary.accountNumber}}>
+                                            {{ beneficiary.firstName + ' ' + beneficiary.lastName }}
+                                        </mat-option> -->
+                                        <ng-container *ngFor="let beneficiary of beneficiaries">
+                                            <mat-option *ngIf="beneficiary.routingNumber!=='111222333'" value={{beneficiary.accountNumber}}>
+                                                {{ beneficiary.firstName + ' ' + beneficiary.lastName }}
+                                            </mat-option> 
+                                        </ng-container>
                                     </mat-select>
                                     <mat-error *ngIf="beneficiaryValidateForm.get('beneficiaryFormControl').hasError('required')">
                                         Selection is <strong>required</strong>
@@ -165,7 +235,7 @@
                             </form>
 
                             <mat-action-row>
-                                <button mat-raised-button color="primary" (click)="transfer(transaction)" [disabled]="!beneficiaryValidateForm.valid">Transfer</button>
+                                <button mat-raised-button color="primary" (click)="transferInOtherBank(transaction)" [disabled]="!beneficiaryValidateForm.valid">Transfer</button>
                             </mat-action-row>
                         </mat-expansion-panel>
 
