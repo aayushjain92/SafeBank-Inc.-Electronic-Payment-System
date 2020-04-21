@@ -40,6 +40,7 @@ export class AddbeneficiaryComponent implements OnInit {
 
   ngOnInit(): void {
     this.initializeData();
+    this.getbeneficiary();
   }
   private extractData(res: Response) {
     let body = res;
@@ -115,6 +116,7 @@ export class AddbeneficiaryComponent implements OnInit {
     this.rest.getbeneficiary(this.user.account.AccountNumber)
       .subscribe(data => {
         this.beneficiaries = data;
+        console.log(this.beneficiaries)
 
       });
 
@@ -129,7 +131,9 @@ export class AddbeneficiaryComponent implements OnInit {
         this.routing = data;
         // checking if the beneficary already exists
         console.log("this", data);
-        if (data) {
+        console.log(this.routing.parentAccountNumber);
+        console.log(this.user.account.AccountNumber);
+        if (this.routing != null && this.routing.parentAccountNumber === this.user.account.AccountNumber) {
           console.log("this", data);
           this.beneficiaryCheck = true;
           this.error = "Beneficiary already exists";

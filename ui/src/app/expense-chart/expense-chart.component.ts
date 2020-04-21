@@ -13,22 +13,24 @@ import { Chart } from 'chart.js';
   styleUrls: ['./expense-chart.component.scss']
 })
 export class ExpenseChartComponent implements OnInit {
-  user : User;
-  transactions : Transaction[];
-  chart = [];
+  user: User;
+  transactions: Transaction[];
+  expensechart = [];
   title = 'app';
-  public pieChartLabels:string[] = ["Pending", "InProgress", "OnHold", "Complete", "Cancelled"];
-  public pieChartData:number[] = [21, 39, 10, 14, 16];
-  public pieChartType:string = 'pie';
-  public pieChartOptions:any = {'backgroundColor': [
-            "#FF6384",
-            "#4BC0C0",
-            "#FFCE56",
-            "#E7E9ED",
-            "#36A2EB"
-            ]}
+  public pieChartLabels: string[] = ["Pending", "InProgress", "OnHold", "Complete", "Cancelled"];
+  public pieChartData: number[] = [21, 39, 10, 14, 16];
+  public pieChartType: string = 'pie';
+  public pieChartOptions: any = {
+    'backgroundColor': [
+      "#FF6384",
+      "#4BC0C0",
+      "#FFCE56",
+      "#E7E9ED",
+      "#36A2EB"
+    ]
+  }
 
-  constructor(public rest: TransactionsdetailsService, private route: ActivatedRoute, private router: Router, 
+  constructor(public rest: TransactionsdetailsService, private route: ActivatedRoute, private router: Router,
     private store: Store<fromAuth.State>) { }
 
   ngOnInit(): void {
@@ -47,31 +49,31 @@ export class ExpenseChartComponent implements OnInit {
     this.rest.getTransactionbyaccountNumber(this.user.account.AccountNumber)
       .subscribe(data => {
         this.transactions = data;
-        let credit = 0, transfer = 0, food = 0, shopping = 0, travel = 0, fuel = 0, 
-        donation = 0, emi = 0, utilityBills = 0, other = 0;
-        for(let transaction of this.transactions){
+        let credit = 0, transfer = 0, food = 0, shopping = 0, travel = 0, fuel = 0,
+          donation = 0, emi = 0, utilityBills = 0, other = 0;
+        for (let transaction of this.transactions) {
           //taking one transaction data at a time
-          console.log('Amount: ' + transaction.amount + 
-          ' Category:' + transaction.category + ' Type:' + transaction.type);
-          if(transaction.type == 'Credit'){
+          console.log('Amount: ' + transaction.amount +
+            ' Category:' + transaction.category + ' Type:' + transaction.type);
+          if (transaction.type == 'Credit') {
             credit += transaction.amount;
-          } else if(transaction.type == 'Transfer'){
+          } else if (transaction.type == 'Transfer') {
             transfer += transaction.amount;
           } else {
             //Debit with different categories
-            if(transaction.category == 'Food'){
+            if (transaction.category == 'Food') {
               food += transaction.amount;
-            } else if(transaction.category == 'Shopping'){
+            } else if (transaction.category == 'Shopping') {
               shopping += transaction.amount;
-            } else if(transaction.category == 'Travel'){
+            } else if (transaction.category == 'Travel') {
               travel += transaction.amount;
-            } else if(transaction.category == 'Fuel'){
+            } else if (transaction.category == 'Fuel') {
               fuel += transaction.amount;
-            } else if(transaction.category == 'EMI'){
+            } else if (transaction.category == 'EMI') {
               emi += transaction.amount;
-            } else if(transaction.category == 'Donation'){
+            } else if (transaction.category == 'Donation') {
               donation += transaction.amount;
-            } else if(transaction.category == 'Travel'){
+            } else if (transaction.category == 'Travel') {
               utilityBills += transaction.amount;
             } else {
               other += transaction.amount;
@@ -84,11 +86,11 @@ export class ExpenseChartComponent implements OnInit {
       });
   }
 
-  developPieChart(chartData){
-    this.chart = new Chart('canvas', {
+  developPieChart(chartData) {
+    this.expensechart = new Chart('canvasexpense', {
       type: 'pie',
       data: {
-        labels: ['Food', 'Shopping', 'Travel', 'Fuel', 'EMI', 'Donation', 'Utility Bills','Other'],
+        labels: ['Food', 'Shopping', 'Travel', 'Fuel', 'EMI', 'Donation', 'Utility Bills', 'Other'],
         datasets: [{
           label: 'With Respect to USD',
           data: chartData,
@@ -115,12 +117,12 @@ export class ExpenseChartComponent implements OnInit {
           borderWidth: 1
         }]
       },
-      
+
     })
   }
 
 
 
- 
-  
+
+
 }
