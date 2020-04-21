@@ -61,6 +61,7 @@ label{
         font-weight: $f400;
        background-color: rgba(238, 229, 236, 0.767);
     }
+    // firstnmae textbox
     .textName{
                 width: 37%;
                 padding: 6px 20px;
@@ -70,9 +71,11 @@ label{
                 border-radius: 4px;
                 box-sizing: border-box;
             }
+
+            // rest of the text boxes
     .textb{
         
-        width: 31%;
+        width: 23%;
         padding: 6px 20px;
         margin: 3px 0;
         display: inline-block;
@@ -85,7 +88,7 @@ label{
         
         border-right: 1px solid #d7d7d7;
         min-height: 445px;
-        padding-left: 87px;
+        padding-left: 96px;
         #todoLists {
             > div {
                 border-bottom: 2px solid #464646;
