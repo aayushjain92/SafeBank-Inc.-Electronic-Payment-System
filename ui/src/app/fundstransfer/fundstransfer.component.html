@@ -133,10 +133,15 @@
                                 <mat-form-field class="funds-full-width">
                                     <mat-label>Choose Beneficiary:</mat-label>
                                     <mat-select [(value)]="transaction.beneficiaryAccountNumber" [formControl]="beneficiaryValidateForm.get('beneficiaryFormControl')">
-                                        <mat-option *ngFor="let beneficiary of beneficiaries"
+                                        <!-- <mat-option *ngFor="let beneficiary of beneficiaries"
                                             value={{beneficiary.accountNumber}}>
                                             {{ beneficiary.firstName + ' ' + beneficiary.lastName }}
-                                        </mat-option>
+                                        </mat-option> -->
+                                        <ng-container *ngFor="let beneficiary of beneficiaries">
+                                            <mat-option *ngIf="beneficiary.routingNumber==='111222333'" value={{beneficiary.accountNumber}}>
+                                                {{ beneficiary.firstName + ' ' + beneficiary.lastName }}
+                                            </mat-option> 
+                                        </ng-container>
                                     </mat-select>
                                     <mat-error *ngIf="beneficiaryValidateForm.get('beneficiaryFormControl').hasError('required')">
                                         Selection is <strong>required</strong>
@@ -191,10 +196,15 @@
                                 <mat-form-field class="funds-full-width">
                                     <mat-label>Choose Beneficiary:</mat-label>
                                     <mat-select [(value)]="transaction.beneficiaryAccountNumber" [formControl]="beneficiaryValidateForm.get('beneficiaryFormControl')">
-                                        <mat-option *ngFor="let beneficiary of beneficiaries"
+                                        <!-- <mat-option *ngFor="let beneficiary of beneficiaries"
                                             value={{beneficiary.accountNumber}}>
                                             {{ beneficiary.firstName + ' ' + beneficiary.lastName }}
-                                        </mat-option>
+                                        </mat-option> -->
+                                        <ng-container *ngFor="let beneficiary of beneficiaries">
+                                            <mat-option *ngIf="beneficiary.routingNumber!=='111222333'" value={{beneficiary.accountNumber}}>
+                                                {{ beneficiary.firstName + ' ' + beneficiary.lastName }}
+                                            </mat-option> 
+                                        </ng-container>
                                     </mat-select>
                                     <mat-error *ngIf="beneficiaryValidateForm.get('beneficiaryFormControl').hasError('required')">
                                         Selection is <strong>required</strong>
