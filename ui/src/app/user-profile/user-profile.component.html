@@ -14,8 +14,8 @@
             <form [formGroup]="personalFormGroup">
                 <!-- FirstName Field -- read Only -->
                 <mat-form-field>
-                    <mat-label>First name</mat-label>
-                    <input matInput readonly formControlName="firstNameCtrl">
+                    <mat-label>First name </mat-label>
+                    <input matInput readonly formControlName="firstNameCtrl" title="Readonly">
                 </mat-form-field>
 
                 <br>
@@ -23,7 +23,7 @@
                 <!-- Last Name Field -- read Only -->
                 <mat-form-field>
                     <mat-label>Last name</mat-label>
-                    <input matInput readonly formControlName="lastNameCtrl">
+                    <input matInput readonly formControlName="lastNameCtrl" title="Readonly">
                 </mat-form-field>
 
                 <br>
@@ -31,7 +31,8 @@
                 <!-- Phone Number Field -- Could be updated -->
                 <mat-form-field>
                     <mat-label>Phone Number</mat-label>
-                    <input matInput formControlName="phoneNumCtrl" required maxlength="10" minlength="10">
+                    <input matInput formControlName="phoneNumCtrl" required maxlength="10" minlength="10"
+                        title="Editable">
                     <!--Error if phone number is not provided-->
                     <mat-error *ngIf="personalFormGroup.get('phoneNumCtrl').hasError('required')">
                         Phone Number is required
@@ -51,7 +52,7 @@
                 <!-- Email id Field -- read Only -->
                 <mat-form-field>
                     <mat-label>Email</mat-label>
-                    <input matInput readonly formControlName="emailIDCtrl">
+                    <input matInput readonly formControlName="emailIDCtrl" title="Readonly">
                 </mat-form-field>
 
                 <br>
@@ -59,7 +60,24 @@
                 <!-- Date of Birth Field -- read Only -->
                 <mat-form-field>
                     <mat-label>Date of Birth</mat-label>
-                    <input matInput readonly formControlName="dobCtrl">
+                    <!--Input for date with current and future dates disabled-->
+                    <input matInput placeholder="Date of Birth" [min]="minDate" [max]="maxDate"
+                        [matDatepicker]="myDatepicker" formControlName="dobCtrl" title="Editable">
+                    <!--date picker for choosing dates-->
+                    <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
+                    <mat-datepicker #myDatepicker></mat-datepicker>
+                    <!--Error if dob is not provided-->
+                    <mat-error *ngIf="personalFormGroup.get('dobCtrl').hasError('required')">
+                        Date of Birth is required
+                    </mat-error>
+                    <!--Error if dob is today's date-->
+                    <mat-error *ngIf="personalFormGroup.get('dobCtrl').hasError('min')">
+                        Date of Birth cannot be current date
+                    </mat-error>
+                    <!--Error if dob is future date-->
+                    <mat-error *ngIf="personalFormGroup.get('dobCtrl').hasError('max')">
+                        Date of Birth cannot be future date
+                    </mat-error>
                 </mat-form-field>
             </form>
         </mat-expansion-panel>
@@ -77,7 +95,7 @@
             <form [formGroup]="addressFormGroup">
                 <mat-form-field>
                     <mat-label>Address Line 1</mat-label>
-                    <input matInput formControlName="addressLine1Ctrl" required>
+                    <input matInput formControlName="addressLine1Ctrl" required title="Editable">
                     <!--Error if value is not provided-->
                     <mat-error *ngIf="addressFormGroup.get('addressLine1Ctrl').hasError('required')">
                         Address is required
@@ -89,7 +107,7 @@
                 <!-- Address Line 1 Field -- could be updated -->
                 <mat-form-field>
                     <mat-label>Address Line 2</mat-label>
-                    <input matInput formControlName="addressLine2Ctrl" required>
+                    <input matInput formControlName="addressLine2Ctrl" required title="Editable">
                     <!--Error if value is not provided-->
                     <mat-error *ngIf="addressFormGroup.get('addressLine2Ctrl').hasError('required')">
                         Address is required
@@ -101,7 +119,7 @@
                 <!-- City Field -- could be updated -->
                 <mat-form-field>
                     <mat-label>City</mat-label>
-                    <input matInput formControlName="cityCtrl" required>
+                    <input matInput formControlName="cityCtrl" required title="Editable">
                     <!--Error if value is not provided-->
                     <mat-error *ngIf="addressFormGroup.get('cityCtrl').hasError('required')">
                         City is required
@@ -113,7 +131,7 @@
                 <!-- State Field -- could be updated -->
                 <mat-form-field>
                     <mat-label>State</mat-label>
-                    <input matInput formControlName="stateCtrl" required>
+                    <input matInput formControlName="stateCtrl" required title="Editable">
                     <!--Error if value is not provided-->
                     <mat-error *ngIf="addressFormGroup.get('stateCtrl').hasError('required')">
                         State is required
@@ -125,10 +143,22 @@
                 <!-- ZipCode Field -- could be updated -->
                 <mat-form-field>
                     <mat-label>ZipCode</mat-label>
-                    <input matInput formControlName="zipCtrl" required>
-                    <!--Error if value is not provided-->
+                    <input matInput formControlName="zipCtrl" required title="Editable">
+                    <!-- Error if zipcode is not provided -->
                     <mat-error *ngIf="addressFormGroup.get('zipCtrl').hasError('required')">
                         Zip Code is required
+                    </mat-error>
+                    <!-- Error if zipcode has characters other than digits -->
+                    <mat-error *ngIf="addressFormGroup.get('zipCtrl').hasError('pattern')">
+                        Zip Code should be numeric
+                    </mat-error>
+                    <!-- Error if max length is more than 5 digits -->
+                    <mat-error *ngIf="addressFormGroup.get('zipCtrl').hasError('minlength')">
+                        Zip Code can have maximum 5 digits
+                    </mat-error>
+                    <!-- Error if min length is less than 5 digits -->
+                    <mat-error *ngIf="addressFormGroup.get('zipCtrl').hasError('maxlength')">
+                        Zip Code can have maximum 5 digits
                     </mat-error>
                 </mat-form-field>
             </form>
@@ -147,9 +177,19 @@
             <form [formGroup]="credentialsFormGroup">
                 <mat-form-field>
                     <mat-label>Password</mat-label>
-                    <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" required>
+                    <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" 
+                    required title="Editable">
                     <!--Icon to show password if hidden-->
                     <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    <!--Error if password is not provided-->
+                    <mat-error *ngIf="credentialsFormGroup.get('password').hasError('required')">
+                        Password is require
+                    </mat-error>
+                    <!--Error if password does not follow given pattern-->
+                    <mat-error *ngIf="credentialsFormGroup.get('password').hasError('pattern')">
+                        Password should have atleast 1 uppercase, 1 lowercase, 1 digit and
+                        1 special character and minimum length of 9 characters
+                    </mat-error>
                 </mat-form-field>
             </form>
         </mat-expansion-panel>
@@ -168,15 +208,7 @@
                 <!-- Account Number -- readonly -->
                 <mat-form-field>
                     <mat-label>Account Number</mat-label>
-                    <input matInput formControlName="accNumCtrl" readonly>
-                </mat-form-field>
-
-                <br>
-
-                <mat-form-field>
-                    <!-- Account Type -- readonly -->
-                    <mat-label>Account Type</mat-label>
-                    <input matInput readonly>
+                    <input matInput readonly formControlName="accNumCtrl" title="Readonly">
                 </mat-form-field>
 
                 <br>
@@ -184,7 +216,7 @@
                 <mat-form-field>
                     <!-- Routing Number -- readonly -->
                     <mat-label>Routing Number</mat-label>
-                    <input matInput formControlName="routingNumCtrl" readonly>
+                    <input matInput formControlName="routingNumCtrl" readonly title="Readonly">
                 </mat-form-field>
 
                 <br>
@@ -192,7 +224,7 @@
                 <mat-form-field>
                     <!-- Social Security Number -- readonly -->
                     <mat-label>Social Security Number</mat-label>
-                    <input matInput formControlName="ssn" readonly [type]="hideSSN ? 'password' : 'text'">
+                    <input matInput readonly formControlName="ssn" [type]="hideSSN ? 'password' : 'text'" title="Readonly">
                     <!--icon to show values if hidden-->
                     <mat-icon matSuffix (click)="hideSSN = !hideSSN">{{hideSSN ? 'visibility_off' : 'visibility'}}
                     </mat-icon>
@@ -202,8 +234,11 @@
 
         <div>
             <!-- Submit Button -->
-            <button mat-raised-button color="primary" (click)="updateUser()">Submit</button>
+            <button mat-raised-button color="primary" [disabled]="!(personalFormGroup.valid && addressFormGroup.valid && 
+            credentialsFormGroup.valid && ssnFormGroup.valid)" (click)="updateUser()">Submit</button>
         </div>
     </mat-accordion>
 </div>
+
+
 <app-footer></app-footer>

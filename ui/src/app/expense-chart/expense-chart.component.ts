@@ -57,8 +57,6 @@ export class ExpenseChartComponent implements OnInit {
             ' Category:' + transaction.category + ' Type:' + transaction.type);
           if (transaction.type == 'Credit') {
             credit += transaction.amount;
-          } else if (transaction.type == 'Transfer') {
-            transfer += transaction.amount;
           } else {
             //Debit with different categories
             if (transaction.category == 'Food') {
@@ -75,13 +73,15 @@ export class ExpenseChartComponent implements OnInit {
               donation += transaction.amount;
             } else if (transaction.category == 'Travel') {
               utilityBills += transaction.amount;
+            } else if(transaction.category == 'TRANSFER'){
+              transfer += transaction.amount;
             } else {
               other += transaction.amount;
             }
           }
         }
 
-        let pieChartData = [food, shopping, travel, fuel, emi, donation, utilityBills, other];
+        let pieChartData = [food, shopping, travel, fuel, emi, donation, utilityBills, transfer, other];
         this.developPieChart(pieChartData);
       });
   }
@@ -90,7 +90,7 @@ export class ExpenseChartComponent implements OnInit {
     this.expensechart = new Chart('canvasexpense', {
       type: 'pie',
       data: {
-        labels: ['Food', 'Shopping', 'Travel', 'Fuel', 'EMI', 'Donation', 'Utility Bills', 'Other'],
+        labels: ['Food', 'Shopping', 'Travel', 'Fuel', 'EMI', 'Donation', 'Utility Bills', 'Transfer','Other'],
         datasets: [{
           label: 'With Respect to USD',
           data: chartData,
@@ -102,6 +102,7 @@ export class ExpenseChartComponent implements OnInit {
             'rgba(153, 102, 255, 0.2)',
             'rgba(255, 99, 71, 0.2)',
             'rgba(50, 205, 50, 0.2)',
+            'rgba(210, 105, 30, 0.2)',
             'rgba(220, 220, 220, 0.2)'
           ],
           borderColor: [
@@ -112,6 +113,7 @@ export class ExpenseChartComponent implements OnInit {
             'rgba(153, 102, 255, 1)',
             'rgba(255, 99, 71, 1)',
             'rgba(50, 205, 50, 1)',
+            'rgba(210, 105, 30, 1)',
             'rgba(220, 220, 220, 1)',
           ],
           borderWidth: 1

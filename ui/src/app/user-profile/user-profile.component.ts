@@ -6,6 +6,7 @@ import { Store } from '@ngrx/store';
 import * as fromAuth from './../store/reducers/login.reducer';
 import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-user-profile',
@@ -20,8 +21,12 @@ export class UserProfileComponent implements OnInit {
   ssnFormGroup: FormGroup;
   user: User;
 
+   //variables to disable current and future dates in date picker
+   minDate = new Date(1900, 0, 1);
+   maxDate = new Date(new Date().setDate(new Date().getDate() - 1))
+
   constructor(private store: Store<fromAuth.State>, private _formBuilder: FormBuilder, 
-    private service : UserService, private router: Router) {}
+    private service : UserService, private router: Router, private _snackBar: MatSnackBar) {}
 
   ngOnInit() {
     //getting logged in user from Store
@@ -38,7 +43,7 @@ export class UserProfileComponent implements OnInit {
     //Validations on Personal Details Form
     this.personalFormGroup = this._formBuilder.group({
       //Form Controllers
-      firstNameCtrl: ['', Validators.required],
+      firstNameCtrl: [{disabled:true}, Validators.required],
       lastNameCtrl: ['', Validators.required],
       phoneNumCtrl: ['', [Validators.required, Validators.minLength, Validators.pattern("^[0-9]*$")]],
       emailIDCtrl: ['', [Validators.required, Validators.email]],
@@ -63,10 +68,10 @@ export class UserProfileComponent implements OnInit {
     });
 
     //Validations on SSN Form
-    this.ssnFormGroup = this._formBuilder.group({
+    this.ssnFormGroup = new FormGroup({
       //Form Controllers
-      ssn: new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$")]),
-      accTypeCtrl : new FormControl(),
+      ssn: new FormControl({disabled:true}, [Validators.required, Validators.pattern("^[0-9]*$")]),
+      //accTypeCtrl : new FormControl(),
       accNumCtrl: new FormControl(),
       routingNumCtrl : new FormControl()
     })
@@ -115,12 +120,12 @@ export class UserProfileComponent implements OnInit {
     //Personal info
     //getting value of editatble field and setting to user input
     this.user.phoneNumber = this.personalFormGroup.get('phoneNumCtrl').value;
+    this.user.dob = this.personalFormGroup.get('dobCtrl').value;
 
     //setting existing values to new object
     this.user.firstName = this.personalFormGroup.getRawValue().firstNameCtrl;
     this.user.lastName = this.personalFormGroup.getRawValue().lastNameCtrl;
     this.user.email = this.personalFormGroup.getRawValue().emailIDCtrl;
-    this.user.dob = this.personalFormGroup.getRawValue().dobCtrl;
 
     //Address fields 
     //getting value of editatble field and setting to user input
@@ -135,7 +140,7 @@ export class UserProfileComponent implements OnInit {
     this.user.ssn = this.ssnFormGroup.getRawValue().ssn;
     this.account.AccountNumber = this.ssnFormGroup.getRawValue().accNumCtrl;
     this.account.routingNumber = this.ssnFormGroup.getRawValue().routingNumCtrl;
-    this.user.accountType =  this.ssnFormGroup.getRawValue().accTypeCtrl;
+   // this.user.accountType =  this.ssnFormGroup.getRawValue().accTypeCtrl;
     this.user.account = this.account;
 
     // base64 encoded password
@@ -143,5 +148,13 @@ export class UserProfileComponent implements OnInit {
 
     //update user service call
     this.service.updateUser(this.user);
+    this.router.navigate(['/dashboard']);
+    this.openSnackBar('Profile Updated Successfully', 'Dismiss');
+  }
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 10000,
+    });
   }
 }
