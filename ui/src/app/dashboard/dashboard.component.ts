@@ -4,6 +4,8 @@ import { Store, select } from '@ngrx/store';
 import * as fromAuth from './../store/reducers/login.reducer';
 import { User } from 'src/app/model/user';
 import { Router } from '@angular/router';
+import { Input } from '@angular/core';
+import { TransactionsdetailsService } from '../services/transactionsdetails.service';
 // import { MainNavComponent }  from '../main-nav/main-nav.component';
 
 @Component({
@@ -13,10 +15,10 @@ import { Router } from '@angular/router';
 })
 export class DashboardComponent implements OnInit {
   user: User;
+  accountDetails: any;
 
   // @ViewChild(MainNavComponent) mainNavModal;
-
-  constructor(private store: Store<fromAuth.State>, private router: Router) { }
+  constructor(private store: Store<fromAuth.State>, private router: Router, public rest: TransactionsdetailsService) { }
 
 
   ngOnInit(): void {
@@ -34,11 +36,18 @@ export class DashboardComponent implements OnInit {
       // this.mainNavModal.openModal();
     }
     console.log("heere", this.user)
+    this.displayAccountBalance();
+  }
 
-    //route to login
 
+  displayAccountBalance() {
+    this.rest.getAccountBalance(this.user.account.AccountNumber)
+      .subscribe(data => {
+        this.accountDetails = data;
+        console.log(this.accountDetails.CurrentBalance);
 
-    //Call beneficiary details for user
+      });
+
   }
 
 }
