@@ -69,3 +69,14 @@ button {
     z-index: 1;
     background-image: url('/assets/login-image.jpg')
 }
+
+.loginError{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color: red;
+    font-size: small;
+}
+
+.error{
+    margin-bottom: 10px;
+}

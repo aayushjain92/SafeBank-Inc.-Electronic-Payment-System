@@ -12,6 +12,14 @@
           <mat-form-field>
             <mat-label>Email</mat-label>
             <input matInput placeholder="Email ID" formControlName="email" required>
+            <!--Error if email is not provided-->
+            <mat-error *ngIf="form.get('email').hasError('required')" class="error">
+              Email Id is required
+            </mat-error>
+            <!--Error if valid email id is not provided-->
+            <mat-error *ngIf="form.get('email').hasError('email')" class="error">
+              Please enter valid email id
+            </mat-error>
           </mat-form-field>
         </div>
         <div class="inputs">
@@ -20,17 +28,15 @@
               required>
             <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
             <mat-hint *ngIf="!passwordInput.value">Enter your password</mat-hint>
+            <!--Error if password is not provided-->
+            <mat-error *ngIf="form.get('password').hasError('required')" class="error">
+              Password is require
+            </mat-error>
           </mat-form-field>
         </div>
 
-        <!-- <div>
-          <label>Password:</label>
-          <input type="password" matInput placeholder="Password" formControlName="password">
-        </div>
-        <p>lalaalalal</p> -->
-
-        <p *ngIf="errorMessage" class="loginError">
-          {{ errorMessage }}
+        <p *ngIf="error!=null" class="loginError">
+          {{ error}}
         </p>
 
         <p class="loginButtons">

@@ -38,7 +38,6 @@ exports.save = (request, response) => {
  * @param response
 */
 exports.get = (request, response) => {
-    console.log('In get');
     const accountId = request.params.accountId;
 
     const total = accountService.searchAllByAccountId(accountId)

@@ -21,12 +21,12 @@ export class LoginFormComponent implements OnInit {
     }
   }
 
-  @Input() errorMessage: string | null;
+  @Input() error: string | null;
 
   @Output() submitted = new EventEmitter<User>();
   
   form: FormGroup = new FormGroup({
-      email : new FormControl('', Validators.required),
+      email : new FormControl('', [Validators.required, Validators.email]),
       password : new FormControl('', Validators.required)
 });
 
