@@ -45,7 +45,7 @@ export class ExpenseChartComponent implements OnInit {
   }
 
   getbeneficiary() {
-    this.rest.getTransactionbyaccountNumber(this.user.account.AccountNumber)
+    this.rest.getpdf(this.user.account.AccountNumber)
       .subscribe(data => {
         this.transactions = data;
         let credit = 0, transfer = 0, food = 0, shopping = 0, travel = 0, fuel = 0,
