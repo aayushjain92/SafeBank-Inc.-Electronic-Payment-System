@@ -17,6 +17,7 @@ export class DashboardComponent implements OnInit {
   user: User;
   accountDetails: any;
 
+
   // @ViewChild(MainNavComponent) mainNavModal;
   constructor(private store: Store<fromAuth.State>, private router: Router, public rest: TransactionsdetailsService) { }
 
