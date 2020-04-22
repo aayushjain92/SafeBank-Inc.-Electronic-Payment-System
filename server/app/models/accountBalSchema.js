@@ -1,31 +1,36 @@
 'use strict';
+const { customAlphabet } = require('nanoid');
+
 const mongoose = require('mongoose');
-const shortid = require('shortid');
+const nanoid = customAlphabet('1234567890abcdefghijklmnopqrstuvwxyz', 9)
 const Schema = mongoose.Schema;
-const userSchema = require("./user").UserSchema;
+
 /**
  * Mongoose schema for todolist object.
  */
 let AccBalSchema = new Schema({
 
-    user: userSchema,
-
     AccountNumber: {
         type: String,
-        default: function getShortId(){
-           let accNum = shortid.generate();
-           return accNum.toUpperCase();
+        default: function getNanoId() {
+            let accNum = nanoid()
+            return accNum.toUpperCase();
         }
     },
-    
-    CurrentBalance: { 
-        type : Number,
+
+    CurrentBalance: {
+        type: Number,
         default: 0,
+    },
+
+    routingNumber: {
+        type: Number,
+        default: "111222333"
     },
 
     status: {
         type: String,
-        enum : ['active','inactive', 'deleted'],
+        enum: ['active', 'inactive', 'deleted'],
         default: 'active'
     },
 },
@@ -43,4 +48,7 @@ AccBalSchema.set('toJSON', {
     virtuals: true
 });
 
-module.exports = mongoose.model('accounts', AccBalSchema);
+const Account = mongoose.model("accounts", AccBalSchema);
+
+module.exports = { Account, AccBalSchema };
+

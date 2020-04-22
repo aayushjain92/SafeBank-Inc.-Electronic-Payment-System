@@ -4,6 +4,10 @@
     margin-bottom: 15px;
 }
 
+.pwd {
+    margin-bottom: 25px;
+}
+
 .center-content {
     //align the card at the center. pending
     text-align: center;
@@ -14,3 +18,14 @@ button {
     margin-right: 15px;
 }
 
+.register-image{
+    background-image: url('/assets/apple-background.jpg');
+    background-size: cover;
+    border-radius: 12px;
+    
+}
+.mat-stepper-horizontal{
+    background-image: url('/assets/apple-background.jpg');
+    background-size: cover;
+    height:100vh;
+}

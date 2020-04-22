@@ -1,35 +1,33 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-
 import { BeneficiaryComponent } from './beneficiary/beneficiary.component';
 import { AddbeneficiaryComponent } from './addbeneficiary/addbeneficiary.component';
-import { PersonalDetailsComponent } from './signup/personal-details/personal-details.component';
-import { AddressDetailsComponent } from './signup/address-details/address-details.component';
-import { AccountDetailsComponent } from './signup/account-details/account-details.component';
-import { CredentialDetailsComponent } from './signup/credential-details/credential-details.component';
 import { LandingPageComponent } from './landing/landing-page/landing-page.component';
 import { RegisterComponent } from './signup/register/register.component';
 import { LoginComponent } from './login/login-component/login.component';
-import { TransactiontableComponent } from './transactiontable/transactiontable.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { DonateCovidComponent } from './donate-covid/donate-covid.component';
+import { ContactUsComponent } from './contact-us/contact-us.component';
+import { CcDashComponent } from './cc-dash/cc-dash.component';
+import { CustomercareComponent } from './customercare/customercare.component';
+import {FundstransferComponent} from './fundstransfer/fundstransfer.component'
+import { UserProfileComponent } from './user-profile/user-profile.component';
+import { LogoutConfirmationDialogComponent } from './login/logout-confirmation-dialog/logout-confirmation-dialog.component';
 
 const routes: Routes = [
-  { path: '', component: LandingPageComponent },
-  {
-    path: 'register', component: RegisterComponent,
-    children:
-      [
-        { path: 'personalDetails', component: PersonalDetailsComponent },
-        { path: 'demographicDetails', component: AddressDetailsComponent },
-        { path: 'accountDetails', component: AccountDetailsComponent },
-        { path: 'credentials', component: CredentialDetailsComponent }
-      ]
-  },
-  { path: 'beneficiary', component: BeneficiaryComponent },
-  { path: 'addbeneficiary', component: AddbeneficiaryComponent },
+  { path: '', component: LoginComponent },
+  { path: 'beneficiaries', component: BeneficiaryComponent },
+  { path: 'register', component: RegisterComponent,},
+  { path: 'beneficiaries/add', component: AddbeneficiaryComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'transactions', component: TransactiontableComponent },
-  { path: 'dashboard', component: DashboardComponent }
+  { path: 'dashboard', component: DashboardComponent },
+  { path: 'ccdashboard', component: CcDashComponent },
+  { path: 'donatecovid', component: DonateCovidComponent },
+  { path: 'contactus', component: ContactUsComponent },
+  { path: 'complaints', component: CustomercareComponent },
+  { path: 'fundstransfer', component: FundstransferComponent},
+  { path: 'profile', component: UserProfileComponent},
+  { path: 'logout', component: LogoutConfirmationDialogComponent}
 ];
 
 @NgModule({

@@ -13,6 +13,13 @@
             "runtimeExecutable": "npm",
             "runtimeArgs": ["run-script", "debug"],
             "port": 9229
-          }
+        },
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Launch Chrome against localhost",
+            "url": "http://localhost:4200",
+            "webRoot": "${workspaceFolder}/ui"
+        }
     ]
 }

@@ -2,8 +2,21 @@
 
 const registerService = require('../services/register-service');
 const accountService = require('../services/account-service');
+const emailService = require('../services/email-service');
 const mongoose = require('mongoose'),
     User = mongoose.model('user');
+
+exports.list = (request, response) => {
+    const params = {};
+    const promise = registerService.Search(params);
+    const result = (items) => {
+        response.status(200);
+        response.json(items);
+    };
+    promise
+        .then(result)
+        .catch(renderErrorResponse(response));
+};
 
 /**
  * Creates a new list and sets the response.
@@ -12,7 +25,7 @@ const mongoose = require('mongoose'),
  * @param response
 */
 exports.save = (request, response) => {
-    
+
     if (!request.body.firstName) {
         return response.status(400).send({
             message: "firstName cannot be empty"
@@ -27,28 +40,22 @@ exports.save = (request, response) => {
     let newAccount;
     const user = Object.assign({}, request.body);
     const result = (saveditem) => {
-        // response.status(201);
-        newUser = saveditem;
-        //Create account
-        const account = {
-            user : newUser
-        };
-        const accResult = (savedAccitem) => {
-            // response.status(201);
-            newAccount = savedAccitem;
-        };
-        const accPromise = accountService.save(account);
-        accPromise
-            .then(accResult)
-            .catch(renderErrorResponse(response));
-
-        console.log(newUser);
-        console.log(newAccount);
+        newAccount = saveditem;
+        user.account = newAccount;
         
-        response.json(saveditem);
-        response.json(newUser);
+        const userResult = (savedUserItem) => {
+            newUser = savedUserItem;
+            response.status(201);
+            response.json(newUser);
+            //call to email service
+            emailService.sendEmail(newUser);
+        };
+        const userPromise = registerService.save(user);
+        userPromise
+            .then(userResult)
+            .catch(renderErrorResponse(response));
     };
-    const promise = registerService.save(user);
+    const promise = accountService.save({});
     promise
         .then(result)
         .catch(renderErrorResponse(response));

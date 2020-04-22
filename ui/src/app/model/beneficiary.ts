@@ -2,15 +2,17 @@
 export class Beneficiary {
     firstName: string;
     lastName: string;
-    accountNumber: number;
+    accountNumber: string;
     nickName: string
     routingNumber: number
+    parentAccountNumber: string
     // Constructor
     constructor(firstName: string,
         lastName: string,
-        accountNumber: number,
+        accountNumber: string,
         nickName: string,
-        routingNumber: number
+        routingNumber: number,
+        parentAccountNumber: string
     ) {
 
         this.firstName = firstName;
@@ -18,5 +20,6 @@ export class Beneficiary {
         this.accountNumber = accountNumber;
         this.nickName = nickName;
         this.routingNumber = routingNumber;
+        this.parentAccountNumber = parentAccountNumber
     }
 }

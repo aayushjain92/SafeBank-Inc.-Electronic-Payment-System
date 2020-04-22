@@ -15,9 +15,11 @@ module.exports = (app) => {
     app.route('/transfer')
         .put(transactController.transfer);
 
+    app.route('/transferinotherbank')
+        .put(transactController.transferInOtherBank);    
+
     app.route('/transactions/:accountNumber')
         .get(transactController.list)
-
 
     app.route('/transactionspdf/:accountNumber')
         .get(transactController.pdf);

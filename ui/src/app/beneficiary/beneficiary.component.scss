@@ -61,16 +61,33 @@ label{
         font-weight: $f400;
        background-color: rgba(238, 229, 236, 0.767);
     }
+    // firstnmae textbox
+    .textName{
+                width: 37%;
+                padding: 6px 20px;
+                margin: 3px 0;
+                display: inline-block;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                box-sizing: border-box;
+            }
+
+            // rest of the text boxes
     .textb{
-        background-color:rgba(238, 229, 236, 0.767);
-        border-style: none
         
+        width: 23%;
+        padding: 6px 20px;
+        margin: 3px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
     }
 
     .left-section {
         
-        border-right: 1px solid #d7d7d7;
         min-height: 445px;
+        padding-left: 96px;
         #todoLists {
             > div {
                 border-bottom: 2px solid #464646;

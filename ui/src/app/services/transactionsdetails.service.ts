@@ -23,4 +23,10 @@ export class TransactionsdetailsService {
     return this.http.get(`${API_URL + 'transactionspdf'}/${accountNumber}`);
   }
 
+  // displays users account balance on frontedn
+  getAccountBalance(accountNumber): Observable<any> {
+    return this.http.get(`${API_URL + 'accounts'}/${accountNumber}`);
+  }
+
+
 }

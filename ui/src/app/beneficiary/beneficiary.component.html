@@ -1,3 +1,7 @@
+<app-main-nav>
+
+</app-main-nav>
+
 <div id="main" class="main">
 
     <!-- main accordion section -->
@@ -6,14 +10,22 @@
         <div id="mainContent" class="mainContent">
 
             <div class="left-section">
+
                 <div class="crumb">
-                    <a class="anav anavl" [routerLink]="['/addbeneficiary']" routerLinkActive="router-link-active">
+                    <a class="anav anavl" [routerLink]="['/beneficiaries/add']" routerLinkActive="router-link-active">
                         <mat-icon class="icon">person_add</mat-icon>Add
                     </a>
                 </div>
 
                 <div id="todoLists">
                     <h3 class="heading">{{title}}</h3>
+                    <!-- display msg for the new user or no beneficaries  -->
+                    <div *ngIf="beneficiaries?.length== 0">
+                        <div class=" alert alert-info">
+                            Please Click on <strong>Add</strong> a new Beneficiary link on top right
+                        </div>
+                    </div>
+
 
                     <div *ngFor="let beneficiary of beneficiaries">
                         <mat-accordion>
@@ -26,8 +38,8 @@
 
 
                                         <label for="fName ">Name:</label>
-                                        <input class="textb " type="text" name=fName id="fName"
-                                            [(ngModel)]="beneficiary.firstName">
+                                        <input class="textName " type="text" name=fName id="fName"
+                                            [(ngModel)]="beneficiary.firstName" readonly>
 
                                     </mat-panel-title>
                                     <mat-panel-description>
@@ -36,7 +48,7 @@
                                 </mat-expansion-panel-header>
                                 <label for="lastName">Last Name:</label>
                                 <input class="textb " type="text" name=lastName id="lastName"
-                                    [(ngModel)]="beneficiary.lastName">
+                                    [(ngModel)]="beneficiary.lastName" readonly>
                                 <br>
                                 <br>
                                 <label for="accountNumber">Account Number:</label>
@@ -70,26 +82,4 @@
 
     </div>
 </div>
-
-<!-- The Modal -->
-<div id="myModal" class="modal" [ngStyle]="{'display': modalValue ? 'block' : 'none' }">
-
-    <!-- Modal content -->
-    <div class="modal-content">
-        <!-- <div class="modal-header">
-
-            <h4 class="modal-title" id="myModalLabel">Exterminator</h4>
-        </div> -->
-        <div class="header">
-            <img height="40px" width="40px" src="https://www.tanie-konto.pl/wp-content/uploads/idea-bank-logo.jpg">
-        </div>
-        <div class="modal-container">
-            <p>{{modalValue}}</p>
-            <div class="crumbl">
-                <a class="deletmod deletmodl" [routerLink]="[]" (click)="toggleModal()">OK</a>
-            </div>
-        </div>
-
-    </div>
-
-</div>
+<app-footer></app-footer>
