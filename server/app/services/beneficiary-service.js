@@ -53,6 +53,5 @@ exports.delete = (accountId) => {
 // find beneficiary by id
 exports.get = (accountId) => {
     const itemPromise = Beneficiary.findOne({ accountNumber: accountId }).exec();
-    console.log(itemPromise);
     return itemPromise;
 };

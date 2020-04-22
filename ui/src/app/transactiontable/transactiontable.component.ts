@@ -36,10 +36,8 @@ export class TransactiontableComponent implements OnInit {
 
   initializeTableTxn() {
     let self = this;
-    console.log(this.store);
     this.store.subscribe(val => self.auth = val);
     this.user = this.auth.auth.status.user;
-    console.log("table" + this.user.account.AccountNumber);
   }
 
   // get 5 txns

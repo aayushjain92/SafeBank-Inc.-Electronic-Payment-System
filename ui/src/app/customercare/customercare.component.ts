@@ -20,13 +20,11 @@ export class CustomercareComponent implements OnInit {
 
   ngOnInit(): void {
     let auth;
-    console.log(this.store);
     this.store.subscribe(val => auth = val);
     if (auth.auth.status.user == null) {
       this.router.navigate(['/login']);
     } else {
       this.user = auth.auth.status.user;
-      console.log('User found in Customer complaints');
       this.getbeneficiary();
       // this.mainNavModal.openModal();
     }

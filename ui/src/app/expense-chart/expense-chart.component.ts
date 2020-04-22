@@ -35,7 +35,6 @@ export class ExpenseChartComponent implements OnInit {
 
   ngOnInit(): void {
     let auth;
-    console.log(this.store);
     this.store.subscribe(val => auth = val);
     if (auth.auth.status.user == null) {
       this.router.navigate(['/login']);
@@ -53,8 +52,6 @@ export class ExpenseChartComponent implements OnInit {
           donation = 0, emi = 0, utilityBills = 0, other = 0;
         for (let transaction of this.transactions) {
           //taking one transaction data at a time
-          console.log('Amount: ' + transaction.amount +
-            ' Category:' + transaction.category + ' Type:' + transaction.type);
           if (transaction.type == 'Credit') {
             credit += transaction.amount;
           } else {
