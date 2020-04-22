@@ -146,6 +146,7 @@ export class FundstransferComponent implements OnInit {
     // transferring amount to account in the same bank 
     transferInSameBank(transaction : Transaction): void{
       this.transaction.category = "TRANSFER";
+      this.transaction.amount = Number(this.transaction.amount);
 
       this.rest.transferAmountSameBank(transaction).subscribe((data) => {
         if(data instanceof Transaction){
@@ -174,6 +175,7 @@ export class FundstransferComponent implements OnInit {
     // transferring amount to account in a different bank 
     transferInOtherBank(transaction : Transaction): void{
       this.transaction.category = "TRANSFER";
+      this.transaction.amount = Number(this.transaction.amount);
       this.transaction.type = "Debit"; 
       this.rest.transferAmountOtherBank(transaction).subscribe((data) => {
         if(data instanceof Transaction){
