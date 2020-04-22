@@ -44,12 +44,12 @@ export class BeneficiaryService {
   }
 
   // manage beneficiaries
-  getBeneficiarybyaccountNumber(accountNumber): Observable<Beneficiary> {
-    return this.http.get<Beneficiary>(`${endpoint + 'manageBeneficiaries'}/${accountNumber}`);
+  getAccountbyAccountNumber(accountNumber): Observable<any> {
+    return this.http.get<any>(`${endpoint + 'accounts'}/${accountNumber}`);
   }
 
   // find if the user of Our Bank exists
   getUserByAccountNumber(accountNumber, parentAccountNumber): Observable<any> {
-    return this.http.get(`${endpoint + 'accounts'}/${accountNumber}/${parentAccountNumber}`);
+    return this.http.get(`${endpoint + 'beneficiaries'}/${accountNumber}/${parentAccountNumber}`);
   }
 }
