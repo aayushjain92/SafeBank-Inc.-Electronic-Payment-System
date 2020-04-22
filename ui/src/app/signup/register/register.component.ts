@@ -123,7 +123,7 @@ export class RegisterComponent implements OnInit {
   eventSelection(event) {
     alert(event.value);
     this.user.state = event.value;
-    console.log(this.user.state);
+    // console.log(this.user.state);
   }
 
   //below variables set to true to hide password and SSN on page load
@@ -151,7 +151,6 @@ export class RegisterComponent implements OnInit {
     //Password
     //base64 encoded password
     this.user.password = btoa(this.credentialsFormGroup.get('password').value);
-    console.log(this.user.password);
     //SSN Field
     this.user.ssn = this.ssnFormGroup.get('ssn').value;
 

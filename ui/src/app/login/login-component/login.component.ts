@@ -13,7 +13,6 @@ import { LoginService } from 'src/app/services/login.service';
 export class LoginComponent implements OnInit {
 
   user = new User();
-
   pending$ = this.store.pipe(select(fromAuth.getPending));
   error$ = this.store.pipe(select(fromAuth.getError));
 
@@ -23,10 +22,14 @@ export class LoginComponent implements OnInit {
     this.loginApi.loadUsers();
   }
 
-
+  error; 
+  errorMsg;
   onSubmit(user : User) {
-    console.log('in login comp parent >>' + user);
     this.loginApi.login(user);
+    this.store.subscribe(val => {
+      this.error = val;
+      this.errorMsg = this.error.auth.loginPage.error;
+    });
   }
 
 }
