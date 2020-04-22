@@ -9,7 +9,7 @@
             </span>
             <div class="welcome">Welcome back, {{user.firstName}}!!
             </div><br><br>
-            <span class="lastLogin"><strong>Last Login Time: </strong> {{user.lastLoginDate}}</span>
+            <span class="lastLogin"><strong>Last Login Time: </strong> {{user.lastLoginDate | date: 'short' }}</span>
 
         </div>
 
