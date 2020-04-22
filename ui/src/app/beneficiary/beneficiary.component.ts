@@ -39,13 +39,11 @@ export class BeneficiaryComponent implements OnInit {
   // intitialized data for a loggedin User
   initializeData() {
     let auth;
-    console.log(this.store);
     this.store.subscribe(val => auth = val);
     if (auth.auth.status.user == null) {
       this.router.navigate(['/login']);
     } else {
       this.user = auth.auth.status.user;
-      console.log('User found on Beneficiary');
     }
     console.log("beneficary" + this.user.account.AccountNumber);
   }
@@ -63,7 +61,6 @@ export class BeneficiaryComponent implements OnInit {
   deleteBeneficiary(benefeciary: Beneficiary) {
     // let benefeciary = new Beneficiary(this.firstName, this.lastName, this.accountNumber, this.nickName, this.routingNumber);
 
-    console.log(benefeciary);
     this.rest.deleteBeneficiary(benefeciary.accountNumber).subscribe((data) => {
       this.openSnackBar(benefeciary.firstName + " has been deleted successfully"
       , 'Dismiss');

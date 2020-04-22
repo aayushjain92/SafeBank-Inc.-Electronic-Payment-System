@@ -36,13 +36,11 @@ export class ContactUsComponent implements OnInit {
 
   ngOnInit(): void {
     let auth;
-    console.log(this.store);
     this.store.subscribe(val => auth = val);
     if (auth.auth.status.user == null) {
       this.router.navigate(['/login']);
     } else {
       this.user = auth.auth.status.user;
-      console.log('User found in contact us');
     }
 
     this.contactUsFormGroup = this._formBuilder.group({
