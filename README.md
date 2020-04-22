@@ -1,5 +1,4 @@
 # SafeBank (INFO6150 Final Project)
-=======
 
 Safebank is an electronic payment system that enables customers of SafeBank Inc. (imaginary) to conduct a range of financial transactions in real time. 
 
@@ -17,17 +16,17 @@ Safebank is an electronic payment system that enables customers of SafeBank Inc.
 
 ## Technologies Used
 #### Frontend
-    * Angular
+    * Angular v9.1.0
 
 #### Backend
-    * Express
-    * NodeJS 
-    * MongoDB
-    * Mongoose
+    * Express v4.17.1
+    * Node v12.14.1
+    * mongoDB Atlas (Cloud)
+    * Mongoose v5.9.7
 
 ## Requirments
     * Node
-    * MongoDB running locally
+    * Internet connection (for mongoDB Atlas)
 
 
 ## How to execute
@@ -46,7 +45,10 @@ Steps to run:
 
 
 
-## Developed by: Team Exterminators
+
+
+## Team Exterminators
+
 
 | Name | NEU ID | Email Address |
 | --- | --- | --- |

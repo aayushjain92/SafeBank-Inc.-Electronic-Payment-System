@@ -1,6 +1,8 @@
-# Ui
+# ui
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.6.
+
+This directory contains the frontend code of Safebank online banking application.
 
 ## Development server
 
