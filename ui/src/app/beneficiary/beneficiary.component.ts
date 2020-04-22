@@ -7,6 +7,7 @@ import { BeneficiaryService } from '../services/beneficiary.service';
 import { Store, select } from '@ngrx/store';
 import * as fromAuth from './../store/reducers/login.reducer';
 import { User } from 'src/app/model/user';
+import {MatSnackBar} from '@angular/material/snack-bar';
 @Component({
   selector: 'app-beneficiary',
   templateUrl: './beneficiary.component.html',
@@ -21,13 +22,12 @@ export class BeneficiaryComponent implements OnInit {
   beneficiaries: any;
   panelOpenState = false;
   title = 'My Beneficiaries';
-  modalValue: string = undefined;
   benefeciary: Beneficiary;
   routingNumber: number;
 
   constructor(public rest: BeneficiaryService, private route: ActivatedRoute,
-    private router: Router, private store: Store<fromAuth.State>
-  ) { }
+    private router: Router, private store: Store<fromAuth.State>, 
+    private _snackBar: MatSnackBar) { }
   user: User;
   auth: any;
   ngOnInit(): void {
@@ -65,22 +65,18 @@ export class BeneficiaryComponent implements OnInit {
 
     console.log(benefeciary);
     this.rest.deleteBeneficiary(benefeciary.accountNumber).subscribe((data) => {
-
-      this.modalValue = benefeciary.firstName + " has been deleted successfully";
-      console.log(benefeciary.accountNumber);
+      this.openSnackBar(benefeciary.firstName + " has been deleted successfully"
+      , 'Dismiss');
       this.getbeneficiary();
-      // document.getElementById("myModal").style.display = "block";
     }, (err) => {
       console.log(err);
     });
   }
 
-  // the confirmation modal
-  toggleModal() {
-
-    document.getElementById("myModal").style.display = "none";
-    this.modalValue = undefined;
-    return false;
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 10000,
+    });
   }
 
 }

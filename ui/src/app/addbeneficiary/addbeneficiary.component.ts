@@ -9,6 +9,7 @@ import { escapeIdentifier } from '@angular/compiler/src/output/abstract_emitter'
 import * as fromAuth from './../store/reducers/login.reducer';
 import { User } from 'src/app/model/user';
 import { Store, select } from '@ngrx/store';
+import {MatSnackBar} from '@angular/material/snack-bar';;
 @Component({
   selector: 'app-addbeneficiary',
   templateUrl: './addbeneficiary.component.html',
@@ -31,11 +32,13 @@ export class AddbeneficiaryComponent implements OnInit {
   routingNumberCheck: boolean = false;
   accountNumberCheck: boolean = false;
   error: string;
-  modalValue: string = undefined;
   user: User;
   auth: any;
   UserAccountdetails: any;
-  constructor(public rest: BeneficiaryService, private route: ActivatedRoute, private router: Router, private http: HttpClient, private store: Store<fromAuth.State>
+  
+ constructor(public rest: BeneficiaryService, private route: ActivatedRoute, 
+    private router: Router, private http: HttpClient, 
+    private store: Store<fromAuth.State>, private _snackBar: MatSnackBar 
   ) { }
 
 
@@ -105,11 +108,7 @@ export class AddbeneficiaryComponent implements OnInit {
           }
 
         });
-
-
     }
-
-
   }
 
   // get beneficiaries from backend
@@ -120,8 +119,6 @@ export class AddbeneficiaryComponent implements OnInit {
         console.log(this.beneficiaries)
 
       });
-
-
   }
 
 
@@ -175,6 +172,7 @@ export class AddbeneficiaryComponent implements OnInit {
             this.error = "";
             this.beneficiaryCheck = false;
           }, 5000);
+// <<<<<<< avi_ministatement
         });
 
 
@@ -216,10 +214,26 @@ export class AddbeneficiaryComponent implements OnInit {
 
 
 
+// =======
+        } else {
+          this.beneficiaryCheck = false;
+          this.benef = new Beneficiary(this.firstName, this.lastName, this.accountNumber, this.nickName, this.routingNumber, this.user.account.AccountNumber);
+
+          this.rest.savebeneficiary(this.benef)
+            .subscribe(data => {
+              this.beneficiaries = data;
+              this.openSnackBar(data.firstName + " has been added successfully", 'Dismiss');
+              this.router.navigate(['/dashboard']);
+            });
+        }
+      });
+// >>>>>>> urvashi
   }
 
-
-
-
-
+  //Snack bar to show the successs/error message
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 10000,
+    });
+  }
 }

@@ -75,6 +75,7 @@ export class DonateCovidComponent implements OnInit {
     });
   }
 
+  //Snack bar to show the successs/error message
   openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action, {
       duration: 10000,
