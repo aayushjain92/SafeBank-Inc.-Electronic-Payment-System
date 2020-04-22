@@ -90,6 +90,7 @@ export class AddbeneficiaryComponent implements OnInit {
 
   // function to check the routing number
   check() {
+    this.getInputValues();
     const userRoutingValue = (<HTMLInputElement>document.getElementById("routingNumber")).value;
     // check if roouting number is of Exterminator bank
     if (userRoutingValue === "111222333") {
@@ -99,7 +100,6 @@ export class AddbeneficiaryComponent implements OnInit {
       // calling external api for verifying routing number
       const endpoint = 'https://www.routingnumbers.info/api/name.json?rn=';
       this.routingNumber = this.routingNumber;
-
       this.http.get(`${endpoint + this.routingNumber}`)
         .subscribe(data => {
           this.routing = data;
