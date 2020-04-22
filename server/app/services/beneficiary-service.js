@@ -14,6 +14,11 @@ exports.searchbeneficiaryList = (accountId) => {
     return promise;
 };
 
+exports.searchByAccountAndParent = (accountId, parentAccountId) => {
+    const promise = Beneficiary.find({ $and:[{accountNumber: accountId}, {parentAccountNumber: parentAccountId}] }).exec();
+    return promise;
+};
+
 // seach for all the Beneficiary by accntnumber
 exports.search = (accountId) => {
     const promise = Beneficiary.findOne({ accountNumber: accountId }).exec();

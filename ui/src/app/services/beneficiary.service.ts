@@ -49,7 +49,7 @@ export class BeneficiaryService {
   }
 
   // find if the user of Our Bank exists
-  getUserByAccountNumber(accountNumber): Observable<any> {
-    return this.http.get(`${endpoint + 'accounts'}/${accountNumber}`);
+  getUserByAccountNumber(accountNumber, parentAccountNumber): Observable<any> {
+    return this.http.get(`${endpoint + 'accounts'}/${accountNumber}/${parentAccountNumber}`);
   }
 }
