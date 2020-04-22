@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/model/user';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl, AbstractControl, AsyncValidatorFn } from '@angular/forms';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { RegisterService } from 'src/app/services/register.service';
+// import { SignupService } from 'src/app/services/signup.service';
+import { map, debounceTime, take, switchMap } from "rxjs/operators";
+import { Observable, of } from 'rxjs';
+import { LoginService } from 'src/app/services/login.service';
 
 // State for dropdown to select State in Address Form
 interface State {
@@ -85,7 +89,7 @@ export class RegisterComponent implements OnInit {
   ];
 
   constructor(private _formBuilder: FormBuilder, private route: ActivatedRoute,
-    private router: Router, private service: RegisterService) { }
+    private router: Router, private service: RegisterService, private loginApi: LoginService) { }
 
   user: User = new User();
   users: User[] = [];
@@ -97,7 +101,7 @@ export class RegisterComponent implements OnInit {
       firstNameCtrl: ['', Validators.required],
       lastNameCtrl: ['', Validators.required],
       phoneNumberCtrl: ['', [Validators.required, Validators.minLength, Validators.pattern("^[0-9]*$")]],
-      emailIDCtrl: ['', [Validators.required, Validators.email]],
+      emailIDCtrl: ['', [Validators.required, Validators.email], [this.existingEmailValidator()]],
       dobCtrl: ['', [Validators.required]]
     });
     //Validations on address Details Form
@@ -120,6 +124,40 @@ export class RegisterComponent implements OnInit {
 
   }
 
+
+  isEmptyInputValue(value: any): boolean {
+    // we don't check for string here so it also works with arrays
+    return value === null || value.length === 0;
+  }
+
+  existingEmailValidator(initialEmail: string = ""): AsyncValidatorFn {
+    return (
+      control: AbstractControl
+    ):
+      | Promise<{ [key: string]: any } | null>
+      | Observable<{ [key: string]: any } | null> => {
+      if (this.isEmptyInputValue(control.value)) {
+        return of(null);
+      } else if (control.value === initialEmail) {
+        return of(null);
+      } else {
+        return control.valueChanges.pipe(
+          debounceTime(500),
+          take(1),
+          switchMap(_ =>
+            this.loginApi.getUserByEmail(control.value)
+              .pipe(
+                map(user =>
+                  user ? { existingEmail: { value: control.value } } : null
+                )
+              )
+          )
+        );
+      }
+    };
+  }
+
+
   eventSelection(event) {
     alert(event.value);
     this.user.state = event.value;
@@ -136,6 +174,7 @@ export class RegisterComponent implements OnInit {
 
 
   saveUser(): void {
+
     //Personal info
     this.user.firstName = this.personalFormGroup.get('firstNameCtrl').value;
     this.user.lastName = this.personalFormGroup.get('lastNameCtrl').value;
@@ -156,6 +195,7 @@ export class RegisterComponent implements OnInit {
 
     //register user and navigate to login page
     this.service.registerUser(this.user);
+
     this.router.navigate(['/login', {}]);
   }
 }

@@ -73,6 +73,10 @@
               <mat-error *ngIf="personalFormGroup.get('emailIDCtrl').hasError('email')">
                 Please enter valid email id
               </mat-error>
+              <!--Error if email id already exists-->
+              <mat-error *ngIf="personalFormGroup.get('emailIDCtrl').hasError('existingEmail')">
+                Email ID already exists
+              </mat-error>
             </mat-form-field>
           </div>
           <div class="element">
