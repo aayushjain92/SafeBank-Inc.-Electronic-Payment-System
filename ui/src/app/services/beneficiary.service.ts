@@ -40,12 +40,16 @@ export class BeneficiaryService {
   // end point to delete beneficiary
   deleteBeneficiary(accountNumber): Observable<Beneficiary> {
 
-    return this.http.delete<Beneficiary>(`${endpoint + 'manageBeneficiaries'}/${accountNumber}`);
+    return this.http.delete<Beneficiary>(`${endpoint + 'beneficiaries/add'}/${accountNumber}`);
   }
 
   // manage beneficiaries
   getAccountbyAccountNumber(accountNumber): Observable<any> {
     return this.http.get<any>(`${endpoint + 'accounts'}/${accountNumber}`);
+  }
+
+  getBeneficiarybyaccountNumber(accountNumber): Observable<Beneficiary> {
+    return this.http.get<Beneficiary>(`${endpoint + 'beneficiaries/add'}/${accountNumber}`);
   }
 
   // find if the user of Our Bank exists

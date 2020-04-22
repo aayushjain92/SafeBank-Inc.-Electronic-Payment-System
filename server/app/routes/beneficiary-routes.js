@@ -9,10 +9,10 @@ module.exports = (app) => {
         .get(beneficaryController.list)
     app.route('/beneficiaries')
         .post(beneficaryController.save);
-    app.route('/manageBeneficiaries/:accountNumber')
+    app.route('/beneficiaries/add/:accountNumber')
         .get(beneficaryController.get)
         .delete(beneficaryController.delete);
-
-        app.route('/beneficiaries/:accountId/:parentId')
+  
+    app.route('/beneficiaries/:accountId/:parentId')
         .get(beneficaryController.getByParent);
 };  
