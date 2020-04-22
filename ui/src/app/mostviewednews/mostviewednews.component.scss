@@ -1,11 +1,16 @@
-.tabsView .tabsContent>ul>li {
-    display: none;
+.tabsView .tabsContent>ul{
     list-style: none;
-    width: 301px;
-    margin-left: 419px;
-    border-top: 2px solid #000;
-    background: #f1f5f8;
-    }
+    >li {
+    
+        width: 301px;
+        /* margin-left: 419px; */
+        /* border-top: 2px solid #000; */
+        background: #f1f5f8;
+       
+        }
+    
+}
+
     
     .tabsView{
         .tabsContent>ul>li.active {
@@ -25,12 +30,21 @@
     font-size: 13px;
     line-height: 17px;
     padding: 7px 10px;
-    list-style: none
+    list-style: circle;
     }
     
     .list1 li:hover {
     background: #f4f4f4;
     border-color: #cdcbcb;
     color: #000
+    }
+
+
+    .mostPopular{
+        color: #000;
+        font-weight: 700;
+        line-height: 36px;
+        border-top: 1px solid #000;
+        margin-left: 41px;
     }
     
