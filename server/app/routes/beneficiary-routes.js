@@ -12,4 +12,7 @@ module.exports = (app) => {
     app.route('/beneficiaries/add/:accountNumber')
         .get(beneficaryController.get)
         .delete(beneficaryController.delete);
+  
+    app.route('/beneficiaries/:accountId/:parentId')
+        .get(beneficaryController.getByParent);
 };  

@@ -129,3 +129,29 @@ exports.get = (request, response) => {
             });
         });
 };
+
+/**
+ * get method for the finding items by passing id it will return 1 item
+ *
+ * @param request
+ * @param response
+*/
+exports.getByParent = (request, response) => {
+    const accountId = request.params.accountId;
+    const parentAccountId = request.params.parentId;
+    const total = beneficaryService.searchByAccountAndParent(accountId, parentAccountId)
+        .then(item => {
+            if (item != null) {
+                response.status(200).json(item);
+            } else {
+                response.status(404).json({
+                    message: "Account Not found"
+                });
+            }
+        })
+        .catch(err => {
+            response.status(500).json({
+                message: "not proper id format"
+            });
+        });
+};

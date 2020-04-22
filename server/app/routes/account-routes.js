@@ -11,5 +11,7 @@ module.exports = (app) => {
         .get(accountsController.get)
         .delete(accountsController.delete);
         //Add update account api
+
+        
 };
 
