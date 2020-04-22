@@ -114,7 +114,7 @@ let renderErrorResponse = (response) => {
 
 
 
-// get method for the finding items by passing id it will return 1 item
+// get method for the finding beneficaries by passing id it will return 1 beneficiaries
 exports.get = (request, response) => {
     const accountId = request.params.accountNumber;
 

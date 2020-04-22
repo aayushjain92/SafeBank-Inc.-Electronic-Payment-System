@@ -25,7 +25,7 @@ export class BeneficiaryService {
 
 
   // end point to get all items
-  getbeneficiary(accountNumber : string): Observable<any> {
+  getbeneficiary(accountNumber: string): Observable<any> {
 
     return this.http.get(`${endpoint + 'beneficiaries'}/${accountNumber}`);
   }
@@ -46,5 +46,10 @@ export class BeneficiaryService {
   // manage beneficiaries
   getBeneficiarybyaccountNumber(accountNumber): Observable<Beneficiary> {
     return this.http.get<Beneficiary>(`${endpoint + 'manageBeneficiaries'}/${accountNumber}`);
+  }
+
+  // find if the user of Our Bank exists
+  getUserByAccountNumber(accountNumber): Observable<any> {
+    return this.http.get(`${endpoint + 'accounts'}/${accountNumber}`);
   }
 }

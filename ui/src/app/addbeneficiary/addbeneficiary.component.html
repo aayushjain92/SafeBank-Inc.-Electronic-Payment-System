@@ -56,7 +56,8 @@
     </div>
 
 
-    <button class="submitBtn" name="Submit" value="Submit" (click)="savebeneficiary()">Submit</button>
+    <button class="submitBtn" name="Submit" value="Submit" (click)="savebeneficiary()"
+        [disabled]="!routingNumberCheck">Submit</button>
     <div *ngIf="beneficiaryCheck">
         <span class="beneficiaryerror">{{error}}</span>
     </div>
