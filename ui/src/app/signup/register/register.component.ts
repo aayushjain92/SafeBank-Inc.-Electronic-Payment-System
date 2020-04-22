@@ -108,7 +108,7 @@ export class RegisterComponent implements OnInit {
     this.addressFormGroup = this._formBuilder.group({
       addressLine1Ctrl: ['', Validators.required],
       addressLine2Ctrl: ['', Validators.required],
-      cityCtrl: ['', Validators.required],
+      cityCtrl: ['', [Validators.required, Validators.pattern('^[A-Za-z]+$')]],
       stateCtrl: ['', Validators.required],
       zipCtrl: ['', [Validators.required, Validators.pattern("^[0-9]*$"), Validators.minLength(5), Validators.maxLength(5)]]
     });
