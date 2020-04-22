@@ -17,7 +17,7 @@ export class ChartComponent implements OnInit {
 
   // calling external api
   dailyForecast() {
-    return this.http.get("https://api.worldtradingdata.com/api/v1/forex?base=USD&api_token=YZ6lb7ELYKjIrOFi0cgzNfEczgZ8j1FbkNpOMwJtRTfKNeCmDDL2FfddgKN")
+    return this.http.get("https://api.worldtradingdata.com/api/v1/forex?base=USD&api_token=YZ6lb7ELYKjIrOFi0cgzNfEczgZ8j1FbkNpOMwJtRTfKNeCmDDL2FfddgKNd")
       .pipe(map(result => result));
   }
 
