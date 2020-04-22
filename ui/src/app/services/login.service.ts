@@ -44,6 +44,7 @@ export class LoginService {
   }
 
   login(user: User): void {
+    this.loadUsers();
     this.setUsersToArray();
     const isauthentcated = this.authenticate(user);
     const error = "Email/password is incorrect. Please try again.";
@@ -51,12 +52,15 @@ export class LoginService {
       //Fetching entire user object
       this.getUserByEmail(user.email).subscribe((userDetails:User) => {
         user = userDetails;
+
         //dispatch login success state to store
         this.store.dispatch(AuthActions.loginSuccess({ user }));
         // console.log("this.store.getState(): "+ this.store.);
+        
         // this.store.subscribe(function() {
         //   localStorage.setItem('state', JSON.stringify(this.store.getState()));
         // })      
+        
         //how to use state in dashboard and other screens
         if(user.role != null && user.role === 'customercare'){
           this.router.navigate(['/ccdashboard']);
@@ -71,6 +75,7 @@ export class LoginService {
   }
 
   authenticate(user: User): boolean {
+
     let isauthenticated = false;
     this.users.forEach(element => {
       //Decoding the base64 password returned
@@ -91,6 +96,7 @@ export class LoginService {
 
   logout(user: User): void {
     this.updateLastLogin(user.email)
+
     //check if updateLastLogin is successful
     this.store.dispatch(LogoutActions.logout());
     this.router.navigate(['/']);
