@@ -42,8 +42,14 @@ exports.get = (request, response) => {
 
     const total = accountService.searchAllByAccountId(accountId)
         .then(item => {
+            if (item != null) {
+                response.status(200).json(item);
+            } else {
+                response.status(404).json({
+                    message: "Account Not found"
+                });
+            }
 
-            response.status(200).json(item);
         })
         .catch(err => {
             response.status(500).json({

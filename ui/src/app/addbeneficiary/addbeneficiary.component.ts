@@ -21,7 +21,7 @@ export class AddbeneficiaryComponent implements OnInit {
   lastName: string;
   accountNumber: string;
   nickName: string;
-  routingNumber: number;
+  routingNumber: any;
   routing: any;
   beneficiaries: any;
   panelOpenState = false;
@@ -34,7 +34,9 @@ export class AddbeneficiaryComponent implements OnInit {
   error: string;
   user: User;
   auth: any;
-  constructor(public rest: BeneficiaryService, private route: ActivatedRoute, 
+  UserAccountdetails: any;
+  
+ constructor(public rest: BeneficiaryService, private route: ActivatedRoute, 
     private router: Router, private http: HttpClient, 
     private store: Store<fromAuth.State>, private _snackBar: MatSnackBar 
   ) { }
@@ -122,20 +124,97 @@ export class AddbeneficiaryComponent implements OnInit {
 
   // saving beneficiary to the database
   savebeneficiary() {
-    this.rest.getBeneficiarybyaccountNumber(this.accountNumber)
-      .subscribe(data => {
-        this.routing = data;
-        // checking if the beneficary already exists
-        console.log("this", data);
-        // console.log(this.routing.parentAccountNumber);
-        // console.log(this.user.account.AccountNumber);
-        if (this.routing != null && this.routing.parentAccountNumber === this.user.account.AccountNumber) {
-          console.log("this", data);
+    // 
+
+    if (this.user.account.AccountNumber === this.accountNumber) {
+      this.beneficiaryCheck = true;
+      this.error = "Cannot add yourself as beneficiary";
+      setTimeout(() => {
+        this.beneficiaryCheck = false;
+        this.error = "";
+      }, 5000);
+    } else if (this.user.account.routingNumber == this.routingNumber) {
+
+      this.rest.getUserByAccountNumber(this.accountNumber).subscribe(data => {
+        this.UserAccountdetails = data;
+        this.rest.getBeneficiarybyaccountNumber(this.accountNumber)
+          .subscribe(data => {
+            this.routing = data;
+            // checking if the beneficary already exists
+            console.log("this", data);
+
+            if (this.routing != null && this.routing.parentAccountNumber === this.user.account.AccountNumber) {
+              console.log("this", data);
+              this.beneficiaryCheck = true;
+              this.error = "Beneficiary already exists";
+              let timeoutId = setTimeout(() => {
+                this.beneficiaryCheck = false;
+                this.error = "";
+              }, 5000);
+            } else {
+              this.beneficiaryCheck = false;
+              this.benef = new Beneficiary(this.firstName, this.lastName, this.accountNumber, this.nickName, this.routingNumber, this.user.account.AccountNumber);
+
+              this.rest.savebeneficiary(this.benef)
+                .subscribe(data => {
+                  this.beneficiaries = data;
+                  this.modalValue = data.firstName + " has been added successfully";
+                });
+            }
+          });
+
+      }
+        , (err) => {
           this.beneficiaryCheck = true;
-          this.error = "Beneficiary already exists";
-          let timeoutId = setTimeout(() => {
+          console.log(err);
+          this.error = err.error.message;
+          setTimeout(() => {
+            this.error = "";
             this.beneficiaryCheck = false;
           }, 5000);
+// <<<<<<< avi_ministatement
+        });
+
+
+
+    } else {
+      this.rest.getBeneficiarybyaccountNumber(this.accountNumber)
+        .subscribe(data => {
+          this.routing = data;
+          // checking if the beneficary already exists
+          console.log("this", data);
+
+          if (this.routing != null && this.routing.parentAccountNumber === this.user.account.AccountNumber) {
+            console.log("this", data);
+            this.beneficiaryCheck = true;
+            this.error = "Beneficiary already exists";
+            let timeoutId = setTimeout(() => {
+              this.beneficiaryCheck = false;
+              this.error = "";
+            }, 5000);
+          } else {
+            this.beneficiaryCheck = false;
+            this.benef = new Beneficiary(this.firstName, this.lastName, this.accountNumber, this.nickName, this.routingNumber, this.user.account.AccountNumber);
+
+            this.rest.savebeneficiary(this.benef)
+              .subscribe(data => {
+                this.beneficiaries = data;
+                this.modalValue = data.firstName + " has been added successfully";
+              });
+          }
+        });
+
+
+    }
+
+
+
+
+
+
+
+
+// =======
         } else {
           this.beneficiaryCheck = false;
           this.benef = new Beneficiary(this.firstName, this.lastName, this.accountNumber, this.nickName, this.routingNumber, this.user.account.AccountNumber);
@@ -148,6 +227,7 @@ export class AddbeneficiaryComponent implements OnInit {
             });
         }
       });
+// >>>>>>> urvashi
   }
 
   //Snack bar to show the successs/error message
