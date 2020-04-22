@@ -24,8 +24,8 @@ Safebank is an electronic payment system that enables customers of SafeBank Inc.
     * mongoDB Atlas (Cloud)
     * Mongoose v5.9.7
 
-## Requirments
-    * Node
+## Requirements
+    * Node v12.14.1 (recommended)
     * Internet connection (for mongoDB Atlas)
 
 
