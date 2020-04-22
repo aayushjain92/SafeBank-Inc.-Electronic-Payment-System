@@ -9,7 +9,7 @@ import { BeneficiaryService } from '../services/beneficiary.service';
 import { Transaction } from '../model/transaction.model';
 import { Beneficiary } from '../model/beneficiary';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-fundstransfer',
@@ -23,12 +23,12 @@ export class FundstransferComponent implements OnInit {
   selectedBeneficiary: string;
 
   constructor(public restBeneficiary: BeneficiaryService, public rest: FundstransferService, private route: ActivatedRoute, 
-    private router: Router, private store: Store<fromAuth.State>) {
+    private router: Router, private store: Store<fromAuth.State>, private _snackBar: MatSnackBar ) {
     this.transaction = new Transaction();
   }
   user: User;
   auth: any;
-  displayText: string = undefined;
+  // displayText: string = undefined;
   panelOpenState = false;
 
   ngOnInit(): void {
@@ -87,7 +87,9 @@ export class FundstransferComponent implements OnInit {
     this.transaction.type = "Credit";
     
     this.rest.creditAmount(transaction).subscribe((data) => {
-      this.displayText = transaction.ownerAccountNum + ` has been credited successfully by USD ${transaction.amount}`;
+      this.openSnackBar(transaction.ownerAccountNum + ` has been credited successfully by USD ${transaction.amount}`
+      , 'Dismiss');
+      this.router.navigate(['/dashboard']);
     }, (err) => {
       console.log(err);
     });
@@ -100,15 +102,21 @@ export class FundstransferComponent implements OnInit {
 
     this.rest.debitAmount(transaction).subscribe((data) => {
       if(data instanceof Transaction){
-        this.displayText = transaction.ownerAccountNum + ` has been debited successfully by USD ${transaction.amount}`;
+        this.openSnackBar(transaction.ownerAccountNum + ` has been debited successfully by USD ${transaction.amount}`
+      , 'Dismiss');
+      this.router.navigate(['/dashboard']);
       }else{
         const obj = JSON.parse(JSON.stringify(data));
         if(obj.status = 401){
           if(obj.message == "Account doesnt exist or Insufficient Funds"){
-            this.displayText = "Insufficient funds, please try changing the amount to a lesser value";
+            this.openSnackBar("Insufficient funds, please try changing the amount to a lesser value"
+            , 'Dismiss');
           }
           else{
-            this.displayText = obj.message;
+            this.openSnackBar(obj.message
+            , 'Dismiss');
+            this.router.navigate(['/dashboard']);
+           
           }
         }
       }  
@@ -133,15 +141,19 @@ export class FundstransferComponent implements OnInit {
 
       this.rest.transferAmountSameBank(transaction).subscribe((data) => {
         if(data instanceof Transaction){
-          this.displayText = `Amount transferred successfully!`;
+          this.openSnackBar(`Amount transferred successfully!`
+            , 'Dismiss');
+          this.router.navigate(['/dashboard']);
         }else{
           const obj = JSON.parse(JSON.stringify(data));
           if(obj.status = 401){
             if(obj.message == "Account doesnt exist or Insufficient Funds"){
-              this.displayText = "Insufficient funds, please try changing the amount to a lesser value";
+              this.openSnackBar("Insufficient funds, please try changing the amount to a lesser value",
+             'Dismiss');
             }
             else{
-              this.displayText = obj.message;
+              this.openSnackBar(obj.message, 'Dismiss'); 
+              this.router.navigate(['/dashboard']);
             }
           }
         }  
@@ -157,14 +169,20 @@ export class FundstransferComponent implements OnInit {
       this.transaction.type = "Debit"; 
       this.rest.transferAmountOtherBank(transaction).subscribe((data) => {
         if(data instanceof Transaction){
-          this.displayText = `Amount transferred successfully!`;
+          this.openSnackBar(`Amount transferred successfully!`,
+             'Dismiss');
+          this.router.navigate(['/dashboard']);
         }else{
           const obj = JSON.parse(JSON.stringify(data));
           if(obj.status = 401){
             if(obj.message == "Account doesnt exist or Insufficient Funds"){
-              this.displayText = "Insufficient funds, please try changing the amount to a lesser value";
+              this.openSnackBar("Insufficient funds, please try changing the amount to a lesser value",
+             'Dismiss');
             }else{
-              this.displayText = obj.message;
+              this.openSnackBar(obj.message,
+             'Dismiss');
+             console.log('In else');
+             this.router.navigate(['/dashboard']);
             }
           }
         }  
@@ -173,13 +191,12 @@ export class FundstransferComponent implements OnInit {
         console.log(err);
       });
     }
-
-
-  // the confirmation modal
-  toggleModal() {
-    document.getElementById("myModal").style.display = "none";
-    this.displayText = undefined;
-    return false;
+    
+  //Snack bar to show the successs/error message
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 10000,
+    });
   }
 
 
