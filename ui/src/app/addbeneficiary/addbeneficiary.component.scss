@@ -40,10 +40,10 @@ $gray: #f7f7f7;
     
         @extend .btn;
         background-color: #3f51b5;
-        &:hover {
-            background-color: black;
-            color: white;
-        }
+        // &:hover {
+        //     background-color: black;
+        //     color: white;
+        // }
         &:focus {
             outline: 0;
         }

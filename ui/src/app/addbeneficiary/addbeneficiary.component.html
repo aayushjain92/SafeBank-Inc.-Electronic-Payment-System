@@ -47,21 +47,14 @@
         <!-- <span class="error" *ngIf="!routingNumber.valid && routingNumber.touched">
             Please enter Due date!
         </span> -->
-        <div *ngIf="enterVal">
-            <span class="error">{{error}}</span>
-        </div>
         <div *ngIf="routingNumberCheck">
             <mat-icon>check_circle</mat-icon>
         </div>
     </div>
 
 
-    <button class="submitBtn" name="Submit" value="Submit" (click)="savebeneficiary()">Submit</button>
-    <div *ngIf="beneficiaryCheck">
-        <span class="beneficiaryerror">{{error}}</span>
-    </div>
-    <!-- error for form fields -->
-
+    <button class="submitBtn" name="Submit" value="Submit" (click)="savebeneficiary()"
+        [disabled]="!routingNumberCheck">Submit</button>
 </div>
 
 <app-footer></app-footer>

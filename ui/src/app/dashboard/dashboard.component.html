@@ -8,7 +8,8 @@
                 <img src="assets/8finished.png" alt="AVATAR">
             </span>
             <div class="welcome">Welcome back, {{user.firstName}}!!
-            </div>
+            </div><br><br>
+            <span class="lastLogin"><strong>Last Login Time: </strong> {{user.lastLoginDate | date: 'short' }}</span>
 
         </div>
 
@@ -29,4 +30,5 @@
 <app-transactiontable></app-transactiontable>
 <app-chart></app-chart>
 <!-- <app-expense-chart></app-expense-chart> -->
+<br><br><br><br><br><br><br><br><br>
 <app-footer></app-footer>

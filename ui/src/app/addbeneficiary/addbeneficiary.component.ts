@@ -21,20 +21,19 @@ export class AddbeneficiaryComponent implements OnInit {
   lastName: string;
   accountNumber: string;
   nickName: string;
-  routingNumber: number;
+  routingNumber: any;
   routing: any;
   beneficiaries: any;
   panelOpenState = false;
   title = 'My Beneficiaries';
   benef: Beneficiary;
-  enterVal: boolean;
-  beneficiaryCheck: boolean;
   routingNumberCheck: boolean = false;
-  accountNumberCheck: boolean = false;
   error: string;
   user: User;
   auth: any;
-  constructor(public rest: BeneficiaryService, private route: ActivatedRoute, 
+  UserAccountdetails: any;
+  
+ constructor(public rest: BeneficiaryService, private route: ActivatedRoute, 
     private router: Router, private http: HttpClient, 
     private store: Store<fromAuth.State>, private _snackBar: MatSnackBar 
   ) { }
@@ -68,10 +67,8 @@ export class AddbeneficiaryComponent implements OnInit {
     // check if roouting number is of Exterminator bank
     if (userRoutingValue === "111222333") {
       this.routingNumberCheck = true;
-      this.enterVal = false;
     } else {
       this.routingNumberCheck = false;
-      this.enterVal = true;
       // calling external api for verifying routing number
       const endpoint = 'https://www.routingnumbers.info/api/name.json?rn=';
       this.routingNumber = this.routingNumber;
@@ -84,29 +81,27 @@ export class AddbeneficiaryComponent implements OnInit {
           // status code filtered and then allowed user to register or add a beneficiary
           if (this.routing["code"] === 200) {
             this.routingNumberCheck = true;
-            this.enterVal = false;
             console.log("success");
           } else if (this.routing["code"] === 404) {
             this.routingNumberCheck = false;
-            this.enterVal = true;
             this.error = "Incorrect Routing Number";
-            setTimeout(() => {
-              this.enterVal = false;
-              this.error = "";
-            }, 2000);
+            this.openSnackBar("Incorrect Routing Number", 'Dismiss');
             console.log("fail");
           } else if (this.routing["code"] === 400) {
             this.routingNumberCheck = false;
-            this.enterVal = true;
             this.error = "Routing Number should be 9 digits";
-            setTimeout(() => {
-              this.enterVal = false;
-              this.error = "";
-            }, 3000);
+            this.openSnackBar("Routing Number should be 9 digits", 'Dismiss');
           }
 
         });
     }
+  }
+
+  //Snack bar to show the successs/error message
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 10000,
+    });
   }
 
   // get beneficiaries from backend
@@ -122,38 +117,64 @@ export class AddbeneficiaryComponent implements OnInit {
 
   // saving beneficiary to the database
   savebeneficiary() {
-    this.rest.getBeneficiarybyaccountNumber(this.accountNumber)
-      .subscribe(data => {
-        this.routing = data;
-        // checking if the beneficary already exists
-        console.log("this", data);
-        // console.log(this.routing.parentAccountNumber);
-        // console.log(this.user.account.AccountNumber);
-        if (this.routing != null && this.routing.parentAccountNumber === this.user.account.AccountNumber) {
-          console.log("this", data);
-          this.beneficiaryCheck = true;
-          this.error = "Beneficiary already exists";
-          let timeoutId = setTimeout(() => {
-            this.beneficiaryCheck = false;
-          }, 5000);
-        } else {
-          this.beneficiaryCheck = false;
-          this.benef = new Beneficiary(this.firstName, this.lastName, this.accountNumber, this.nickName, this.routingNumber, this.user.account.AccountNumber);
+    if (this.user.account.AccountNumber === this.accountNumber) {
+      this.error = "Cannot add yourself as beneficiary";
+      this.openSnackBar("Cannot add yourself as beneficiary", 'Dismiss');
+    } else if (this.user.account.routingNumber == this.routingNumber) {
 
-          this.rest.savebeneficiary(this.benef)
-            .subscribe(data => {
-              this.beneficiaries = data;
-              this.openSnackBar(data.firstName + " has been added successfully", 'Dismiss');
-              this.router.navigate(['/dashboard']);
-            });
-        }
-      });
-  }
+      this.rest.getUserByAccountNumber(this.accountNumber).subscribe(data => {
+        this.UserAccountdetails = data;
+        this.rest.getBeneficiarybyaccountNumber(this.accountNumber)
+          .subscribe(data => {
+            this.routing = data;
+            // checking if the beneficary already exists
+            console.log("our bank", data);
 
-  //Snack bar to show the successs/error message
-  openSnackBar(message: string, action: string) {
-    this._snackBar.open(message, action, {
-      duration: 10000,
-    });
+            if (this.routing != null && this.routing.parentAccountNumber === this.user.account.AccountNumber) {
+              console.log("this", data);
+              //cleanup
+              this.error = "Beneficiary already exists";
+              this.openSnackBar("Beneficiary already exists", 'Dismiss');
+            } else {
+              this.benef = new Beneficiary(this.firstName, this.lastName, this.accountNumber, this.nickName, this.routingNumber, this.user.account.AccountNumber);
+
+              this.rest.savebeneficiary(this.benef)
+                .subscribe(data => {
+                  this.beneficiaries = data;
+                  this.openSnackBar(data.firstName + " has been added successfully", 'Dismiss');
+                  this.router.navigate(['/beneficiaries']);
+                });
+            }
+          });
+
+      }
+      , (err) => {
+          // console.log(err);
+          // this.error = err.error.message;
+          this.openSnackBar(err.error.message, 'Dismiss');
+        });
+    } else {
+      this.rest.getBeneficiarybyaccountNumber(this.accountNumber)
+        .subscribe(data => {
+          this.routing = data;
+          // checking if the beneficary already exists
+          console.log("other bank", data);
+
+          if (this.routing != null && this.routing.parentAccountNumber === this.user.account.AccountNumber) {
+            console.log("this", data);
+            this.error = "Beneficiary already exists";
+            this.openSnackBar("Beneficiary already exists", 'Dismiss');
+          } else {
+            this.benef = new Beneficiary(this.firstName, this.lastName, this.accountNumber, this.nickName, this.routingNumber, this.user.account.AccountNumber);
+
+            this.rest.savebeneficiary(this.benef)
+              .subscribe(data => {
+                this.beneficiaries = data;
+                this.openSnackBar(data.firstName + " has been added successfully", 'Dismiss');
+                this.router.navigate(['/beneficiaries']);
+              });
+          }
+        });
+    }
   }
 }

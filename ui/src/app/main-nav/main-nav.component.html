@@ -29,7 +29,7 @@
         <mat-icon aria-hidden="false" aria-label="home icon">local_phone</mat-icon>
         <span class="nav-item">Contact Us</span>
       </a>
-      <a mat-list-item (click)="logoutPopUp()">
+      <a mat-list-item (click)="openDialog()">
         <mat-icon aria-hidden="false" aria-label="home icon">arrow_forward_ios</mat-icon>
         <span class="nav-item">Logout</span>
       </a>
@@ -49,25 +49,8 @@
 
 
       <div class="logout-btn">
-        <a (click)="logoutPopUp()">Logout</a>
+        <a (click)="openDialog()">Logout</a>
       </div>
     </mat-toolbar>
-
-    <!-- The Modal -->
-    <div id="myModal" class="modal" [ngStyle]="{'display': modalValue ? 'block' : 'none' }">
-      <!-- Modal content -->
-      <div class="modal-content">
-        <div class="header">
-          <img height="40px" width="40px" src="https://www.tanie-konto.pl/wp-content/uploads/idea-bank-logo.jpg">
-        </div>
-        <div class="modal-container">
-          <p>{{modalValue}}</p>
-          <div class="crumbl">
-            <a class="logout logoutl" [routerLink]="[('/dashboard')]" (click)="toggleModal()">Cancel</a>
-            <a class="logout logoutl" (click)="logout()">OK</a>
-          </div>
-        </div>
-      </div>
-    </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
