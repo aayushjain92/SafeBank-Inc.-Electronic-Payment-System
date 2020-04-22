@@ -24,13 +24,11 @@ export class DonateCovidComponent implements OnInit {
 
   ngOnInit(): void {
     let auth;
-    console.log(this.store);
     this.store.subscribe(val => auth = val);
     if (auth.auth.status.user == null) {
       this.router.navigate(['/login']);
     } else {
-      this.user = auth.auth.status.user;
-      console.log('User found in donatecovid');
+      this.user = auth.auth.status.user; 
     }
     this.donateFormGroup = new FormGroup({
       amountCtrl : new FormControl('', [
@@ -49,7 +47,6 @@ export class DonateCovidComponent implements OnInit {
     this.transaction.ownerAccountNum =  this.user.account.AccountNumber;
     this.transaction.category = 'Donation';
     this.transaction.type = 'Debit';
-    console.log(transaction);
     this.rest.debitAmount(transaction).subscribe((data) => {
       if(data instanceof Transaction){
         this.openSnackBar(transaction.ownerAccountNum + ` 
@@ -57,9 +54,7 @@ export class DonateCovidComponent implements OnInit {
       , 'Dismiss');
       this.router.navigate(['/dashboard']);
       } else {
-        console.log('in else');
         const obj = JSON.parse(JSON.stringify(data));
-        console.log(obj.message);
         if(obj.status = 401){
           if(obj.message == "Account doesnt exist or Insufficient Funds"){
             this.openSnackBar('Insufficient funds, please try changing the amount to a lesser value'

@@ -70,14 +70,12 @@ export class FundstransferComponent implements OnInit {
 
   initializeTable() {
     let auth;
-    console.log(this.store);
     this.store.subscribe(val => auth = val);
     if (auth.auth.status.user == null) {
       this.router.navigate(['/login']);
     } else {
       this.user = auth.auth.status.user;
       this.transaction.ownerAccountNum =  this.user.account.AccountNumber;
-      console.log('User found on Fund Transfer');
     }
   }
 
@@ -191,7 +189,6 @@ export class FundstransferComponent implements OnInit {
             }else{
               this.openSnackBar(obj.message,
              'Dismiss');
-             console.log('In else');
              this.router.navigate(['/dashboard']);
             }
           }

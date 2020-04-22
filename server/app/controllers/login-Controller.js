@@ -20,7 +20,6 @@ exports.list = (request, response) => {
     const result = (items) => {
         response.status(200);
         response.json(items);
-        //console.log(JSON.stringify(items));
     };
     promise
         .then(result)
@@ -60,7 +59,6 @@ exports.get = (request, response) => {
 };
 
 exports.updateLastLogin = (request, response) => {
-    console.log('In update method');
     const email = request.params.email;
     let user;
     //Find by Email
@@ -69,16 +67,12 @@ exports.updateLastLogin = (request, response) => {
             user = item;
             user.modifiedDate = new Date().toISOString();
             user.lastLoginDate = new Date().toISOString();
-            // console.log('setting last login as : ' + user.lastLoginDate);
             //Update the user
             loginService.update(user)
                 .then(updatedItem =>{
-                    // console.log('object updated successfully');
-                    // console.log(updatedItem);
                     response.status(200).json({
                         message : 'Last login time updated for user with email id : ' + updatedItem.email
                     });
-                    console.log('Done');
                 })
                 .catch(err => {
                     response.status(500).json({

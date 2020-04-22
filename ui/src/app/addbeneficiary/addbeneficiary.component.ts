@@ -69,15 +69,12 @@ export class AddbeneficiaryComponent implements OnInit {
 
   initializeData() {
     let auth;
-    //console.log(this.store);
     this.store.subscribe(val => auth = val);
     if (auth.auth.status.user == null) {
       this.router.navigate(['/login']);
     } else {
       this.user = auth.auth.status.user;
-      //console.log('User found on Beneficiary');
     }
-    //console.log("beneficary" + this.user.account.AccountNumber);
   }
 
   getInputValues() {
@@ -103,17 +100,14 @@ export class AddbeneficiaryComponent implements OnInit {
       this.http.get(`${endpoint + this.routingNumber}`)
         .subscribe(data => {
           this.routing = data;
-          //console.log(this.routing)
 
           // status code filtered and then allowed user to register or add a beneficiary
           if (this.routing["code"] === 200) {
             this.routingNumberCheck = true;
-            //console.log("success");
           } else if (this.routing["code"] === 404 || this.routing["code"] === 400) {
             this.routingNumberCheck = false;
             this.error = "Incorrect Routing Number";
             this.openSnackBar("Incorrect Routing Number", 'Dismiss');
-            //console.log("fail");
           } 
         });
     }
@@ -131,7 +125,6 @@ export class AddbeneficiaryComponent implements OnInit {
     this.rest.getbeneficiary(this.user.account.AccountNumber)
       .subscribe(data => {
         this.beneficiaries = data;
-        //console.log(this.beneficiaries)
       });
   }
 
@@ -153,7 +146,6 @@ export class AddbeneficiaryComponent implements OnInit {
               .subscribe(data => { 
                 if (data && data.length != 0) {
                   // checking if the beneficary already exists
-                  console.log("our bank", data);
                   this.error = "Beneficiary already exists";
                   this.openSnackBar("Beneficiary already exists", 'Dismiss');
                   } else {
@@ -172,8 +164,6 @@ export class AddbeneficiaryComponent implements OnInit {
             this.openSnackBar("Account doesn't exist", 'Dismiss');
           }
         }, (err) => {
-          // console.log(err);
-          // this.error = err.error.message;
           this.openSnackBar(err.error.message, 'Dismiss');
         });
         
@@ -182,10 +172,8 @@ export class AddbeneficiaryComponent implements OnInit {
         .subscribe(data => {
           this.routing = data;
           // checking if the beneficary already exists
-          //console.log("other bank", data);
 
           if (this.routing != null) {
-            //console.log("this", data);
             this.error = "Beneficiary already exists";
             this.openSnackBar("Beneficiary already exists", 'Dismiss');
           } else {
