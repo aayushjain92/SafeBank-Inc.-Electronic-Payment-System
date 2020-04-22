@@ -173,7 +173,7 @@ export class AddbeneficiaryComponent implements OnInit {
           this.routing = data;
           // checking if the beneficary already exists
 
-          if (this.routing != null) {
+          if (this.routing && this.routing.length != 0) {
             this.error = "Beneficiary already exists";
             this.openSnackBar("Beneficiary already exists", 'Dismiss');
           } else {
