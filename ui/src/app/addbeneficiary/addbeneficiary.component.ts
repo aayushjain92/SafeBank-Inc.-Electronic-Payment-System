@@ -9,7 +9,9 @@ import { escapeIdentifier } from '@angular/compiler/src/output/abstract_emitter'
 import * as fromAuth from './../store/reducers/login.reducer';
 import { User } from 'src/app/model/user';
 import { Store, select } from '@ngrx/store';
-import {MatSnackBar} from '@angular/material/snack-bar';;
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+
 @Component({
   selector: 'app-addbeneficiary',
   templateUrl: './addbeneficiary.component.html',
@@ -32,17 +34,34 @@ export class AddbeneficiaryComponent implements OnInit {
   user: User;
   auth: any;
   UserAccountdetails: any;
-  
- constructor(public rest: BeneficiaryService, private route: ActivatedRoute, 
-    private router: Router, private http: HttpClient, 
-    private store: Store<fromAuth.State>, private _snackBar: MatSnackBar 
+  // form groups to bind form data
+  addBeneficiaryFormGroup: FormGroup;
+
+  constructor(public rest: BeneficiaryService, private route: ActivatedRoute,
+    private router: Router, private http: HttpClient,
+    private store: Store<fromAuth.State>, private _snackBar: MatSnackBar,
+    private _formBuilder: FormBuilder
   ) { }
 
-
   ngOnInit(): void {
+
+
+    //Validations on Personal Details Form
+    this.addBeneficiaryFormGroup = this._formBuilder.group({
+      firstNameCtrl: new FormControl('', [Validators.required, Validators.pattern("^[a-zA-Z]*$")]),
+      lastNameCtrl: new FormControl('', [Validators.required, Validators.pattern("^[a-zA-Z]*$")]),
+      accNumberCtrl: new FormControl('', [Validators.required, Validators.pattern("^[A-Z0-9]+"),
+      Validators.minLength(9), Validators.maxLength(15)]),
+      nickNameCtrl: new FormControl('', [Validators.required, Validators.pattern("^[a-zA-Z]*$")]),
+      routingNumberCtrl: new FormControl('', [Validators.required,
+      Validators.pattern("^[0-9]*$"), Validators.minLength(9), Validators.maxLength(9)])
+    });
+
     this.initializeData();
     this.getbeneficiary();
+
   }
+
   private extractData(res: Response) {
     let body = res;
     return body || {};
@@ -50,15 +69,23 @@ export class AddbeneficiaryComponent implements OnInit {
 
   initializeData() {
     let auth;
-    console.log(this.store);
+    //console.log(this.store);
     this.store.subscribe(val => auth = val);
     if (auth.auth.status.user == null) {
       this.router.navigate(['/login']);
     } else {
       this.user = auth.auth.status.user;
-      console.log('User found on Beneficiary');
+      //console.log('User found on Beneficiary');
     }
-    console.log("beneficary" + this.user.account.AccountNumber);
+    //console.log("beneficary" + this.user.account.AccountNumber);
+  }
+
+  getInputValues() {
+    this.firstName = this.addBeneficiaryFormGroup.get("firstNameCtrl").value;
+    this.lastName = this.addBeneficiaryFormGroup.get("lastNameCtrl").value;
+    this.nickName = this.addBeneficiaryFormGroup.get("nickNameCtrl").value;
+    this.accountNumber = this.addBeneficiaryFormGroup.get("accNumberCtrl").value;
+    this.routingNumber = this.addBeneficiaryFormGroup.get("routingNumberCtrl").value;
   }
 
   // function to check the routing number
@@ -76,23 +103,18 @@ export class AddbeneficiaryComponent implements OnInit {
       this.http.get(`${endpoint + this.routingNumber}`)
         .subscribe(data => {
           this.routing = data;
-          console.log(this.routing)
+          //console.log(this.routing)
 
           // status code filtered and then allowed user to register or add a beneficiary
           if (this.routing["code"] === 200) {
             this.routingNumberCheck = true;
-            console.log("success");
-          } else if (this.routing["code"] === 404) {
+            //console.log("success");
+          } else if (this.routing["code"] === 404 || this.routing["code"] === 400) {
             this.routingNumberCheck = false;
             this.error = "Incorrect Routing Number";
             this.openSnackBar("Incorrect Routing Number", 'Dismiss');
-            console.log("fail");
-          } else if (this.routing["code"] === 400) {
-            this.routingNumberCheck = false;
-            this.error = "Routing Number should be 9 digits";
-            this.openSnackBar("Routing Number should be 9 digits", 'Dismiss');
-          }
-
+            //console.log("fail");
+          } 
         });
     }
   }
@@ -109,59 +131,61 @@ export class AddbeneficiaryComponent implements OnInit {
     this.rest.getbeneficiary(this.user.account.AccountNumber)
       .subscribe(data => {
         this.beneficiaries = data;
-        console.log(this.beneficiaries)
-
+        //console.log(this.beneficiaries)
       });
   }
 
 
   // saving beneficiary to the database
   savebeneficiary() {
+    this.getInputValues();
     if (this.user.account.AccountNumber === this.accountNumber) {
       this.error = "Cannot add yourself as beneficiary";
       this.openSnackBar("Cannot add yourself as beneficiary", 'Dismiss');
     } else if (this.user.account.routingNumber == this.routingNumber) {
-
-      this.rest.getUserByAccountNumber(this.accountNumber).subscribe(data => {
-        this.UserAccountdetails = data;
-        this.rest.getBeneficiarybyaccountNumber(this.accountNumber)
-          .subscribe(data => {
-            this.routing = data;
-            // checking if the beneficary already exists
-            console.log("our bank", data);
-
-            if (this.routing != null && this.routing.parentAccountNumber === this.user.account.AccountNumber) {
-              console.log("this", data);
-              //cleanup
-              this.error = "Beneficiary already exists";
-              this.openSnackBar("Beneficiary already exists", 'Dismiss');
-            } else {
-              this.benef = new Beneficiary(this.firstName, this.lastName, this.accountNumber, this.nickName, this.routingNumber, this.user.account.AccountNumber);
-
-              this.rest.savebeneficiary(this.benef)
-                .subscribe(data => {
-                  this.beneficiaries = data;
-                  this.openSnackBar(data.firstName + " has been added successfully", 'Dismiss');
-                  this.router.navigate(['/beneficiaries']);
-                });
-            }
-          });
-
-      }
-      , (err) => {
+      this.rest.getAccountbyAccountNumber(this.accountNumber)
+        .subscribe(data => {
+          this.routing = data;
+          if (this.routing != null) {
+            //Account exists in SafeBank
+            //Check whether Beneficiary already exists
+            this.rest.getUserByAccountNumber(this.accountNumber, this.user.account.AccountNumber)
+              .subscribe(data => { 
+                if (data && data.length != 0) {
+                  // checking if the beneficary already exists
+                  console.log("our bank", data);
+                  this.error = "Beneficiary already exists";
+                  this.openSnackBar("Beneficiary already exists", 'Dismiss');
+                  } else {
+                    //Account exists but is not a beneficiary, so we can add
+                    this.benef = new Beneficiary(this.firstName, this.lastName,
+                      this.accountNumber, this.nickName, this.routingNumber, this.user.account.AccountNumber);
+                    this.rest.savebeneficiary(this.benef)
+                      .subscribe(data => {
+                        this.beneficiaries = data;
+                        this.openSnackBar(data.firstName + " has been added successfully", 'Dismiss');
+                        this.router.navigate(['/beneficiaries']);
+                      });
+                  }
+              });
+          } else {
+            this.openSnackBar("Account doesn't exist", 'Dismiss');
+          }
+        }, (err) => {
           // console.log(err);
           // this.error = err.error.message;
           this.openSnackBar(err.error.message, 'Dismiss');
         });
+        
     } else {
-      this.rest.getBeneficiarybyaccountNumber(this.accountNumber)
+      this.rest.getUserByAccountNumber(this.accountNumber, this.user.account.AccountNumber)
         .subscribe(data => {
           this.routing = data;
           // checking if the beneficary already exists
-          console.log("other bank", data);
+          //console.log("other bank", data);
 
-          if (this.routing != null && this.routing.parentAccountNumber === this.user.account.AccountNumber) {
-            console.log("this", data);
+          if (this.routing != null) {
+            //console.log("this", data);
             this.error = "Beneficiary already exists";
             this.openSnackBar("Beneficiary already exists", 'Dismiss');
           } else {
