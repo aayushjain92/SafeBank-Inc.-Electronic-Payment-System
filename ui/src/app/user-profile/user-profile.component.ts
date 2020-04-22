@@ -55,8 +55,8 @@ export class UserProfileComponent implements OnInit {
       //Form Controllers
       addressLine1Ctrl: ['', Validators.required],
       addressLine2Ctrl: ['', Validators.required],
-      cityCtrl: ['', Validators.required],
-      stateCtrl: ['', Validators.required],
+      cityCtrl: ['', [Validators.required,Validators.pattern("^[a-zA-Z]*$")]],
+      stateCtrl: ['', [Validators.required, Validators.pattern("^[a-zA-Z]*$")]],
       zipCtrl: ['', [Validators.required, Validators.pattern("^[0-9]*$"), Validators.minLength(5), Validators.maxLength(5)]]
     });
 

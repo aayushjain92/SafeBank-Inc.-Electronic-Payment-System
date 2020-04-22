@@ -3,7 +3,7 @@
 
 <!-- User Profile -->
 <div class="center-content">
-    <mat-accordion>
+    <mat-accordion class="main">
         <!-- Expansion panel for personal info -->
         <mat-expansion-panel class="expansion-panel">
             <mat-expansion-panel-header>
@@ -13,7 +13,7 @@
             </mat-expansion-panel-header>
             <form [formGroup]="personalFormGroup">
                 <!-- FirstName Field -- read Only -->
-                <mat-form-field>
+                <mat-form-field class="form-field">
                     <mat-label>First name </mat-label>
                     <input matInput readonly formControlName="firstNameCtrl" title="Readonly">
                 </mat-form-field>
@@ -21,7 +21,7 @@
                 <br>
 
                 <!-- Last Name Field -- read Only -->
-                <mat-form-field>
+                <mat-form-field class="form-field">
                     <mat-label>Last name</mat-label>
                     <input matInput readonly formControlName="lastNameCtrl" title="Readonly">
                 </mat-form-field>
@@ -29,14 +29,14 @@
                 <br>
 
                 <!-- Phone Number Field -- Could be updated -->
-                <mat-form-field>
+                <mat-form-field class="form-field">
                     <mat-label>Phone Number</mat-label>
                     <input matInput formControlName="phoneNumCtrl" required maxlength="10" minlength="10"
                         title="Editable">
                     <!--Error if phone number is not provided-->
                     <mat-error *ngIf="personalFormGroup.get('phoneNumCtrl').hasError('required')">
                         Phone Number is required
-                    </mat-error>
+                    </mat-error >
                     <!--Error if phone number length is less than 10 digits-->
                     <mat-error *ngIf="personalFormGroup.get('phoneNumCtrl').hasError('minlength')">
                         Phone Number should have 10 digits
@@ -50,7 +50,7 @@
                 <br>
 
                 <!-- Email id Field -- read Only -->
-                <mat-form-field>
+                <mat-form-field class="form-field">
                     <mat-label>Email</mat-label>
                     <input matInput readonly formControlName="emailIDCtrl" title="Readonly">
                 </mat-form-field>
@@ -58,7 +58,7 @@
                 <br>
 
                 <!-- Date of Birth Field -- read Only -->
-                <mat-form-field>
+                <mat-form-field class="form-field">
                     <mat-label>Date of Birth</mat-label>
                     <!--Input for date with current and future dates disabled-->
                     <input matInput placeholder="Date of Birth" [min]="minDate" [max]="maxDate"
@@ -93,7 +93,7 @@
             <br>
             <!-- Address Line 1 Field -- could be updated -->
             <form [formGroup]="addressFormGroup">
-                <mat-form-field>
+                <mat-form-field class="form-field">
                     <mat-label>Address Line 1</mat-label>
                     <input matInput formControlName="addressLine1Ctrl" required title="Editable">
                     <!--Error if value is not provided-->
@@ -105,7 +105,7 @@
                 <br>
 
                 <!-- Address Line 1 Field -- could be updated -->
-                <mat-form-field>
+                <mat-form-field class="form-field">
                     <mat-label>Address Line 2</mat-label>
                     <input matInput formControlName="addressLine2Ctrl" required title="Editable">
                     <!--Error if value is not provided-->
@@ -117,31 +117,39 @@
                 <br>
 
                 <!-- City Field -- could be updated -->
-                <mat-form-field>
+                <mat-form-field class="form-field">
                     <mat-label>City</mat-label>
                     <input matInput formControlName="cityCtrl" required title="Editable">
                     <!--Error if value is not provided-->
                     <mat-error *ngIf="addressFormGroup.get('cityCtrl').hasError('required')">
                         City is required
                     </mat-error>
+                    <!--Error if value is not provided-->
+                    <mat-error *ngIf="addressFormGroup.get('cityCtrl').hasError('pattern')">
+                        Invalid city
+                    </mat-error>
                 </mat-form-field>
 
                 <br>
 
                 <!-- State Field -- could be updated -->
-                <mat-form-field>
+                <mat-form-field class="form-field">
                     <mat-label>State</mat-label>
                     <input matInput formControlName="stateCtrl" required title="Editable">
                     <!--Error if value is not provided-->
                     <mat-error *ngIf="addressFormGroup.get('stateCtrl').hasError('required')">
                         State is required
                     </mat-error>
+                    <!--Error if state has invalid characters-->
+                    <mat-error *ngIf="addressFormGroup.get('stateCtrl').hasError('pattern')">
+                        Invalid State
+                    </mat-error>
                 </mat-form-field>
 
                 <br>
 
                 <!-- ZipCode Field -- could be updated -->
-                <mat-form-field>
+                <mat-form-field class="form-field">
                     <mat-label>ZipCode</mat-label>
                     <input matInput formControlName="zipCtrl" required title="Editable">
                     <!-- Error if zipcode is not provided -->
@@ -175,7 +183,7 @@
 
             <!-- Password Field -- could be updated -->
             <form [formGroup]="credentialsFormGroup">
-                <mat-form-field>
+                <mat-form-field class="form-field">
                     <mat-label>Password</mat-label>
                     <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" 
                     required title="Editable">
@@ -206,14 +214,14 @@
             <br>
             <form [formGroup]="ssnFormGroup">
                 <!-- Account Number -- readonly -->
-                <mat-form-field>
+                <mat-form-field class="form-field">
                     <mat-label>Account Number</mat-label>
                     <input matInput readonly formControlName="accNumCtrl" title="Readonly">
                 </mat-form-field>
 
                 <br>
 
-                <mat-form-field>
+                <mat-form-field class="form-field">
                     <!-- Routing Number -- readonly -->
                     <mat-label>Routing Number</mat-label>
                     <input matInput formControlName="routingNumCtrl" readonly title="Readonly">
@@ -221,7 +229,7 @@
 
                 <br>
 
-                <mat-form-field>
+                <mat-form-field class="form-field">
                     <!-- Social Security Number -- readonly -->
                     <mat-label>Social Security Number</mat-label>
                     <input matInput readonly formControlName="ssn" [type]="hideSSN ? 'password' : 'text'" title="Readonly">
