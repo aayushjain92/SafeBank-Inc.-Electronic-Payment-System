@@ -12,7 +12,9 @@ Safebank is an electronic payment system that enables customers of SafeBank Inc.
 * Transfer money to same bank
 * Transfer money to other bank
 * Make donations
-
+* Email Notifications
+* Customer Support
+* Expense reports and Live Forex rates
 
 ## Technologies Used
 #### Frontend
