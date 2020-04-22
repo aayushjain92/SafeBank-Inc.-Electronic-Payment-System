@@ -20,6 +20,8 @@ export class FundstransferComponent implements OnInit {
   title = 'Funds Transfer';
   transaction: Transaction;
   beneficiaries: any;
+  interbank: Beneficiary[] = [];
+  intrabank: Beneficiary[] = [];
   selectedBeneficiary: string;
 
   constructor(public restBeneficiary: BeneficiaryService, public rest: FundstransferService, private route: ActivatedRoute, 
@@ -131,7 +133,13 @@ export class FundstransferComponent implements OnInit {
     this.restBeneficiary.getbeneficiary(this.user.account.AccountNumber)
       .subscribe(data => {
         this.beneficiaries = data;
-
+        for(let beneficiary of this.beneficiaries){
+          if(beneficiary.routingNumber===111222333){
+            this.intrabank.push(beneficiary);
+          } else {
+            this.interbank.push(beneficiary);
+          }
+        }
       });
   }
 

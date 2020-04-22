@@ -15,7 +15,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { LogoutConfirmationDialogComponent } from './login/logout-confirmation-dialog/logout-confirmation-dialog.component';
 
 const routes: Routes = [
-  { path: '', component: LandingPageComponent },
+  { path: '', component: LoginComponent },
   { path: 'beneficiaries', component: BeneficiaryComponent },
   { path: 'register', component: RegisterComponent,},
   { path: 'beneficiaries/add', component: AddbeneficiaryComponent },

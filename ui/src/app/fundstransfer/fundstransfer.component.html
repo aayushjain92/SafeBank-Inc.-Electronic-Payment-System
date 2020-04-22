@@ -131,12 +131,12 @@
                                     <mat-icon>send</mat-icon>
                                 </mat-panel-description>
                             </mat-expansion-panel-header>
-                            <div *ngIf="beneficiaries?.length== 0">
+                            <div *ngIf="intrabank?.length== 0">
                                 <div class="alert alert-info">
                                     Please <strong><a routerLink="/beneficiaries" routerLinkActive="active">Add</a></strong> a Beneficiary before transferring funds
                                 </div>
                             </div>
-                            <div *ngIf="beneficiaries?.length> 0">
+                            <div *ngIf="intrabank?.length> 0">
                                 <div>
                                     <form class="funds-form" [formGroup]="beneficiaryValidateForm">
 
@@ -212,12 +212,12 @@
                                     <mat-icon>send</mat-icon>
                                 </mat-panel-description>
                             </mat-expansion-panel-header>
-                            <div *ngIf="beneficiaries?.length== 0">
+                            <div *ngIf="interbank?.length== 0">
                                 <div class="alert alert-info">
                                     Please <strong><a routerLink="/beneficiaries" routerLinkActive="active">Add</a></strong> a Beneficiary before transferring funds
                                 </div>
                             </div>
-                            <div *ngIf="beneficiaries?.length> 0">
+                            <div *ngIf="interbank?.length> 0">
                                 <form class="funds-form" [formGroup]="beneficiaryValidateForm">
                                     <mat-form-field class="funds-full-width">
                                         <mat-label>Account Number</mat-label>
