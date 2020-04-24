@@ -14,7 +14,7 @@ Safebank is an electronic payment system that enables customers of SafeBank Inc.
 * Make donations
 * Email Notifications
 * Customer Support
-* Expense reports and Live Forex rates
+* Expense Charts and Live Forex rates in the form of Charts
 
 ## Technologies Used
 #### Frontend
@@ -50,8 +50,6 @@ Steps to run:
 
 
 ## Team Exterminators
-
-
 | Name | NEU ID | Email Address |
 | --- | --- | --- |
 | Avi Tiwari | 001449863 | tiwari.av@husky.neu.edu |
