@@ -52,7 +52,8 @@ Steps to run:
 ## Team Members
 | Name | Email Address |
 | --- | --- |
+| Aayush Jain | jain.aay@husky.neu.edu |
 | Avi Tiwari | tiwari.av@husky.neu.edu |
 | Urvashi Jain | jain.ur@husky.neu.edu |
 | Vivek Dalal | dalal.vi@husky.neu.edu |
-| Aayush Jain | jain.aay@husky.neu.edu |
+
