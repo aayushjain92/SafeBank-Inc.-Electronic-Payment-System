@@ -1,6 +1,6 @@
 # SafeBank Electronic Payment System
 
-Safebank is an electronic payment system that enables customers of SafeBank Inc. (imaginary) to conduct a range of financial transactions in real time. 
+An electronic payment system(or an online baking portal) that enables customers of SafeBank Inc. (imaginary) to conduct a range of financial transactions in real time. 
 
 #### This online personal banking application is aimed to offer features such as:
 
