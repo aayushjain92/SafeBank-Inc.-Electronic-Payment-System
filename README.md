@@ -1,4 +1,4 @@
-# SafeBank (INFO6150 Final Project)
+# SafeBank Electronic Payment System
 
 Safebank is an electronic payment system that enables customers of SafeBank Inc. (imaginary) to conduct a range of financial transactions in real time. 
 
@@ -49,10 +49,10 @@ Steps to run:
 
 
 
-## Team Exterminators
-| Name | NEU ID | Email Address |
-| --- | --- | --- |
-| Avi Tiwari | 001449863 | tiwari.av@husky.neu.edu |
-| Urvashi Jain | 001089739 | jain.ur@husky.neu.edu |
-| Vivek Dalal | 001430934  | dalal.vi@husky.neu.edu |
-| Aayush Jain | 001401616 | jain.aay@husky.neu.edu |
+## Team Members
+| Name | Email Address |
+| --- | --- |
+| Avi Tiwari | tiwari.av@husky.neu.edu |
+| Urvashi Jain | jain.ur@husky.neu.edu |
+| Vivek Dalal | dalal.vi@husky.neu.edu |
+| Aayush Jain | jain.aay@husky.neu.edu |
