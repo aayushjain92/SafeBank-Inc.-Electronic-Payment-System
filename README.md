@@ -23,7 +23,7 @@ An electronic payment system(or an online baking portal) that enables customers 
 #### Backend
     * Express v4.17.1
     * Node v12.14.1
-    * mongoDB Atlas (Cloud)
+    * MongoDB Atlas (Cloud)
     * Mongoose v5.9.7
 
 ## Requirements
